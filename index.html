@@ -708,7 +708,7 @@
           <div class="tabs-row">
             <button class="mode-tab active" data-mode="genel">Genel Mod</button>
             <button class="mode-tab secondary" data-mode="mulakat">Mülakat Modu</button>
-            <button class="mode-tab secondary" data-mode="ceo">CEO Modu</button>
+            <!-- <button class="mode-tab secondary" data-mode="ceo">CEO Modu</button> -->
             <button class="mode-tab secondary" data-mode="teknik">Teknik Mod</button>
             <button class="mode-tab secondary" data-mode="xr">XR / Etkileşim Modu</button>
           </div>
@@ -1408,4 +1408,37 @@
   </script>
 </body>
 </html>
+<script>
+(async function () {
+  const owner = "ekremssen";
+  const repo = "EkremSen_Interactive_CV";
+  const branch = "main";
+  const key = "cv_latest_sha";
+
+  try {
+    const url = `https://api.github.com/repos/${owner}/${repo}/commits/${branch}`;
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) return;
+
+    const data = await res.json();
+    const sha = data.sha;
+    const prev = localStorage.getItem(key);
+
+    // Eğer daha önce farklı SHA gördüyse, sayfayı cache-busting param ile yeniden aç
+    if (prev && prev !== sha) {
+      const u = new URL(location.href);
+      u.searchParams.set("v", sha.slice(0, 8)); // URL değişsin -> cache kırılır
+      localStorage.setItem(key, sha);
+      location.replace(u.toString());
+      return;
+    }
+
+    // İlk kez geliyorsa kaydet
+    if (!prev) localStorage.setItem(key, sha);
+  } catch (e) {
+    // sessiz geç
+  }
+})();
+</script>
+
 
