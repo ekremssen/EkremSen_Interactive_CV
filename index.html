@@ -4,13 +4,18 @@
   <meta charset="UTF-8" />
   <title>Ekrem Şen – Etkileşimli Sesli CV</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Cache support (not always enough alone, but helps) -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     :root {
@@ -37,25 +42,18 @@
     .cv-shell {
       width: 100%;
       max-width: 1220px;
-      background: linear-gradient(
-          135deg,
-          rgba(124, 59, 255, 0.45),
-          transparent 40%
-        ),
+      background: linear-gradient(135deg, rgba(124, 59, 255, 0.45), transparent 40%),
         linear-gradient(-135deg, rgba(61, 220, 255, 0.32), transparent 45%),
         radial-gradient(circle at top, #11153a, #050819 55%);
       border-radius: 24px;
       padding: 20px 18px 26px;
-      box-shadow: 0 0 0 1px rgba(120, 150, 255, 0.22),
-        0 26px 60px rgba(0, 0, 0, 0.85);
+      box-shadow: 0 0 0 1px rgba(120, 150, 255, 0.22), 0 26px 60px rgba(0, 0, 0, 0.85);
       position: relative;
       overflow: hidden;
     }
 
     @media (min-width: 900px) {
-      .cv-shell {
-        padding: 28px 32px 32px;
-      }
+      .cv-shell { padding: 28px 32px 32px; }
     }
 
     .glow-border {
@@ -65,52 +63,24 @@
       padding: 1px;
       background: radial-gradient(circle at 0 0, #3ddcff 0, transparent 55%),
         radial-gradient(circle at 100% 0, #7c3bff 0, transparent 55%);
-      -webkit-mask: linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       pointer-events: none;
       opacity: 0.4;
     }
 
-    .cv-inner {
-      position: relative;
-      z-index: 1;
-    }
+    .cv-inner { position: relative; z-index: 1; }
 
-    .top-layout {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
+    .top-layout { display: flex; flex-direction: column; gap: 20px; }
     @media (min-width: 960px) {
-      .top-layout {
-        flex-direction: row;
-        align-items: stretch;
-      }
+      .top-layout { flex-direction: row; align-items: stretch; }
     }
 
-    .hero-left {
-      flex: 1.2;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
+    .hero-left { flex: 1.2; display: flex; flex-direction: column; gap: 18px; }
+    .hero-right { flex: 1.05; display: flex; flex-direction: column; gap: 16px; }
 
-    .hero-right {
-      flex: 1.05;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 
     .chip {
       padding: 4px 10px;
@@ -123,13 +93,7 @@
       text-transform: uppercase;
     }
 
-    .name-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
+    .name-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
     .name-row h1 {
       font-size: clamp(26px, 3vw, 32px);
       font-weight: 700;
@@ -137,9 +101,7 @@
       text-shadow: 0 0 25px rgba(125, 220, 255, 0.8);
     }
 
-    .wave {
-      font-size: 22px;
-    }
+    .wave { font-size: 22px; }
 
     .subtitle {
       font-size: 13px;
@@ -148,12 +110,7 @@
       line-height: 1.5;
     }
 
-    .link-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 4px;
-    }
+    .link-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 
     .link-pill {
       display: inline-flex;
@@ -175,19 +132,9 @@
       transform: translateY(-1px);
     }
 
-    .link-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
+    .link-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--accent); }
 
-    .tabs-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
+    .tabs-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
 
     .mode-tab {
       border-radius: 999px;
@@ -201,8 +148,7 @@
     }
 
     .mode-tab.active {
-      background: radial-gradient(circle at top, var(--accent) 0, #18b9ff 40%)
-        border-box;
+      background: radial-gradient(circle at top, var(--accent) 0, #18b9ff 40%) border-box;
       border-color: transparent;
       color: #04101a;
       font-weight: 600;
@@ -210,9 +156,7 @@
       text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
     }
 
-    .mode-tab.secondary {
-      border-color: rgba(80, 104, 204, 0.7);
-    }
+    .mode-tab.secondary { border-color: rgba(80, 104, 204, 0.7); }
 
     .avatar-shell {
       align-self: center;
@@ -221,8 +165,7 @@
       width: min(210px, 60vw);
       aspect-ratio: 1/1;
       border-radius: 50%;
-      background:
-        radial-gradient(circle at center, #14172e 0, #050819 56%, #02030a 100%);
+      background: radial-gradient(circle at center, #14172e 0, #050819 56%, #02030a 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -270,18 +213,9 @@
     }
 
     @keyframes pulse {
-      0% {
-        opacity: 0.1;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 0.6;
-        transform: scale(1.06);
-      }
-      100% {
-        opacity: 0.1;
-        transform: scale(1);
-      }
+      0% { opacity: 0.1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.06); }
+      100% { opacity: 0.1; transform: scale(1); }
     }
 
     .lang-toggle {
@@ -297,24 +231,10 @@
       align-self: flex-start;
     }
 
-    .lang-pill {
-      border-radius: 999px;
-      padding: 2px 7px;
-      cursor: pointer;
-      opacity: 0.55;
-    }
+    .lang-pill { border-radius: 999px; padding: 2px 7px; cursor: pointer; opacity: 0.55; }
+    .lang-pill.active { background: var(--accent-soft); opacity: 1; font-weight: 600; color: var(--accent); }
 
-    .lang-pill.active {
-      background: var(--accent-soft);
-      opacity: 1;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .timeline-card,
-    .projects-card,
-    .skills-card,
-    .qa-card {
+    .timeline-card, .projects-card, .skills-card, .qa-card {
       background: radial-gradient(circle at top left, #181d4d 0, #0a0d27 55%);
       border-radius: 18px;
       padding: 14px 16px 16px;
@@ -341,42 +261,18 @@
       color: rgba(159, 176, 238, 0.9);
     }
 
-    .timeline-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 12px;
-    }
-
+    .timeline-list { display: flex; flex-direction: column; gap: 10px; font-size: 12px; }
     .timeline-item {
       padding: 8px 10px;
       border-radius: 12px;
       background: rgba(7, 11, 39, 0.9);
       border: 1px solid rgba(99, 122, 255, 0.45);
     }
+    .timeline-item strong { font-size: 12px; }
+    .timeline-item .company { font-size: 11px; color: var(--text-soft); }
+    .timeline-item .meta { font-size: 10px; color: rgba(160, 174, 236, 0.9); margin-top: 2px; }
 
-    .timeline-item strong {
-      font-size: 12px;
-    }
-
-    .timeline-item .company {
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .timeline-item .meta {
-      font-size: 10px;
-      color: rgba(160, 174, 236, 0.9);
-      margin-top: 2px;
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-    }
-
+    .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
     .mini-pill {
       font-size: 10px;
       padding: 3px 7px;
@@ -385,17 +281,9 @@
       color: rgba(195, 206, 255, 0.96);
     }
 
-    .projects-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 8px;
-      margin-top: 4px;
-    }
-
+    .projects-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: 4px; }
     @media (min-width: 900px) {
-      .projects-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      }
+      .projects-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
     }
 
     .project-item {
@@ -406,81 +294,32 @@
       font-size: 11px;
     }
 
-    .project-item h4 {
-      font-size: 11.5px;
-      margin-bottom: 2px;
-    }
+    .project-item h4 { font-size: 11.5px; margin-bottom: 2px; }
+    .project-item .meta { font-size: 10px; color: rgba(166, 182, 238, 0.95); margin-bottom: 3px; }
+    .project-item ul { margin-left: 14px; margin-top: 2px; }
+    .project-item li { margin-bottom: 2px; }
 
-    .project-item .meta {
-      font-size: 10px;
-      color: rgba(166, 182, 238, 0.95);
-      margin-bottom: 3px;
-    }
-
-    .project-item ul {
-      margin-left: 14px;
-      margin-top: 2px;
-    }
-
-    .project-item li {
-      margin-bottom: 2px;
-    }
-
-    .skills-bars {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 6px;
-      margin-top: 6px;
-    }
-
+    .skills-bars { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; margin-top: 6px; }
     @media (min-width: 600px) {
-      .skills-bars {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      }
+      .skills-bars { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
     }
 
-    .skill-line {
-      font-size: 11px;
-    }
-
-    .skill-label {
-      display: flex;
-      justify-content: space-between;
-      color: var(--text-soft);
-      margin-bottom: 2px;
-    }
-
-    .skill-bar {
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(40, 46, 104, 0.9);
-      overflow: hidden;
-    }
-
-    .skill-fill {
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #3ddcff, #7c3bff);
-      box-shadow: 0 0 14px rgba(61, 220, 255, 0.7);
-    }
+    .skill-line { font-size: 11px; }
+    .skill-label { display: flex; justify-content: space-between; color: var(--text-soft); margin-bottom: 2px; }
+    .skill-bar { height: 6px; border-radius: 999px; background: rgba(40, 46, 104, 0.9); overflow: hidden; }
+    .skill-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, #3ddcff, #7c3bff); box-shadow: 0 0 14px rgba(61, 220, 255, 0.7); }
 
     .about-text {
       font-size: 12px;
       color: var(--text-soft);
       line-height: 1.55;
       margin-top: 6px;
+      white-space: pre-line; /* important for \n */
     }
 
-    .about-list {
-      font-size: 11.5px;
-      margin-top: 6px;
-      color: var(--text-soft);
-      padding-left: 16px;
-    }
+    .about-list { font-size: 11.5px; margin-top: 6px; color: var(--text-soft); padding-left: 16px; }
 
-    .qa-card {
-      margin-top: 18px;
-    }
+    .qa-card { margin-top: 18px; }
 
     .qa-layout {
       display: grid;
@@ -488,18 +327,9 @@
       gap: 10px;
       margin-top: 8px;
     }
+    @media (max-width: 880px) { .qa-layout { grid-template-columns: minmax(0, 1fr); } }
 
-    @media (max-width: 880px) {
-      .qa-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .qa-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .qa-buttons { display: flex; flex-direction: column; gap: 6px; }
 
     .qa-btn {
       width: 100%;
@@ -530,11 +360,10 @@
       line-height: 1.55;
       color: var(--text-soft);
       overflow-y: auto;
+      white-space: pre-line; /* important */
     }
 
-    .qa-answer strong {
-      color: #ffffff;
-    }
+    .qa-answer strong { color: #ffffff; }
 
     .qa-footer {
       display: flex;
@@ -546,9 +375,7 @@
       color: var(--text-soft);
     }
 
-    .qa-footer span {
-      opacity: 0.8;
-    }
+    .qa-footer span { opacity: 0.8; }
 
     .qa-input-row {
       display: flex;
@@ -578,9 +405,7 @@
       outline: none;
     }
 
-    .qa-input-wrapper input::placeholder {
-      color: rgba(168, 180, 233, 0.7);
-    }
+    .qa-input-wrapper input::placeholder { color: rgba(168, 180, 233, 0.7); }
 
     .send-btn {
       border-radius: 999px;
@@ -597,15 +422,9 @@
       gap: 6px;
     }
 
-    .send-btn:hover {
-      filter: brightness(1.07);
-    }
+    .send-btn:hover { filter: brightness(1.07); }
 
-    .io-controls {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-    }
+    .io-controls { display: flex; gap: 8px; margin-top: 8px; }
 
     .io-btn {
       width: 32px;
@@ -620,9 +439,7 @@
       transition: background 0.16s, border 0.16s, transform 0.08s;
     }
 
-    .io-btn span {
-      font-size: 15px;
-    }
+    .io-btn span { font-size: 15px; }
 
     .io-btn.active {
       background: radial-gradient(circle at top, #3ddcff 0, #178fdf 55%);
@@ -630,14 +447,9 @@
       transform: translateY(-1px);
     }
 
-    .io-btn:hover:not(.active) {
-      background: rgba(28, 36, 86, 0.98);
-    }
+    .io-btn:hover:not(.active) { background: rgba(28, 36, 86, 0.98); }
 
-    .small-note {
-      font-size: 10px;
-      color: rgba(158, 176, 235, 0.9);
-    }
+    .small-note { font-size: 10px; color: rgba(158, 176, 235, 0.9); }
 
     .en-summary {
       font-size: 11px;
@@ -648,31 +460,23 @@
       padding-top: 6px;
     }
 
-    .en-summary strong {
-      color: #ffffff;
-    }
+    .en-summary strong { color: #ffffff; }
 
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: rgba(123, 146, 255, 0.7);
-      border-radius: 999px;
-    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: rgba(123, 146, 255, 0.7); border-radius: 999px; }
   </style>
 </head>
+
 <body>
   <div class="cv-shell">
     <div class="glow-border"></div>
     <div class="cv-inner">
       <div class="top-layout">
-        <!-- SOL TARAF – GENEL PROFİL -->
+        <!-- LEFT -->
         <section class="hero-left">
           <div class="badge-row">
-            <div class="chip">Senior Business Analyst Team Lead / Product Manager</div>
-            <div class="chip">Sermaye Piyasaları, Ödeme Sistemleri, Dijital Cüzdan</div>
+            <div class="chip" id="chip-role">Senior Business Analyst Team Lead / Product Manager</div>
+            <div class="chip" id="chip-domain">Sermaye Piyasaları, Ödeme Sistemleri, Dijital Cüzdan</div>
           </div>
 
           <div class="name-row">
@@ -688,59 +492,41 @@
           </p>
 
           <p class="subtitle" id="about-short-en" style="display:none;">
-            I am a experienced Senior Business Analyst Team Lead / Product Manager in
-            capital markets, payment systems and digital wallets, combining
-            end-to-end analysis, API integration, regulatory compliance and
-            cross-functional team leadership.
+            I am an experienced Senior Business Analyst Team Lead / Product Manager in
+            capital markets, payment systems, and digital wallets—combining end-to-end
+            analysis, API integration, regulatory compliance, and cross-functional leadership.
           </p>
 
           <div class="link-row">
             <a class="link-pill" href="https://www.linkedin.com/in/ekremsen" target="_blank" rel="noreferrer">
               <span class="link-dot"></span>
-              <span>LinkedIn Profilim</span>
+              <span id="link-linkedin">LinkedIn Profilim</span>
             </a>
             <a class="link-pill" href="https://ekremsen.medium.com" target="_blank" rel="noreferrer">
               <span class="link-dot"></span>
-              <span>Medium Yazılarım</span>
+              <span id="link-medium">Medium Yazılarım</span>
             </a>
           </div>
 
           <div class="tabs-row">
-            <button class="mode-tab active" data-mode="genel">Genel Mod</button>
-            <button class="mode-tab secondary" data-mode="mulakat">Mülakat Modu</button>
-            <!-- <button class="mode-tab secondary" data-mode="ceo">CEO Modu</button> -->
-            <button class="mode-tab secondary" data-mode="teknik">Teknik Mod</button>
-            <button class="mode-tab secondary" data-mode="xr">XR / Etkileşim Modu</button>
+            <button class="mode-tab active" data-mode="genel" id="tab-genel">Genel Mod</button>
+            <button class="mode-tab secondary" data-mode="mulakat" id="tab-mulakat">Mülakat Modu</button>
+            <button class="mode-tab secondary" data-mode="teknik" id="tab-teknik">Teknik Mod</button>
+            <button class="mode-tab secondary" data-mode="xr" id="tab-xr">XR / Etkileşim Modu</button>
           </div>
 
           <div class="lang-toggle">
-            <span style="opacity:0.7;">Dil:</span>
-            <span class="lang-pill active" data-lang="tr">TR</span>
+            <span id="lang-label" style="opacity:0.7;">Dil:</span>
+            <span class="lang-pill" data-lang="tr">TR</span>
             <span class="lang-pill" data-lang="en">EN</span>
           </div>
 
-          <div class="about-text" id="mode-text">
-            Şu anda Gedik Yatırım’da sermaye piyasaları, Check-SIM, STS entegrasyonu,
-            mobil uygulama ve SIM bloke kaldırma gibi kritik projelerde, iş analizi ile
-            ürün yönetimini birleştiren hibrit bir rolde çalışıyorum.  
-            <br /><br />
-            Analiz, gereksinim yönetimi, kullanıcı yolculuğu tasarımı ve teknik
-            ekiplerle aynı masada detay çözebilme becerimi; regülasyon bilgisi,
-            API/entegrasyon deneyimi ve ekip liderliğiyle birleştiriyorum. Böylece
-            developer, ürün, operasyon, insan kaynakları ve üst yönetim tarafı aynı
-            ekranda net bir resim görebiliyor.
-          </div>
+          <div class="about-text" id="mode-text"></div>
 
-          <ul class="about-list">
-            <li>Spot döviz, Check-SIM, SMS OTP, STS, dijital cüzdan ve kart ürünlerinde uçtan uca deneyim</li>
-            <li>Müşteri ve regülasyon beklentisini teknik çözümle birleştiren iş analizi yaklaşımı</li>
-            <li>API ve entegrasyon projelerinde Postman odaklı, test destekli analiz ve dokümantasyon</li>
-            <li>Analist ekibi yönetimi, priorizasyon, roadmap ve iş yükü dengesi kurabilen liderlik</li>
-            <li>Önceki rollerde BEDAŞ, Vodafone ve benzeri paydaşlarla çok taraflı proje yönetimi deneyimi</li>
-          </ul>
+          <ul class="about-list" id="about-list"></ul>
 
           <div class="en-summary" id="en-summary" style="display:none;">
-            <strong>English snapshot for hiring managers &amp; CTOs:</strong>  
+            <strong>English snapshot for hiring managers &amp; CTOs:</strong>
             Ekrem is a hybrid Senior Business Analyst &amp; Product Manager with
             deep experience in capital markets, payment systems, digital wallets and
             SIM-block removal. He bridges business, regulation and technology,
@@ -751,7 +537,7 @@
           </div>
         </section>
 
-        <!-- SAĞ TARAF – AVATAR + ZAMAN ÇİZELGESİ + SKILLS -->
+        <!-- RIGHT -->
         <section class="hero-right">
           <div class="avatar-shell" id="avatar">
             <div class="avatar-ring"></div>
@@ -760,343 +546,90 @@
 
           <div class="timeline-card">
             <div class="card-title">
-              Kariyer Zaman Çizelgesi
-              <span>Son roller ve odak alanları</span>
+              <div id="timeline-title">Kariyer Zaman Çizelgesi</div>
+              <span id="timeline-sub">Son roller ve odak alanları</span>
             </div>
-            <div class="timeline-list">
-              <div class="timeline-item">
-                <strong>Gedik Yatırım – Senior Business Analyst Team Lead</strong>
-                <div class="company">
-                  Spot Döviz &amp; Trading, Check-SIM, STS, SMS OTP, mobil uygulama
-                </div>
-                <div class="meta">
-                  Uçtan uca iş analizi, ürün yönetimi, operatör ve vendor koordinasyonu,
-                  regülasyon ve maliyet odaklı yaklaşım
-                </div>
-              </div>
-              <div class="timeline-item">
-                <strong>DİAS Teknoloji – Senior Expert Business Analyst</strong>
-                <div class="company">
-                  Prod sorunları, ElasticSearch analizi, talep yönetimi, eğitim ve entegrasyon
-                </div>
-                <div class="meta">
-                  Root-cause analizi, Jira / Confluence süreçleri, saha ve teknik ekiplerle çalışma
-                </div>
-              </div>
-              <div class="timeline-item">
-                <strong>UPT Ödeme – Expert Business Analyst</strong>
-                <div class="company">
-                  Dijital cüzdan, kart, Metropol POS, Uption Kart, rating, kurye entegrasyonları
-                </div>
-                <div class="meta">
-                  In-app rating, deep link, kart &amp; POS akışları, kurye API’leri ve veri odaklı süreçler
-                </div>
-              </div>
-              <div class="timeline-item">
-                <strong>Akbank – Senior Business Analyst</strong>
-                <div class="company">
-                  Tosla &amp; Tosla x Starbucks entegrasyonları, referral ve kampanya kurguları
-                </div>
-                <div class="meta">
-                  BPMN, cashback &amp; ödül süreçleri, App-to-App ve OAuth tabanlı entegrasyon
-                </div>
-              </div>
-            </div>
+            <div class="timeline-list" id="timeline-list"></div>
           </div>
 
           <div class="skills-card">
             <div class="card-title">
-              Yetkinlik Profili
-              <span>Developer, PM, CTO ve HR gözünden</span>
+              <div id="skills-title">Yetkinlik Profili</div>
+              <span id="skills-sub">Developer, PM, CTO ve HR gözünden</span>
             </div>
-            <div class="skills-bars">
+
+            <div class="skills-bars" id="skills-bars">
               <div class="skill-line">
-                <div class="skill-label">
-                  <span>İş Analizi &amp; Gereksinim Yönetimi</span>
-                  <span>Uzman</span>
-                </div>
-                <div class="skill-bar">
-                  <div class="skill-fill" style="width:96%;"></div>
-                </div>
+                <div class="skill-label"><span id="s1">İş Analizi &amp; Gereksinim Yönetimi</span><span id="s1l">Uzman</span></div>
+                <div class="skill-bar"><div class="skill-fill" style="width:96%;"></div></div>
               </div>
 
               <div class="skill-line">
-                <div class="skill-label">
-                  <span>Ürün Yönetimi &amp; Roadmap</span>
-                  <span>İleri</span>
-                </div>
-                <div class="skill-bar">
-                  <div class="skill-fill" style="width:88%;"></div>
-                </div>
+                <div class="skill-label"><span id="s2">Ürün Yönetimi &amp; Roadmap</span><span id="s2l">İleri</span></div>
+                <div class="skill-bar"><div class="skill-fill" style="width:88%;"></div></div>
               </div>
 
               <div class="skill-line">
-                <div class="skill-label">
-                  <span>API / Entegrasyon &amp; Test Odaklı Yaklaşım</span>
-                  <span>İleri</span>
-                </div>
-                <div class="skill-bar">
-                  <div class="skill-fill" style="width:90%;"></div>
-                </div>
+                <div class="skill-label"><span id="s3">API / Entegrasyon &amp; Test Odaklı Yaklaşım</span><span id="s3l">İleri</span></div>
+                <div class="skill-bar"><div class="skill-fill" style="width:90%;"></div></div>
               </div>
 
               <div class="skill-line">
-                <div class="skill-label">
-                  <span>Regülasyon, Risk &amp; Denetim Beklentileri</span>
-                  <span>İleri</span>
-                </div>
-                <div class="skill-bar">
-                  <div class="skill-fill" style="width:92%;"></div>
-                </div>
+                <div class="skill-label"><span id="s4">Regülasyon, Risk &amp; Denetim Beklentileri</span><span id="s4l">İleri</span></div>
+                <div class="skill-bar"><div class="skill-fill" style="width:92%;"></div></div>
               </div>
 
               <div class="skill-line">
-                <div class="skill-label">
-                  <span>Ekip Liderliği &amp; Koçluk</span>
-                  <span>İleri</span>
-                </div>
-                <div class="skill-bar">
-                  <div class="skill-fill" style="width:86%;"></div>
-                </div>
+                <div class="skill-label"><span id="s5">Ekip Liderliği &amp; Koçluk</span><span id="s5l">İleri</span></div>
+                <div class="skill-bar"><div class="skill-fill" style="width:86%;"></div></div>
               </div>
 
               <div class="skill-line">
-                <div class="skill-label">
-                  <span>Sunum, Storytelling &amp; Stakeholder Yönetimi</span>
-                  <span>İleri</span>
-                </div>
-                <div class="skill-bar">
-                  <div class="skill-fill" style="width:90%;"></div>
-                </div>
+                <div class="skill-label"><span id="s6">Sunum, Storytelling &amp; Stakeholder Yönetimi</span><span id="s6l">İleri</span></div>
+                <div class="skill-bar"><div class="skill-fill" style="width:90%;"></div></div>
               </div>
             </div>
-            <p class="small-note" style="margin-top:6px;">
-              Developer için: net acceptance criteria, örnek API payload’ları ve test senaryosu;  
-              PM/CTO için: risk, maliyet ve roadmapi aynı ekranda görebilme;  
+
+            <p class="small-note" id="skills-note" style="margin-top:6px;">
+              Developer için: net acceptance criteria, örnek API payload’ları ve test senaryosu;
+              PM/CTO için: risk, maliyet ve roadmapi aynı ekranda görebilme;
               HR &amp; headhunter için: rol, etki alanı ve motivasyonu net anlatan bir yapı.
             </p>
           </div>
         </section>
       </div>
 
-      <!-- ÖNE ÇIKAN PROJELER -->
+      <!-- PROJECTS -->
       <section class="projects-card" style="margin-top:18px;">
         <div class="card-title">
-          Öne Çıkan Projeler
-          <span>Gedik Yatırım, DİAS, UPT, Akbank ve diğerleri</span>
+          <div id="projects-title">Öne Çıkan Projeler</div>
+          <span id="projects-sub">Gedik Yatırım, DİAS, UPT, Akbank ve diğerleri</span>
         </div>
-        <div class="projects-grid">
-          <!-- Spot Döviz & Trading -->
-          <article class="project-item">
-            <h4>Gedik Yatırım – Spot Döviz &amp; Trading</h4>
-            <div class="meta">Project Manager &amp; Senior Business Analyst – Sermaye Piyasaları</div>
-            <ul>
-              <li>Spot döviz ve trading ürünlerinde uçtan uca proje yönetimi ve iş analizi rolünü bir arada üstlendim.</li>
-              <li>Kur, tatil günü ve spread kurgularını; emir iletim, muhasebe ve risk akışlarıyla birlikte tasarladım.</li>
-              <li>Geneks, DX ve diğer paydaşlarla entegrasyon gereksinimlerini netleştirip canlıya geçiş senaryolarını
-                koordine ediyorum.</li>
-            </ul>
-            <div class="pill-row">
-              <span class="mini-pill">Sermaye Piyasaları</span>
-              <span class="mini-pill">Spot FX</span>
-              <span class="mini-pill">Order &amp; Risk Flow</span>
-            </div>
-          </article>
 
-          <!-- Check-SIM -->
-          <article class="project-item">
-            <h4>Gedik Yatırım – Check-SIM &amp; SIM Bloke Kaldırma</h4>
-            <div class="meta">Turatel STS &amp; Operatör Entegrasyonu</div>
-            <ul>
-              <li>Turatel STS, operatörler ve Geneks ön yüzleri arasında SIM bloke kaldırma sürecini uçtan uca modelledim.</li>
-              <li>Retry mekanizması, hata kodu standardizasyonu ve CRM yönlendirmelerini kapsayan analiz dokümanını hazırladım.</li>
-              <li>SIM bloke kullanıcılarının yatırım danışmanı üzerinden işlem yapabileceği alternatif akışları tasarladım.</li>
-            </ul>
-            <div class="pill-row">
-              <span class="mini-pill">Check-SIM</span>
-              <span class="mini-pill">STS</span>
-              <span class="mini-pill">Operatör Entegrasyonu</span>
-            </div>
-          </article>
-
-          <!-- SMS OTP & Maliyet -->
-          <article class="project-item">
-            <h4>Gedik Yatırım – SMS OTP &amp; Telco Maliyet Analizi</h4>
-            <div class="meta">Vodafone, Turkcell, Türk Telekom ve Turatel iş birliği</div>
-            <ul>
-              <li>Üç operatör ve Turatel üzerinden giden OTP trafiğini detaylı analiz ederek maliyet optimizasyon roadmap’i
-                oluşturdum.</li>
-              <li>Operatör bazlı maliyet dağılımları, yıllık bütçe etkisi ve kampanya senaryolarını CEO sunumu için
-                raporladım.</li>
-              <li>Yeni fiyat teklifleri için pazarlık alanlarını ve teknik mimari iyileştirmelerini birlikte ele alan bir
-                öneri seti hazırladım.</li>
-            </ul>
-            <div class="pill-row">
-              <span class="mini-pill">SMS OTP</span>
-              <span class="mini-pill">Maliyet Analizi</span>
-              <span class="mini-pill">Finansal Raporlama</span>
-            </div>
-          </article>
-
-          <!-- DİAS – Prod Sorunları -->
-          <article class="project-item">
-            <h4>DİAS Teknoloji – Prod Sorunları ve Talep Yönetimi</h4>
-            <div class="meta">Kıdemli İş Analisti – FinTech &amp; Telekom Projeleri</div>
-            <ul>
-              <li>Prod ortam hatalarını ElasticSearch ve SQL ile root-cause analizine tabi tutarak ortalama tespit süresini
-                belirgin şekilde kısalttım.</li>
-              <li>Agile sprint’lere entegre ettiğim çözüm güncellemeleriyle prod geçiş süresini azalttım.</li>
-              <li>Jira ve Confluence’ta talepleri tanımlayıp önceliklendirerek talep işleme hızını artırdım.</li>
-            </ul>
-            <div class="pill-row">
-              <span class="mini-pill">Root-Cause Analysis</span>
-              <span class="mini-pill">ElasticSearch</span>
-              <span class="mini-pill">Talep Yönetimi</span>
-            </div>
-          </article>
-
-          <!-- DİAS – UTTS Lena -->
-          <article class="project-item">
-            <h4>DİAS Teknoloji – UTTS &amp; Lena Teknisyen Entegrasyonları</h4>
-            <div class="meta">Kıdemli İş Analisti – Eğitim &amp; Onboarding Akışları</div>
-            <ul>
-              <li>BPMN ile teknisyen kullanıcı onboarding ve kayıt süreçlerini modelledim.</li>
-              <li>Eğitim modüllerini Jira üzerinden takip ederek saha ekiplerinin adaptasyon süresini kısaltmayı hedefledim.</li>
-              <li>Entegrasyon test planlarını koordine ederek operasyonel verimlilik ve dokümantasyon kalitesini
-                güçlendirdim.</li>
-            </ul>
-            <div class="pill-row">
-              <span class="mini-pill">BPMN</span>
-              <span class="mini-pill">Eğitim Tasarımı</span>
-              <span class="mini-pill">Entegrasyon Testleri</span>
-            </div>
-          </article>
-
-          <!-- UPT – Uption Rating -->
-          <article class="project-item">
-            <h4>UPT – Uption Rating Çalışması</h4>
-            <div class="meta">İş Analisti – In-App Rating &amp; Deep Link</div>
-            <ul>
-              <li>In-app rating ve deep-link store yönlendirmesi entegrasyonunu tasarlayıp devreye alarak kullanıcının geri
-                bildirim toplama oranını artırdım.</li>
-              <li>Kullanıcı davranış odaklı modal gösterimleri ve A/B testleriyle puanlama katılımını iyileştirdim.</li>
-              <li>Power BI dashboard’larla rating performansını gerçek zamanlı izlenebilir hâle getirdim.</li>
-            </ul>
-            <div class="pill-row">
-              <span class="mini-pill">In-App Rating</span>
-              <span class="mini-pill">Deep Linking</span>
-              <span class="mini-pill">Kullanıcı Davranışı</span>
-            </div>
-          </article>
-
-          <!-- UPT – Uption Kart -->
-          <article class="project-item">
-            <h4>UPT – Uption Kart Entegrasyonu</h4>
-            <div class="meta">İş Analisti – Kart &amp; POS Akışları</div>
-            <ul>
-              <li>AktifBank kart servis API’leri için gereksinimleri toplayıp, kart ödeme akışlarını BPMN ile
-                modelledim.</li>
-              <li>Postman tabanlı entegrasyon ve regresyon senaryolarını tanımlayarak canlıya geçiş öncesi hata tekrar
-                oranını azalttım.</li>
-              <li>UAT test döngülerini organize ederek prod ortamındaki kritik hata sayısını düşürmeyi hedefledim.</li>
-            </ul>
-            <div class="pill-row">
-              <span class="mini-pill">Kart &amp; POS</span>
-              <span class="mini-pill">BPMN</span>
-              <span class="mini-pill">UAT</span>
-            </div>
-          </article>
-
-          <!-- UPT – Kurye & Metropol -->
-          <article class="project-item">
-            <h4>UPT – Uption PTT Kurye &amp; Kuryenet / Metropol POS</h4>
-            <div class="meta">İş Analisti – Kurye ve POS Entegrasyonları</div>
-            <ul>
-              <li>PTT Kurye ve Kuryenet API’lerini Uption platformuna entegre ederek manuel gönderi oluşturma adımlarını
-                azalttım.</li>
-              <li>Postman ile entegrasyon hatalarını senaryolaştırıp operasyonel başarısızlık oranını düşürmeye odaklandım.</li>
-              <li>Metropol POS cihazları ile QR kod okuma entegrasyonunu tasarlayıp ödeme sürecini hızlandırdım.</li>
-            </ul>
-            <div class="pill-row">
-              <span class="mini-pill">Kurye Entegrasyonu</span>
-              <span class="mini-pill">Metropol POS</span>
-              <span class="mini-pill">Süreç Optimizasyonu</span>
-            </div>
-          </article>
-
-          <!-- Akbank – Tosla -->
-          <article class="project-item">
-            <h4>Akbank – Tosla &amp; Tosla x Starbucks Projeleri</h4>
-            <div class="meta">İş Analisti – Kampanya ve App-to-App Entegrasyonu</div>
-            <ul>
-              <li>“Tosla Arkadaşına Öner” kampanyası için çok kanallı referral akışını BPMN ile modelleyip devreye aldım.</li>
-              <li>Cashback ve ödül süreçlerini uçtan uca entegre ederek kampanya verimliliğini artırdım.</li>
-              <li>Tosla ve Starbucks mobil uygulamaları arasında App-to-App entegrasyonu ve OAuth tabanlı kimlik doğrulama
-                akışlarını tasarladım.</li>
-            </ul>
-            <div class="pill-row">
-              <span class="mini-pill">Referral Kampanyası</span>
-              <span class="mini-pill">Cashback</span>
-              <span class="mini-pill">App-to-App</span>
-            </div>
-          </article>
-        </div>
+        <div class="projects-grid" id="projects-grid"></div>
       </section>
 
-      <!-- HR SORULARI + SESLİ CEVAP -->
+      <!-- QA -->
       <section class="qa-card" id="qa-section">
         <div class="card-title">
-          HR Soruları (Hazır Sesli Cevaplar)
-          <span>Developer, PM, CTO ve HR için net cevaplar</span>
+          <div id="qa-title">HR Soruları (Hazır Sesli Cevaplar)</div>
+          <span id="qa-sub">Developer, PM, CTO ve HR için net cevaplar</span>
         </div>
 
         <div class="qa-layout">
-          <div class="qa-buttons">
-            <button class="qa-btn" data-question-id="intro">
-              Kısaca kendini ve kariyerini özetler misin?
-            </button>
-            <button class="qa-btn" data-question-id="strengths">
-              Güçlü yönlerin neler? Bir örnek verir misin?
-            </button>
-            <button class="qa-btn" data-question-id="improve">
-              Geliştirmek istediğin yönler neler?
-            </button>
-            <button class="qa-btn" data-question-id="conflict">
-              Zor paydaş / çatışma durumlarını nasıl yönetirsin?
-            </button>
-            <button class="qa-btn" data-question-id="salary">
-              Maaş beklentin ve iş–yaşam dengesi bakış açın nedir?
-            </button>
-            <button class="qa-btn" data-question-id="future">
-              Önümüzdeki 3 yılda kendini nerede görmek istiyorsun?
-            </button>
-            <button class="qa-btn" data-question-id="education">
-              Hangi okuldan mezunsun, eğitimi nasıl konumlandırıyorsun?
-            </button>
-            <button class="qa-btn" data-question-id="lastrole">
-              Gedik Yatırım’da tam olarak ne yapıyorsun?
-            </button>
-            <button class="qa-btn" data-question-id="developer">
-              Seni bir developer gözünden nasıl konumlamalı?
-            </button>
-            <button class="qa-btn" data-question-id="cto">
-              Seni bir CTO / teknik yönetici gözünden nasıl konumlamalı?
-            </button>
-          </div>
+          <div class="qa-buttons" id="qa-buttons"></div>
 
           <div>
-            <div class="qa-answer" id="qa-answer-box">
-              Bir soruyu sol taraftaki butonlardan seçtiğinde, burada hem yazılı
-              cevabı görebilir hem de sesli olarak dinleyebilirsin.
-            </div>
+            <div class="qa-answer" id="qa-answer-box"></div>
+
             <div class="qa-footer">
               <div class="io-controls">
                 <button class="io-btn active" id="speaker-toggle" title="Sesli anlatımı aç/kapat">
                   <span>🔊</span>
                 </button>
               </div>
-              <span>Ses: Türkçe, anlaşılır ve doğal hızda okunur.</span>
-              <span class="small-note">
+              <span id="voice-note">Ses: Türkçe, anlaşılır ve doğal hızda okunur.</span>
+              <span class="small-note" id="salary-note">
                 Maaş beklentisi gibi rakam detaylarını, yüz yüze veya online mülakatta
                 şirketin ücret politikası netleştikten sonra paylaşmayı tercih ediyorum.
               </span>
@@ -1106,199 +639,868 @@
 
         <div class="qa-input-row">
           <div class="qa-input-wrapper">
-            <input
-              id="free-question"
-              type="text"
-              placeholder="Bana bir soru sor (örn: Gedik’te tam olarak ne yapıyorsun? Developer gözüyle ne sunuyorsun?)"
-            />
+            <input id="free-question" type="text"
+              placeholder="Bana bir soru sor (örn: Gedik’te tam olarak ne yapıyorsun? Developer gözüyle ne sunuyorsun?)" />
           </div>
-          <button class="send-btn" id="free-ask-btn">
-            Gönder
-          </button>
+          <button class="send-btn" id="free-ask-btn">Gönder</button>
         </div>
       </section>
+
     </div>
   </div>
 
   <script>
-    // ---------- MODE & LANGUAGE ----------
+    // ===========================
+    // STATE
+    // ===========================
+    let CURRENT_LANG = localStorage.getItem("cv_lang") || "tr";
+    let voiceEnabled = true;
+    let LAST_QA_ID = null;
+
+    // ===========================
+    // DOM
+    // ===========================
     const modeTabEls = document.querySelectorAll(".mode-tab");
     const modeTextEl = document.getElementById("mode-text");
+
     const aboutTr = document.getElementById("about-short-tr");
     const aboutEn = document.getElementById("about-short-en");
     const enSummary = document.getElementById("en-summary");
+
+    const chipRole = document.getElementById("chip-role");
+    const chipDomain = document.getElementById("chip-domain");
+    const linkLinkedin = document.getElementById("link-linkedin");
+    const linkMedium = document.getElementById("link-medium");
+    const langLabel = document.getElementById("lang-label");
+
+    const timelineTitle = document.getElementById("timeline-title");
+    const timelineSub = document.getElementById("timeline-sub");
+    const timelineList = document.getElementById("timeline-list");
+
+    const skillsTitle = document.getElementById("skills-title");
+    const skillsSub = document.getElementById("skills-sub");
+    const skillsNote = document.getElementById("skills-note");
+
+    const projectsTitle = document.getElementById("projects-title");
+    const projectsSub = document.getElementById("projects-sub");
+    const projectsGrid = document.getElementById("projects-grid");
+
+    const qaTitle = document.getElementById("qa-title");
+    const qaSub = document.getElementById("qa-sub");
+    const qaButtonsWrap = document.getElementById("qa-buttons");
+
+    const answerBox = document.getElementById("qa-answer-box");
+    const freeQuestionInput = document.getElementById("free-question");
+    const freeAskBtn = document.getElementById("free-ask-btn");
+
+    const speakerToggle = document.getElementById("speaker-toggle");
+    const avatarEl = document.getElementById("avatar");
+
+    const voiceNoteEl = document.getElementById("voice-note");
+    const salaryNoteEl = document.getElementById("salary-note");
+
     const langPills = document.querySelectorAll(".lang-pill");
 
-    const modeTexts = {
-      genel:
-        "Şu anda Gedik Yatırım’da sermaye piyasaları, Check-SIM, STS entegrasyonu, mobil uygulama ve SIM bloke kaldırma gibi kritik projelerde, iş analizi ile ürün yönetimini birleştiren hibrit bir rolde çalışıyorum.\n\nAnaliz, gereksinim yönetimi, kullanıcı yolculuğu tasarımı ve teknik ekiplerle aynı masada detay çözebilme becerimi; regülasyon bilgisi, API/entegrasyon deneyimi ve ekip liderliğiyle birleştiriyorum. Böylece developer, ürün, operasyon, insan kaynakları ve üst yönetim tarafı aynı ekranda net bir resim görebiliyor.",
-      mulakat:
-        "Bu mod, insan kaynakları, işe alım uzmanları ve yönetici rolleri için tasarlandı. HR sorularına hazır cevaplar, sesli anlatım ve serbest soru kutusu ile; mülakata girmeden önce benim profilimi net, tutarlı ve detaylı bir şekilde duyabilmeleri hedefleniyor.",
-      ceo:
-        "CEO veya üst yönetim bakış açısından bu profil; regülasyon uyumlu, maliyet odaklı, riskleri bilen ve ölçülebilir çıktıları olan projeler yönetebilen bir Senior Business Analyst / Product Manager profili sunar.\n\nSMS OTP maliyet optimizasyonu, Check-SIM ve STS entegrasyonu, spot döviz & trading gibi kritik projelerde hem analitik hem de iş tarafını dengeleyen bir yaklaşım sergiliyorum.",
-      teknik:
-        "Teknik modda; STS, OTP, API, webhook, kart ve POS entegrasyonları, BPMN modelleri, Postman koleksiyonları, test senaryoları ve log/izleme yaklaşımlarına odaklanıyorum.\n\nAmaç, geliştirici ekiplerin hem analizi hem de entegrasyon kurgusunu okunabilir ve tekrarlanabilir şekilde kullanabilmesi.",
-      xr:
-        "XR / Etkileşim modu; bu CV’nin sesli, görsel ve soru–cevap tarafını temsil ediyor. Klasik PDF CV’lerden farklı olarak; avatar, sesli anlatım, HR soruları ve mobil uyumlu tasarım sayesinde deneyim odaklı bir profil sunuyorum."
+    // about list
+    const aboutListEl = document.getElementById("about-list");
+
+    // skills labels
+    const S = {
+      s1: document.getElementById("s1"), s1l: document.getElementById("s1l"),
+      s2: document.getElementById("s2"), s2l: document.getElementById("s2l"),
+      s3: document.getElementById("s3"), s3l: document.getElementById("s3l"),
+      s4: document.getElementById("s4"), s4l: document.getElementById("s4l"),
+      s5: document.getElementById("s5"), s5l: document.getElementById("s5l"),
+      s6: document.getElementById("s6"), s6l: document.getElementById("s6l"),
     };
 
+    // ===========================
+    // CONTENT
+    // ===========================
+    const CONTENT = {
+      tr: {
+        headTitle: "Ekrem Şen – Etkileşimli Sesli CV",
+        chips: {
+          role: "Senior Business Analyst Team Lead / Product Manager",
+          domain: "Sermaye Piyasaları, Ödeme Sistemleri, Dijital Cüzdan"
+        },
+        links: { linkedin: "LinkedIn Profilim", medium: "Medium Yazılarım" },
+        langLabel: "Dil:",
+        tabs: { genel: "Genel Mod", mulakat: "Mülakat Modu", teknik: "Teknik Mod", xr: "XR / Etkileşim Modu" },
+
+        modeTexts: {
+          genel:
+            "Şu anda Gedik Yatırım’da sermaye piyasaları, Check-SIM, STS entegrasyonu, mobil uygulama ve SIM bloke kaldırma gibi kritik projelerde, iş analizi ile ürün yönetimini birleştiren hibrit bir rolde çalışıyorum.\n\n" +
+            "Analiz, gereksinim yönetimi, kullanıcı yolculuğu tasarımı ve teknik ekiplerle aynı masada detay çözebilme becerimi; regülasyon bilgisi, API/entegrasyon deneyimi ve ekip liderliğiyle birleştiriyorum. Böylece developer, ürün, operasyon, insan kaynakları ve üst yönetim tarafı aynı ekranda net bir resim görebiliyor.",
+          mulakat:
+            "Bu mod, insan kaynakları, işe alım uzmanları ve yönetici rolleri için tasarlandı. HR sorularına hazır cevaplar, sesli anlatım ve serbest soru kutusu ile; mülakata girmeden önce benim profilimi net, tutarlı ve detaylı bir şekilde duyabilmeleri hedefleniyor.",
+          teknik:
+            "Teknik modda; STS, OTP, API, webhook, kart ve POS entegrasyonları, BPMN modelleri, Postman koleksiyonları, test senaryoları ve log/izleme yaklaşımlarına odaklanıyorum.\n\n" +
+            "Amaç, geliştirici ekiplerin hem analizi hem de entegrasyon kurgusunu okunabilir ve tekrarlanabilir şekilde kullanabilmesi.",
+          xr:
+            "XR / Etkileşim modu; bu CV’nin sesli, görsel ve soru–cevap tarafını temsil ediyor. Klasik PDF CV’lerden farklı olarak; avatar, sesli anlatım, HR soruları ve mobil uyumlu tasarım sayesinde deneyim odaklı bir profil sunuyorum."
+        },
+
+        aboutList: [
+          "Spot döviz, Check-SIM, SMS OTP, STS, dijital cüzdan ve kart ürünlerinde uçtan uca deneyim",
+          "Müşteri ve regülasyon beklentisini teknik çözümle birleştiren iş analizi yaklaşımı",
+          "API ve entegrasyon projelerinde Postman odaklı, test destekli analiz ve dokümantasyon",
+          "Analist ekibi yönetimi, priorizasyon, roadmap ve iş yükü dengesi kurabilen liderlik",
+          "Önceki rollerde BEDAŞ, Vodafone ve benzeri paydaşlarla çok taraflı proje yönetimi deneyimi"
+        ],
+
+        timeline: {
+          title: "Kariyer Zaman Çizelgesi",
+          sub: "Son roller ve odak alanları",
+          html: `
+            <div class="timeline-item">
+              <strong>Gedik Yatırım – Senior Business Analyst Team Lead</strong>
+              <div class="company">Spot Döviz &amp; Trading, Check-SIM, STS, SMS OTP, mobil uygulama</div>
+              <div class="meta">Uçtan uca iş analizi, ürün yönetimi, operatör & vendor koordinasyonu, regülasyon ve maliyet odaklı yaklaşım</div>
+            </div>
+            <div class="timeline-item">
+              <strong>DİAS Teknoloji – Senior Expert Business Analyst</strong>
+              <div class="company">Prod sorunları, ElasticSearch analizi, talep yönetimi, eğitim ve entegrasyon</div>
+              <div class="meta">Root-cause analizi, Jira / Confluence süreçleri, saha ve teknik ekiplerle çalışma</div>
+            </div>
+            <div class="timeline-item">
+              <strong>UPT Ödeme – Expert Business Analyst</strong>
+              <div class="company">Dijital cüzdan, kart, Metropol POS, Uption Kart, rating, kurye entegrasyonları</div>
+              <div class="meta">In-app rating, deep link, kart &amp; POS akışları, kurye API’leri ve veri odaklı süreçler</div>
+            </div>
+            <div class="timeline-item">
+              <strong>Akbank – Senior Business Analyst</strong>
+              <div class="company">Tosla &amp; Tosla x Starbucks entegrasyonları, referral ve kampanya kurguları</div>
+              <div class="meta">BPMN, cashback &amp; ödül süreçleri, App-to-App ve OAuth tabanlı entegrasyon</div>
+            </div>
+          `
+        },
+
+        skills: {
+          title: "Yetkinlik Profili",
+          sub: "Developer, PM, CTO ve HR gözünden",
+          labels: [
+            ["İş Analizi & Gereksinim Yönetimi", "Uzman"],
+            ["Ürün Yönetimi & Roadmap", "İleri"],
+            ["API / Entegrasyon & Test Odaklı Yaklaşım", "İleri"],
+            ["Regülasyon, Risk & Denetim Beklentileri", "İleri"],
+            ["Ekip Liderliği & Koçluk", "İleri"],
+            ["Sunum, Storytelling & Stakeholder Yönetimi", "İleri"]
+          ],
+          note:
+            "Developer için: net acceptance criteria, örnek API payload’ları ve test senaryosu;\n" +
+            "PM/CTO için: risk, maliyet ve roadmapi aynı ekranda görebilme;\n" +
+            "HR & headhunter için: rol, etki alanı ve motivasyonu net anlatan bir yapı."
+        },
+
+        projects: {
+          title: "Öne Çıkan Projeler",
+          sub: "Gedik Yatırım, DİAS, UPT, Akbank ve diğerleri",
+          html: `
+            <article class="project-item">
+              <h4>Gedik Yatırım – Spot Döviz &amp; Trading</h4>
+              <div class="meta">Project Manager &amp; Senior Business Analyst – Sermaye Piyasaları</div>
+              <ul>
+                <li>Spot döviz ve trading ürünlerinde uçtan uca proje yönetimi ve iş analizi rolünü bir arada üstlendim.</li>
+                <li>Kur, tatil günü ve spread kurgularını; emir iletim, muhasebe ve risk akışlarıyla birlikte tasarladım.</li>
+                <li>Geneks, DX ve diğer paydaşlarla entegrasyon gereksinimlerini netleştirip canlıya geçiş senaryolarını koordine ediyorum.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Sermaye Piyasaları</span>
+                <span class="mini-pill">Spot FX</span>
+                <span class="mini-pill">Order &amp; Risk Flow</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>Gedik Yatırım – Check-SIM &amp; SIM Bloke Kaldırma</h4>
+              <div class="meta">Turatel STS &amp; Operatör Entegrasyonu</div>
+              <ul>
+                <li>Turatel STS, operatörler ve Geneks ön yüzleri arasında SIM bloke kaldırma sürecini uçtan uca modelledim.</li>
+                <li>Retry mekanizması, hata kodu standardizasyonu ve CRM yönlendirmelerini kapsayan analiz dokümanını hazırladım.</li>
+                <li>SIM bloke kullanıcılarının yatırım danışmanı üzerinden işlem yapabileceği alternatif akışları tasarladım.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Check-SIM</span>
+                <span class="mini-pill">STS</span>
+                <span class="mini-pill">Operatör Entegrasyonu</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>Gedik Yatırım – SMS OTP &amp; Telco Maliyet Analizi</h4>
+              <div class="meta">Vodafone, Turkcell, Türk Telekom ve Turatel iş birliği</div>
+              <ul>
+                <li>Üç operatör ve Turatel üzerinden giden OTP trafiğini detaylı analiz ederek maliyet optimizasyon roadmap’i oluşturdum.</li>
+                <li>Operatör bazlı maliyet dağılımları, yıllık bütçe etkisi ve kampanya senaryolarını yönetici sunumu için raporladım.</li>
+                <li>Yeni fiyat teklifleri için pazarlık alanlarını ve teknik mimari iyileştirmelerini birlikte ele alan bir öneri seti hazırladım.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">SMS OTP</span>
+                <span class="mini-pill">Maliyet Analizi</span>
+                <span class="mini-pill">Finansal Raporlama</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>DİAS Teknoloji – Prod Sorunları ve Talep Yönetimi</h4>
+              <div class="meta">Kıdemli İş Analisti – FinTech &amp; Telekom Projeleri</div>
+              <ul>
+                <li>Prod ortam hatalarını ElasticSearch ve SQL ile root-cause analizine tabi tutarak tespit süresini kısaltmaya odaklandım.</li>
+                <li>Agile sprint’lere entegre ettiğim çözüm güncellemeleriyle prod geçiş süresini azalttım.</li>
+                <li>Jira ve Confluence’ta talepleri tanımlayıp önceliklendirerek talep işleme hızını artırdım.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Root-Cause Analysis</span>
+                <span class="mini-pill">ElasticSearch</span>
+                <span class="mini-pill">Talep Yönetimi</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>DİAS Teknoloji – UTTS &amp; Lena Teknisyen Entegrasyonları</h4>
+              <div class="meta">Kıdemli İş Analisti – Eğitim &amp; Onboarding Akışları</div>
+              <ul>
+                <li>BPMN ile teknisyen kullanıcı onboarding ve kayıt süreçlerini modelledim.</li>
+                <li>Eğitim modüllerini Jira üzerinden takip ederek saha ekiplerinin adaptasyon süresini kısaltmayı hedefledim.</li>
+                <li>Entegrasyon test planlarını koordine ederek operasyonel verimlilik ve dokümantasyon kalitesini güçlendirdim.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">BPMN</span>
+                <span class="mini-pill">Eğitim Tasarımı</span>
+                <span class="mini-pill">Entegrasyon Testleri</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>UPT – Uption Rating Çalışması</h4>
+              <div class="meta">İş Analisti – In-App Rating &amp; Deep Link</div>
+              <ul>
+                <li>In-app rating ve deep-link store yönlendirmesi entegrasyonunu tasarlayıp devreye alarak geri bildirim toplama oranını artırmaya odaklandım.</li>
+                <li>Kullanıcı davranış odaklı modal gösterimleri ve A/B testleriyle puanlama katılımını iyileştirdim.</li>
+                <li>Power BI dashboard’larla rating performansını izlenebilir hâle getirdim.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">In-App Rating</span>
+                <span class="mini-pill">Deep Linking</span>
+                <span class="mini-pill">Kullanıcı Davranışı</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>UPT – Uption Kart Entegrasyonu</h4>
+              <div class="meta">İş Analisti – Kart &amp; POS Akışları</div>
+              <ul>
+                <li>AktifBank kart servis API’leri için gereksinimleri toplayıp kart ödeme akışlarını BPMN ile modelledim.</li>
+                <li>Postman tabanlı entegrasyon ve regresyon senaryolarını tanımlayarak canlıya geçiş öncesi hata tekrar oranını azaltmayı hedefledim.</li>
+                <li>UAT test döngülerini organize ederek prod ortamındaki kritik hata sayısını düşürmeye odaklandım.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Kart &amp; POS</span>
+                <span class="mini-pill">BPMN</span>
+                <span class="mini-pill">UAT</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>UPT – Uption PTT Kurye &amp; Kuryenet / Metropol POS</h4>
+              <div class="meta">İş Analisti – Kurye ve POS Entegrasyonları</div>
+              <ul>
+                <li>PTT Kurye ve Kuryenet API’lerini platforma entegre ederek manuel gönderi adımlarını azaltmayı hedefledim.</li>
+                <li>Postman ile entegrasyon hatalarını senaryolaştırıp operasyonel başarısızlık oranını düşürmeye odaklandım.</li>
+                <li>Metropol POS cihazları ile QR kod okuma entegrasyonunu tasarlayıp ödeme sürecini hızlandırdım.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Kurye Entegrasyonu</span>
+                <span class="mini-pill">Metropol POS</span>
+                <span class="mini-pill">Süreç Optimizasyonu</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>Akbank – Tosla &amp; Tosla x Starbucks Projeleri</h4>
+              <div class="meta">İş Analisti – Kampanya ve App-to-App Entegrasyonu</div>
+              <ul>
+                <li>“Tosla Arkadaşına Öner” kampanyası için çok kanallı referral akışını BPMN ile modelleyip devreye aldım.</li>
+                <li>Cashback ve ödül süreçlerini uçtan uca entegre ederek kampanya verimliliğini artırdım.</li>
+                <li>Tosla ve Starbucks mobil uygulamaları arasında App-to-App entegrasyonu ve OAuth tabanlı kimlik doğrulama akışlarını tasarladım.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Referral Kampanyası</span>
+                <span class="mini-pill">Cashback</span>
+                <span class="mini-pill">App-to-App</span>
+              </div>
+            </article>
+          `
+        },
+
+        qa: {
+          title: "HR Soruları (Hazır Sesli Cevaplar)",
+          sub: "Developer, PM, CTO ve HR için net cevaplar",
+          defaultAnswer:
+            "Bir soruyu sol taraftaki butonlardan seçtiğinde, burada hem yazılı cevabı görebilir hem de sesli olarak dinleyebilirsin.",
+          voiceNote: "Ses: Türkçe, anlaşılır ve doğal hızda okunur.",
+          salaryNote:
+            "Maaş beklentisi gibi rakam detaylarını, yüz yüze veya online mülakatta şirketin ücret politikası netleştikten sonra paylaşmayı tercih ediyorum.",
+          placeholder:
+            "Bana bir soru sor (örn: Gedik’te tam olarak ne yapıyorsun? Developer gözüyle ne sunuyorsun?)",
+          send: "Gönder",
+          emptyQuestion: "Sorunu yazdıktan sonra tekrar dener misin?",
+          btns: {
+            intro: "Kısaca kendini ve kariyerini özetler misin?",
+            strengths: "Güçlü yönlerin neler? Bir örnek verir misin?",
+            improve: "Geliştirmek istediğin yönler neler?",
+            conflict: "Zor paydaş / çatışma durumlarını nasıl yönetirsin?",
+            salary: "Maaş beklentin ve iş–yaşam dengesi bakış açın nedir?",
+            future: "Önümüzdeki 3 yılda kendini nerede görmek istiyorsun?",
+            education: "Hangi okuldan mezunsun, eğitimi nasıl konumlandırıyorsun?",
+            lastrole: "Gedik Yatırım’da tam olarak ne yapıyorsun?",
+            developer: "Seni bir developer gözünden nasıl konumlamalı?",
+            cto: "Seni bir CTO / teknik yönetici gözünden nasıl konumlamalı?"
+          },
+          answers: {
+            intro:
+              "Kendimi kısaca şöyle özetleyebilirim: Sermaye piyasaları, ödeme sistemleri ve dijital cüzdan tarafında çalışan, analizi ve ürün yönetimini aynı potada birleştiren bir Senior Business Analyst Team Lead / Product Manager’ım.\n\n" +
+              "Akbank, UPT, DİAS Teknoloji ve son olarak Gedik Yatırım’da; kampanya, kart, kurye, POS, SIM bloke kaldırma, STS entegrasyonu ve spot döviz projelerinde uçtan uca sorumluluk aldım. Teknik ekiplerle aynı dili konuşabilen, işi somut çıktılarla yönetmeye çalışan biri olarak kendimi konumlandırıyorum.",
+            strengths:
+              "Güçlü yönlerimi üç başlıkta toplayabilirim:\n\n" +
+              "1) Uçtan uca düşünme: Bir özelliğin sadece ekranda değil; API, entegrasyon, muhasebe, risk ve raporlama etkisini birlikte ele alıyorum.\n\n" +
+              "2) Regülasyon ve risk bakışı: Projeyi regülasyon çerçevesine oturtup riskleri erken görünür kılıyorum.\n\n" +
+              "3) İletişim ve ekip çalışması: Analist ekibi ve geliştirici ekiplerle net, saygılı ve çözüm odaklı çalışırım.",
+            improve:
+              "Geliştirmek istediğim yön; veri odaklı ürün yönetimi tarafında metrik, dashboard ve deney tasarımını daha da güçlendirmek.\n\n" +
+              "Ayrıca liderlik tarafında da geri bildirim kültürü ve mentorluk yaklaşımıyla analist ekibini büyütmeye odaklanıyorum.",
+            conflict:
+              "Zor paydaş/çatışma durumlarında önce ‘neden’ sorusuna odaklanırım. Beklentileri, riskleri ve kısıtları netleştirdikten sonra ortak zeminde hızlı ilerlemek kolaylaşır.\n\n" +
+              "Özellikle canlıya geçiş gibi kritik dönemlerde; iş, teknik ve regülasyon tarafını aynı masada toplayıp minimum riskle maksimum değer senaryosuna odaklanırım.",
+            salary:
+              "Maaş beklentimi tek cümleyle şöyle özetleyebilirim: Üstlendiğim sorumluluk, yarattığım etki ve piyasa koşullarıyla uyumlu, iki taraf için de adil bir seviyede olmasını isterim.\n\n" +
+              "İş–yaşam dengesinde kritik dönemlerde ekstra efor koyarım; sürdürülebilirlik için önceliklerin net olması, emeğin görünür olması ve ekip içinde yük paylaşımının dengeli olması gerektiğine inanırım.\n\n" +
+              "Rakam tarafını ise rol kapsamı ve ücret bandı netleştikten sonra mülakatta paylaşmayı tercih ederim.",
+            future:
+              "Önümüzdeki 3 yılda; sermaye piyasaları ve ödeme sistemlerinde stratejik projeleri yöneten, analist ekibini büyüten ve ürün portföyüne doğrudan etki eden bir rolde kendimi görüyorum.\n\n" +
+              "Kısa vadede canlıya geçişleri sorunsuz yönetip ölçülebilir iş sonuçları üretmeye; orta vadede ise karar mekanizmalarına veri ve deneyim taşıyan liderlik rolünü güçlendirmeye odaklanıyorum.",
+            education:
+              "Eğitimimi CV’de kısa tutup odağı proje çıktıları ve yetkinliklere çekmeyi tercih ediyorum.\n\n" +
+              "Bunun yanında iş analizi, ürün yönetimi, proje yönetimi, UX, test, SQL ve veri analizi alanlarında çok sayıda eğitim/sertifika programına katıldım. İstenirse LinkedIn profilimde detaylı listesi mevcut.",
+            lastrole:
+              "Gedik Yatırım’da Senior Business Analyst Team Lead olarak; Spot Döviz & Trading, Check-SIM, STS entegrasyonu, SMS OTP maliyet analizi ve mobil geliştirmelerde hibrit BA/PM bakışıyla çalışıyorum.\n\n" +
+              "Ayrıca analist ekibinin planlaması, backlog önceliklendirme ve iş yükü dengesini yönetiyor; paydaşlar arasında iletişim köprüsü kuruyorum.",
+            developer:
+              "Bir developer gözüyle beni şöyle konumlayabilirsin: Gereksinimi sadece cümle olarak değil; acceptance criteria, uçtan uca akış, hata senaryoları, örnek request/response ve test senaryolarıyla birlikte veren bir BA/PM’im.\n\n" +
+              "Genelde Postman üzerinde ortamları kurar, happy-path ve edge-case’leri birlikte tasarlarım. “Bu endpoint tam olarak ne yapacak?” sorusuna teknik detayla cevap vermeye dikkat ederim.",
+            cto:
+              "CTO / teknik yönetici perspektifinden: İş ve teknoloji tarafını dengeleyen, regülasyon ve risk farkındalığı yüksek, çıktıyı ölçülebilir kılan bir profilim.\n\n" +
+              "Kapsam, risk, bağımlılık, bütçe etkisi ve operasyonel yük gibi başlıkları görünür kılar; geliştirme hızını düşürmeden iş beklentisini yönetebilen bir köprü rolü üstlenirim."
+          }
+        }
+      },
+
+      en: {
+        headTitle: "Ekrem Şen – Interactive Voice CV",
+        chips: {
+          role: "Senior Business Analyst Team Lead / Product Manager",
+          domain: "Capital Markets, Payment Systems, Digital Wallets"
+        },
+        links: { linkedin: "My LinkedIn", medium: "My Medium" },
+        langLabel: "Lang:",
+        tabs: { genel: "General Mode", mulakat: "Interview Mode", teknik: "Technical Mode", xr: "XR / Interactive Mode" },
+
+        modeTexts: {
+          genel:
+            "At Gedik Investment, I work on critical initiatives such as capital markets products, Check-SIM, STS integration, mobile delivery and SIM-block removal—bridging business analysis and product management in a hybrid role.\n\n" +
+            "I combine requirements management, user journey design and deep collaboration with engineering teams with regulatory knowledge, API/integration experience and team leadership—so developers, product, operations, HR and executives can see a clear picture on the same screen.",
+          mulakat:
+            "This mode is designed for recruiters, hiring managers and leadership interviews. It provides ready-to-use HR answers, voice narration and a free-question box so stakeholders can understand my profile in a clear, consistent and detailed way—before the interview.",
+          teknik:
+            "In Technical Mode, I focus on STS, OTP, APIs, webhooks, card & POS integrations, BPMN models, Postman collections, test scenarios and logging/observability practices.\n\n" +
+            "The goal is to help engineering teams reuse the analysis and integration design in a readable, repeatable way.",
+          xr:
+            "XR / Interactive Mode represents the voice, visual and Q&A experience of this CV. Unlike classic PDF resumes, it offers an experience-driven profile through an avatar, voice narration, HR Q&A and mobile-friendly design."
+        },
+
+        aboutList: [
+          "End-to-end experience across Spot FX, Check-SIM, SMS OTP, STS, digital wallet and card products",
+          "Business analysis that bridges customer and regulatory expectations with technical solutions",
+          "Postman-driven, test-supported analysis and documentation for API & integration initiatives",
+          "Leadership to manage analyst teams, prioritization, roadmap and workload balancing",
+          "Multi-stakeholder delivery experience with partners such as BEDAŞ, Vodafone and similar in previous roles"
+        ],
+
+        timeline: {
+          title: "Career Timeline",
+          sub: "Latest roles & focus areas",
+          html: `
+            <div class="timeline-item">
+              <strong>Gedik Yatırım – Senior Business Analyst Team Lead</strong>
+              <div class="company">Spot FX &amp; Trading, Check-SIM, STS, SMS OTP, mobile app</div>
+              <div class="meta">End-to-end analysis & product delivery; telco/vendor coordination; regulatory and cost-driven execution</div>
+            </div>
+            <div class="timeline-item">
+              <strong>DİAS Teknoloji – Senior Expert Business Analyst</strong>
+              <div class="company">Production issues, ElasticSearch analysis, demand management, training &amp; integration</div>
+              <div class="meta">Root-cause analysis, Jira/Confluence processes, working closely with field and engineering teams</div>
+            </div>
+            <div class="timeline-item">
+              <strong>UPT Ödeme – Expert Business Analyst</strong>
+              <div class="company">Digital wallet, card, Metropol POS, Uption Card, rating, courier integrations</div>
+              <div class="meta">In-app rating, deep linking, card &amp; POS flows, courier APIs and data-driven processes</div>
+            </div>
+            <div class="timeline-item">
+              <strong>Akbank – Senior Business Analyst</strong>
+              <div class="company">Tosla &amp; Tosla x Starbucks integrations, referral and campaign design</div>
+              <div class="meta">BPMN, cashback &amp; rewards, App-to-App integrations and OAuth-based flows</div>
+            </div>
+          `
+        },
+
+        skills: {
+          title: "Skills Profile",
+          sub: "From a developer, PM, CTO and HR lens",
+          labels: [
+            ["Business Analysis & Requirements", "Expert"],
+            ["Product Management & Roadmap", "Advanced"],
+            ["API / Integration & Test-Driven Approach", "Advanced"],
+            ["Regulation, Risk & Audit Readiness", "Advanced"],
+            ["Team Leadership & Coaching", "Advanced"],
+            ["Presentation, Storytelling & Stakeholder Management", "Advanced"]
+          ],
+          note:
+            "For developers: clear acceptance criteria, sample API payloads and test scenarios;\n" +
+            "For PM/CTO: visibility of risk, cost and roadmap on one screen;\n" +
+            "For HR/headhunters: a structure that clearly communicates role, impact and motivation."
+        },
+
+        projects: {
+          title: "Featured Projects",
+          sub: "Gedik Investment, DİAS, UPT, Akbank and more",
+          html: `
+            <article class="project-item">
+              <h4>Gedik Yatırım – Spot FX &amp; Trading</h4>
+              <div class="meta">Project Manager &amp; Senior Business Analyst – Capital Markets</div>
+              <ul>
+                <li>Led end-to-end project management and business analysis for Spot FX and trading products.</li>
+                <li>Designed FX rate, holiday calendar and spread logic together with order routing, accounting and risk flows.</li>
+                <li>Clarified integration requirements with Geneks, DX and other stakeholders and coordinated go-live scenarios.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Capital Markets</span>
+                <span class="mini-pill">Spot FX</span>
+                <span class="mini-pill">Order &amp; Risk Flow</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>Gedik Yatırım – Check-SIM &amp; SIM-Block Removal</h4>
+              <div class="meta">Turatel STS &amp; Telco Integration</div>
+              <ul>
+                <li>Modeled the end-to-end SIM-block removal journey across Turatel STS, telcos and Geneks front-ends.</li>
+                <li>Prepared analysis covering retry mechanisms, error-code standardization and CRM handoff/redirection.</li>
+                <li>Designed alternative flows so SIM-blocked users can proceed via investment advisors.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Check-SIM</span>
+                <span class="mini-pill">STS</span>
+                <span class="mini-pill">Telco Integration</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>Gedik Yatırım – SMS OTP &amp; Telco Cost Analysis</h4>
+              <div class="meta">Vodafone, Turkcell, Türk Telekom &amp; Turatel collaboration</div>
+              <ul>
+                <li>Analyzed OTP traffic across three telcos and Turatel, building a cost-optimization roadmap.</li>
+                <li>Reported operator-level cost breakdowns, annual budget impact and campaign scenarios for leadership updates.</li>
+                <li>Prepared proposal sets combining negotiation levers with technical architecture improvements.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">SMS OTP</span>
+                <span class="mini-pill">Cost Analysis</span>
+                <span class="mini-pill">Financial Reporting</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>DİAS Teknoloji – Production Issues &amp; Demand Management</h4>
+              <div class="meta">Senior Business Analyst – FinTech &amp; Telecom</div>
+              <ul>
+                <li>Reduced mean time to identify issues by root-cause analysis using ElasticSearch and SQL.</li>
+                <li>Integrated fixes into Agile sprints to shorten production transition time.</li>
+                <li>Improved request throughput by defining and prioritizing demands in Jira/Confluence.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Root-Cause Analysis</span>
+                <span class="mini-pill">ElasticSearch</span>
+                <span class="mini-pill">Demand Management</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>DİAS Teknoloji – UTTS &amp; Lena Technician Integrations</h4>
+              <div class="meta">Senior Business Analyst – Training &amp; Onboarding Flows</div>
+              <ul>
+                <li>Modeled technician onboarding and registration flows using BPMN.</li>
+                <li>Tracked training modules via Jira to shorten field-team adoption time.</li>
+                <li>Coordinated integration test plans to improve operational efficiency and documentation quality.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">BPMN</span>
+                <span class="mini-pill">Training Design</span>
+                <span class="mini-pill">Integration Testing</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>UPT – Uption Rating</h4>
+              <div class="meta">Business Analyst – In-App Rating &amp; Deep Link</div>
+              <ul>
+                <li>Delivered in-app rating and deep-link store redirection to increase feedback capture rate.</li>
+                <li>Improved rating participation through behavior-driven modals and A/B tests.</li>
+                <li>Made rating performance observable with BI dashboards.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">In-App Rating</span>
+                <span class="mini-pill">Deep Linking</span>
+                <span class="mini-pill">User Behavior</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>UPT – Uption Card Integration</h4>
+              <div class="meta">Business Analyst – Card &amp; POS Flows</div>
+              <ul>
+                <li>Collected requirements for card-service APIs and modeled card payment flows via BPMN.</li>
+                <li>Defined Postman-based integration and regression scenarios to reduce pre-go-live defect recurrence.</li>
+                <li>Organized UAT cycles to reduce critical production issues.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Card &amp; POS</span>
+                <span class="mini-pill">BPMN</span>
+                <span class="mini-pill">UAT</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>UPT – Courier Integrations &amp; Metropol POS</h4>
+              <div class="meta">Business Analyst – Courier &amp; POS Integrations</div>
+              <ul>
+                <li>Integrated courier APIs to reduce manual shipment creation steps.</li>
+                <li>Scenario-tested integration failures via Postman to reduce operational failure rate.</li>
+                <li>Designed QR scanning integration with Metropol POS devices to speed up payments.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Courier Integration</span>
+                <span class="mini-pill">Metropol POS</span>
+                <span class="mini-pill">Process Optimization</span>
+              </div>
+            </article>
+
+            <article class="project-item">
+              <h4>Akbank – Tosla &amp; Tosla x Starbucks</h4>
+              <div class="meta">Business Analyst – Campaigns &amp; App-to-App Integration</div>
+              <ul>
+                <li>Delivered multi-channel referral flow for “Invite a Friend” using BPMN.</li>
+                <li>Improved campaign efficiency through end-to-end cashback and rewards integrations.</li>
+                <li>Designed App-to-App integration and OAuth-based authentication flows between Tosla and Starbucks apps.</li>
+              </ul>
+              <div class="pill-row">
+                <span class="mini-pill">Referral</span>
+                <span class="mini-pill">Cashback</span>
+                <span class="mini-pill">App-to-App</span>
+              </div>
+            </article>
+          `
+        },
+
+        qa: {
+          title: "HR Questions (Ready Voice Answers)",
+          sub: "Clear answers for developers, PMs, CTOs and HR",
+          defaultAnswer:
+            "Pick a question from the left to see the written answer here and listen to it with voice narration.",
+          voiceNote: "Voice: English, clear and natural pace.",
+          salaryNote:
+            "I prefer to discuss numeric details (such as salary) after the role scope and the company’s compensation band are clarified during the interview.",
+          placeholder:
+            "Ask me anything (e.g., What exactly do you do at Gedik? What do you provide from a developer perspective?)",
+          send: "Send",
+          emptyQuestion: "Please type your question and try again.",
+          btns: {
+            intro: "Can you briefly summarize yourself and your career?",
+            strengths: "What are your strengths? Can you give an example?",
+            improve: "What would you like to improve?",
+            conflict: "How do you manage difficult stakeholders / conflicts?",
+            salary: "What is your salary expectation and view on work–life balance?",
+            future: "Where do you see yourself in 3 years?",
+            education: "What is your education background and how do you position it?",
+            lastrole: "What exactly do you do at Gedik Yatırım?",
+            developer: "How should a developer position you?",
+            cto: "How should a CTO / tech leader position you?"
+          },
+          answers: {
+            intro:
+              "In short: I’m a hybrid Senior Business Analyst Team Lead / Product Manager working across capital markets, payments and digital wallets.\n\n" +
+              "Across Akbank, UPT, DİAS Teknoloji and now Gedik Investment, I’ve owned end-to-end delivery for campaigns, card, courier, POS, SIM-block removal, STS integration and Spot FX initiatives—bridging business, regulation and engineering with a focus on measurable outcomes.",
+            strengths:
+              "I’d summarize my strengths in three areas:\n\n" +
+              "1) End-to-end thinking: I consider not only UI but also APIs, integrations, accounting, risk and reporting impacts.\n\n" +
+              "2) Regulation & risk awareness: I align delivery with compliance and make risks visible early.\n\n" +
+              "3) Communication & collaboration: I work with clarity and respect across analyst teams, engineering and stakeholders.",
+            improve:
+              "I continuously push myself in data-driven product practices—metrics, dashboards and experimentation.\n\n" +
+              "On the leadership side, I focus on mentoring and building a feedback culture so analysts grow beyond task execution.",
+            conflict:
+              "In conflict situations, I start with the ‘why’: expectations, risks and constraints. Once they’re explicit, alignment becomes much easier.\n\n" +
+              "Especially before go-live, I bring business, tech and compliance into the same conversation and converge on the scenario that delivers maximum value with minimum risk.",
+            salary:
+              "My salary expectation is aligned with scope, impact and market conditions, aiming for a fair level for both sides.\n\n" +
+              "On work–life balance: I can step up during critical phases, but I believe sustainability requires clear priorities, visible effort and balanced workload.\n\n" +
+              "I prefer to discuss exact numbers once the role scope and compensation band are clarified during the interview.",
+            future:
+              "In the next 3 years, I see myself leading strategic initiatives in capital markets and payments—growing the analyst team and directly impacting the product portfolio.\n\n" +
+              "Short term: successful go-lives and measurable business outcomes. Mid term: stronger leadership influence by bringing data and experience into decision-making.",
+            education:
+              "I keep education concise in the resume and prioritize measurable project outcomes and competencies.\n\n" +
+              "That said, I’ve completed multiple trainings/certifications in BA, product management, project management, UX, testing, SQL and analytics. Details are available on my LinkedIn if needed.",
+            lastrole:
+              "At Gedik Investment, I work as Senior Business Analyst Team Lead on Spot FX & Trading, Check-SIM, STS integration, SMS OTP cost analysis and mobile delivery—bridging BA and product management.\n\n" +
+              "I also manage analyst planning, backlog prioritization and workload balance, and act as a communication bridge across stakeholders.",
+            developer:
+              "From a developer perspective: I translate requirements into actionable deliverables—acceptance criteria, end-to-end flows, error scenarios, sample request/response and test cases.\n\n" +
+              "I often set up environments in Postman and design both happy-path and edge-cases together, answering “what does this endpoint do?” with technical clarity.",
+            cto:
+              "From a CTO lens: I balance business and technology with strong regulation/risk awareness and measurable outcomes.\n\n" +
+              "I make scope, risk, dependencies, budget impact and operational load visible—acting as a bridge that manages expectations without slowing engineering delivery."
+          }
+        }
+      }
+    };
+
+    // ===========================
+    // UTIL
+    // ===========================
+    function normalizeTR(str) {
+      return str
+        .toLowerCase()
+        .replace(/ç/g, "c").replace(/ğ/g, "g").replace(/ı/g, "i")
+        .replace(/ö/g, "o").replace(/ş/g, "s").replace(/ü/g, "u");
+    }
+
+    // ===========================
+    // RENDER FUNCTIONS
+    // ===========================
+    function renderAboutList(list) {
+      aboutListEl.innerHTML = list.map(x => `<li>${x}</li>`).join("");
+    }
+
+    function renderTimeline(html) { timelineList.innerHTML = html; }
+    function renderProjects(html) { projectsGrid.innerHTML = html; }
+
+    function renderQABtns(btns) {
+      const order = ["intro","strengths","improve","conflict","salary","future","education","lastrole","developer","cto"];
+      qaButtonsWrap.innerHTML = order.map(id => {
+        return `<button class="qa-btn" data-question-id="${id}">${btns[id]}</button>`;
+      }).join("");
+
+      // bind click
+      qaButtonsWrap.querySelectorAll(".qa-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-question-id");
+          LAST_QA_ID = id;
+          const text = CONTENT[CURRENT_LANG].qa.answers[id];
+          if (!text) return;
+          answerBox.textContent = text;
+          speakText(text);
+        });
+      });
+    }
+
+    function applySkillsLabels(labels) {
+      // labels: [ [name, level], ... ]
+      const map = [
+        ["s1","s1l"], ["s2","s2l"], ["s3","s3l"],
+        ["s4","s4l"], ["s5","s5l"], ["s6","s6l"]
+      ];
+      map.forEach((pair, idx) => {
+        const [nameId, lvlId] = pair;
+        if (labels[idx]) {
+          S[nameId].textContent = labels[idx][0];
+          S[lvlId].textContent = labels[idx][1];
+        }
+      });
+    }
+
+    function applyLang(lang) {
+      CURRENT_LANG = lang;
+      localStorage.setItem("cv_lang", lang);
+
+      // update <title>
+      document.title = CONTENT[lang].headTitle;
+
+      // chips + links
+      chipRole.textContent = CONTENT[lang].chips.role;
+      chipDomain.textContent = CONTENT[lang].chips.domain;
+      linkLinkedin.textContent = CONTENT[lang].links.linkedin;
+      linkMedium.textContent = CONTENT[lang].links.medium;
+      langLabel.textContent = CONTENT[lang].langLabel;
+
+      // tabs text
+      document.getElementById("tab-genel").textContent = CONTENT[lang].tabs.genel;
+      document.getElementById("tab-mulakat").textContent = CONTENT[lang].tabs.mulakat;
+      document.getElementById("tab-teknik").textContent = CONTENT[lang].tabs.teknik;
+      document.getElementById("tab-xr").textContent = CONTENT[lang].tabs.xr;
+
+      // show about TR/EN blocks
+      if (lang === "tr") {
+        aboutTr.style.display = "";
+        aboutEn.style.display = "none";
+        enSummary.style.display = "none";
+      } else {
+        aboutTr.style.display = "none";
+        aboutEn.style.display = "";
+        enSummary.style.display = "";
+      }
+
+      // mode text based on active mode
+      const activeModeBtn = document.querySelector(".mode-tab.active");
+      const activeMode = activeModeBtn ? activeModeBtn.getAttribute("data-mode") : "genel";
+      modeTextEl.textContent = CONTENT[lang].modeTexts[activeMode] || CONTENT[lang].modeTexts.genel;
+
+      // about list
+      renderAboutList(CONTENT[lang].aboutList);
+
+      // timeline
+      timelineTitle.textContent = CONTENT[lang].timeline.title;
+      timelineSub.textContent = CONTENT[lang].timeline.sub;
+      renderTimeline(CONTENT[lang].timeline.html);
+
+      // skills
+      skillsTitle.textContent = CONTENT[lang].skills.title;
+      skillsSub.textContent = CONTENT[lang].skills.sub;
+      applySkillsLabels(CONTENT[lang].skills.labels);
+      skillsNote.textContent = CONTENT[lang].skills.note;
+
+      // projects
+      projectsTitle.textContent = CONTENT[lang].projects.title;
+      projectsSub.textContent = CONTENT[lang].projects.sub;
+      renderProjects(CONTENT[lang].projects.html);
+
+      // QA
+      qaTitle.textContent = CONTENT[lang].qa.title;
+      qaSub.textContent = CONTENT[lang].qa.sub;
+      voiceNoteEl.textContent = CONTENT[lang].qa.voiceNote;
+      salaryNoteEl.textContent = CONTENT[lang].qa.salaryNote;
+      freeQuestionInput.placeholder = CONTENT[lang].qa.placeholder;
+      freeAskBtn.textContent = CONTENT[lang].qa.send;
+
+      // default answer text
+      if (!LAST_QA_ID) {
+        answerBox.textContent = CONTENT[lang].qa.defaultAnswer;
+      } else {
+        // if user already clicked a QA button, keep that answer but translate it
+        const text = CONTENT[lang].qa.answers[LAST_QA_ID];
+        if (text) answerBox.textContent = text;
+      }
+
+      renderQABtns(CONTENT[lang].qa.btns);
+
+      // active pill UI
+      langPills.forEach(p => p.classList.toggle("active", p.getAttribute("data-lang") === lang));
+    }
+
+    // ===========================
+    // MODE HANDLERS
+    // ===========================
     modeTabEls.forEach((btn) => {
       btn.addEventListener("click", () => {
         modeTabEls.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         const mode = btn.getAttribute("data-mode");
-        modeTextEl.textContent = modeTexts[mode] || modeTexts.genel;
+        modeTextEl.textContent = CONTENT[CURRENT_LANG].modeTexts[mode] || CONTENT[CURRENT_LANG].modeTexts.genel;
       });
     });
 
+    // language pills
     langPills.forEach((pill) => {
       pill.addEventListener("click", () => {
-        langPills.forEach((p) => p.classList.remove("active"));
-        pill.classList.add("active");
         const lang = pill.getAttribute("data-lang");
-        if (lang === "tr") {
-          aboutTr.style.display = "";
-          aboutEn.style.display = "none";
-          enSummary.style.display = "none";
-        } else {
-          aboutTr.style.display = "none";
-          aboutEn.style.display = "";
-          enSummary.style.display = "";
+        applyLang(lang);
+      });
+    });
+
+    // ===========================
+    // FREE QUESTION (TR/EN)
+    // ===========================
+    function answerFreeQuestion(qRaw) {
+      const q = (qRaw || "").trim();
+      if (!q) return CONTENT[CURRENT_LANG].qa.emptyQuestion;
+
+      if (CURRENT_LANG === "tr") {
+        const n = normalizeTR(q);
+
+        if (n.includes("gedik") || n.includes("spot doviz") || n.includes("trading")) {
+          return "Gedik Yatırım’da spot döviz ve trading projelerinde; kur, tatil günü, spread, emir iletim, muhasebe ve risk akışlarını uçtan uca tasarladığım hibrit bir rolüm var. Ayrıca Check-SIM, STS ve SMS OTP maliyet analizlerinin de iş analizi ve koordinasyonundan sorumluyum.";
         }
-      });
-    });
 
-    // ---------- HR ANSWERS ----------
-    const hrAnswers = {
-      intro:
-        "Kendimi kısaca şöyle özetleyebilirim: Sermaye piyasaları, ödeme sistemleri ve dijital cüzdan tarafında çalışan, analizi ve ürün yönetimini aynı potada birleştiren bir Senior Business Analyst Team Lead / Product Manager’ım.\n\nAkbank, UPT, DİAS Teknoloji ve son olarak Gedik Yatırım’da; kampanya, kart, kurye, POS, SIM bloke kaldırma, STS entegrasyonu ve spot döviz projelerinde uçtan uca sorumluluk aldım. Teknik ekiplerle aynı dili konuşabilen, işi rakamlarla ve somut çıktılarla yönetmeye çalışan biri olarak kendimi konumlandırıyorum.",
-      strengths:
-        "Güçlü yönlerimi üç başlıkta toplayabilirim:\n\n1) Uçtan uca düşünme: Bir özelliğin sadece ekranda değil; API, entegrasyon, muhasebe, risk ve raporlama tarafındaki etkisini de birlikte ele alıyorum. Örneğin spot döviz projesinde; kur, tatil günü, spread ve muhasebe akışlarını tek modelde toparladım.\n\n2) Regülasyon ve risk bakışı: Sermaye piyasaları, kart ve ödeme sistemleri tarafında regülasyon maddelerini okuyan, projeyi bu çerçeveye oturtan bir analistim.\n\n3) Ekip çalışması ve iletişim: Analist ekibini yönlendirirken de, geliştirici ekiplerle çalışırken de net, saygılı ve çözüm odaklı bir iletişimi önemsiyorum.",
-      improve:
-        "Geliştirmek istediğim yön, aslında güçlü olduğum alanların çıtasını daha da yükseltmekle ilgili. Özellikle veri odaklı ürün yönetimi tarafında; dashboard, metrik ve deney tasarımı konusunda kendimi güncel tutmaya çalışıyorum.\n\nAyrıca ekip liderliği tarafında da, analistleri sadece görev veren değil, onlara yol açan ve geri bildirim kültürü oluşturan bir lider olarak konumlandırmak için eğitimler ve mentorluk görüşmeleri yapıyorum.",
-      conflict:
-        "Zor paydaş ve çatışma durumlarında önce ‘neden’ sorusuna odaklanmayı tercih ediyorum. Tarafların beklentisini, riskleri ve kısıtları netleştirdikten sonra ortak bir zemin bulmak çok daha kolay hale geliyor.\n\nÖrneğin canlıya geçiş öncesi zaman kısıtı olan projelerde; geliştirici ekip, iş birimi ve regülasyon tarafını aynı masada topluyor, öncelikleri şeffaf şekilde paylaşıp, minimum riskle maksimum değer üretecek senaryoya odaklanıyorum.",
-      salary:
-        "Maaş beklentimi tek cümleyle şöyle özetleyebilirim: Üstlendiğim sorumluluk, yarattığım etki ve piyasa koşullarıyla uyumlu, her iki taraf için de adalet duygusunu besleyen bir seviyede olmasını isterim.\n\nİş–yaşam dengesinde; kritik dönemlerde ekstra efor koymaktan çekinmem, ancak bunun sürdürülebilir olması için önceliklerin net olması, emeğin görünür olması ve ekip içinde yük paylaşımının dengeli olması gerektiğine inanırım.\n\nUzun vadede motive, üretken ve yaratıcı ekiplerin bu dengeyi koruyabilen yapılarda ortaya çıktığını düşünüyorum. Rakam tarafını ise, hem şirketin ücret bandını hem de rolün kapsamını netleştirdikten sonra yüz yüze veya online mülakatta paylaşmayı tercih ederim.",
-      future:
-        "Önümüzdeki 3 yılda kendimi, sermaye piyasaları ve ödeme sistemleri tarafında stratejik projeleri yöneten; analist ekibini büyütüp geliştiren ve ürün portföyüne doğrudan etki eden bir rolde görüyorum.\n\nKısa vadede, içinde bulunduğum projelerin canlıya geçişini sorunsuz yönetip, ölçülebilir iş sonuçları üretmeye odaklanıyorum. Orta vadede ise, analiz, ürün ve teknoloji ekipleri arasındaki köprüyü daha da güçlendiren, karar mekanizmalarına veri ve deneyim taşıyan bir liderlik pozisyonu hedefliyorum.",
-      education:
-        "Lisans eğitimime ve geçmiş akademik sürecime CV’de özellikle kısaca yer veriyorum; odağımı daha çok iş deneyimi, proje çıktıları ve yetkinliklere çekmek istiyorum.\n\nEğitim tarafında; iş analizi, ürün yönetimi, proje yönetimi, UX, test, SQL ve veri analizi alanlarında çok sayıda sertifika ve eğitim programına katıldım. İlgili kişi isterse, LinkedIn profilim üzerinden detaylı sertifika ve eğitim listemi inceleyebilir.",
-      lastrole:
-        "Son rolümde, Gedik Yatırım’da Senior Business Analyst Team Lead olarak çalışıyorum. Spot döviz & trading, Check-SIM, STS entegrasyonu, SMS OTP maliyet analizi ve mobil uygulama geliştirmeleri gibi kritik projelerde hem analistlik hem de ürün yönetimi perspektifiyle görev alıyorum.\n\nBuna ek olarak analist ekibinin iş planlaması, backlog önceliklendirme ve iş yükü dengesini yönetiyor, proje paydaşları arasında iletişim köprüsü kuruyorum.",
-      developer:
-        "Bir developer gözüyle beni şöyle konumlayabilirsin: Gereksinimi sadece cümle olarak değil; acceptance criteria, uçtan uca akış, hata durumları, örnek request–response ve test senaryosu ile birlikte veren bir iş analisti ve ürün yöneticisiyim.\n\nGenellikle Postman üzerinde ortamlar kurarak, API çağrılarını örneklendiriyor; hem happy path, hem de edge case’leri seninle aynı dilden konuşarak tasarlıyorum. ‘Bu endpoint tam olarak ne yapacak?’ sorusuna, sadece iş tarafının cümlesiyle değil, teknik detayla da cevap vermeye dikkat ediyorum.",
-      cto:
-        "Bir CTO veya teknik yönetici gözünden bakıldığında; beni, iş ve teknoloji tarafını dengeleyen, regülasyon ve risk farkındalığı yüksek, çıktıyı metriklerle takip etmeyi seven bir profil olarak düşünebilirsiniz.\n\nProje planlarında; kapsam, risk, bağımlılık, bütçe etkisi ve operasyonel yük gibi başlıkları ayrı ayrı ele alıyor, geliştirici ekiplerin hızını düşürmeden, iş tarafının beklentisini yöneten bir köprü rolü üstleniyorum. Özellikle sermaye piyasaları ve ödeme sistemleri gibi regülasyonu yüksek alanlarda; hem denetim gereksinimlerini hem de müşteri deneyimini aynı masada konuşmayı önemsiyorum."
-    };
+        if (n.includes("upt") || n.includes("uption") || n.includes("metropol") || n.includes("kurye")) {
+          return "UPT tarafında Uption Kart, Metropol POS, PTT Kurye ve Kuryenet entegrasyonları üzerinde çalıştım. Kart, POS, dijital cüzdan ve kurye akışlarını API seviyesinde modelleyip Postman senaryolarıyla birlikte yönettim. Ayrıca Uption Rating çalışması ile in-app rating ve deep link entegrasyonlarını tasarladım.";
+        }
 
-    const qaButtons = document.querySelectorAll(".qa-btn");
-    const answerBox = document.getElementById("qa-answer-box");
+        if (n.includes("dias")) {
+          return "DİAS Teknoloji’de prod sorunları ve talep yönetimi tarafında; ElasticSearch, log analizi ve Jira talep süreci üzerinden root-cause tespiti yaparak, hataların tespit ve çözüm süresini kısaltmaya odaklandım. Ayrıca UTTS ve Lena teknisyen entegrasyonlarında eğitim ve onboarding akışlarını BPMN ile modelledim.";
+        }
 
-    qaButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const id = btn.getAttribute("data-question-id");
-        const text = hrAnswers[id];
-        if (!text) return;
-        answerBox.textContent = text;
-        speakText(text);
-      });
-    });
+        if (n.includes("akbank") || n.includes("tosla") || n.includes("starbucks")) {
+          return "Akbank’ta Tosla ve Tosla x Starbucks projelerinde; referral kampanyaları, cashback & ödül süreçleri ve App-to-App entegrasyon akışları üzerinde çalıştım. BPMN diyagramları, kampanya kuralları ve OAuth tabanlı entegrasyonlarla hem iş hem de teknik ekiplerle birlikte ilerledim.";
+        }
 
-    // ---------- FREE QUESTION ----------
-    const freeQuestionInput = document.getElementById("free-question");
-    const freeAskBtn = document.getElementById("free-ask-btn");
+        if (n.includes("developer") || n.includes("gelistirici") || n.includes("yazilimci")) return CONTENT.tr.qa.answers.developer;
+        if (n.includes("cto") || n.includes("teknik yonetici") || n.includes("teknik lider")) return CONTENT.tr.qa.answers.cto;
 
-    function normalize(str) {
-      return str
-        .toLowerCase()
-        .replace(/ç/g, "c")
-        .replace(/ğ/g, "g")
-        .replace(/ı/g, "i")
-        .replace(/ö/g, "o")
-        .replace(/ş/g, "s")
-        .replace(/ü/g, "u");
-    }
+        if (n.includes("guc") || n.includes("gucu") || n.includes("guc yon")) return CONTENT.tr.qa.answers.strengths;
+        if (n.includes("maas") || n.includes("ucret") || n.includes("salary")) return CONTENT.tr.qa.answers.salary;
+        if (n.includes("uc yil") || n.includes("3 yil") || n.includes("gelecek")) return CONTENT.tr.qa.answers.future;
+        if (n.includes("okul") || n.includes("universite") || n.includes("egitim")) return CONTENT.tr.qa.answers.education;
+        if (n.includes("ne yapiyorsun") || n.includes("gorevin") || n.includes("rolun")) return CONTENT.tr.qa.answers.lastrole;
+        if (n.includes("kendini") || n.includes("kimsin") || n.includes("ozet")) return CONTENT.tr.qa.answers.intro;
 
-    function answerFreeQuestion(q) {
-      const n = normalize(q);
-
-      if (!q.trim()) {
-        return "Sorunu yazdıktan sonra tekrar dener misin?";
+        return "Soru için teşekkür ederim. Bu interaktif CV’de, PDF’lere sığmayan kısımları; proje çıktıları, rol tanımı, teknik derinlik ve liderlik bakış açısı olarak öne çıkarmaya çalıştım.\n\nÖzetle; sermaye piyasaları, ödeme sistemleri, dijital cüzdan ve entegrasyon dünyasında, hem analizi hem de ürünü aynı potada birleştiren; geliştirici, ürün, operasyon, insan kaynakları ve üst yönetimle ortak dil yakalayabilen bir Senior Business Analyst Team Lead / Product Manager olarak çalışıyorum.";
       }
 
-      // Özel durumlar: şirket / rol / sektör / rol tipi
-      if (n.includes("gedik") || n.includes("spot doviz") || n.includes("trading")) {
-        return (
-          "Gedik Yatırım’da spot döviz ve trading projelerinde; kur, tatil günü, spread, emir iletim, muhasebe ve risk akışlarını uçtan uca tasarladığım hibrit bir rolüm var. " +
-          "Ayrıca Check-SIM, STS ve SMS OTP maliyet analizlerinin de iş analizi ve koordinasyonundan sorumluyum."
-        );
+      // EN
+      const e = q.toLowerCase();
+
+      if (e.includes("gedik") || e.includes("spot fx") || e.includes("trading")) {
+        return "At Gedik Investment, I work in a hybrid BA/PM role across Spot FX and trading initiatives—covering FX rate logic, holiday calendars, spreads, order routing, accounting and risk flows end-to-end. I also contribute to Check-SIM, STS integration and SMS OTP cost analysis coordination.";
       }
 
-      if (n.includes("upt") || n.includes("uption") || n.includes("metropol") || n.includes("kurye")) {
-        return (
-          "UPT tarafında Uption Kart, Metropol POS, PTT Kurye ve Kuryenet entegrasyonları üzerinde çalıştım. Kart, POS, dijital cüzdan ve kurye akışlarını API seviyesinde modelleyip, Postman senaryolarıyla birlikte yönettim. " +
-          "Ayrıca Uption Rating çalışması ile in-app rating ve deep link entegrasyonlarını tasarladım."
-        );
+      if (e.includes("upt") || e.includes("uption") || e.includes("metropol") || e.includes("courier")) {
+        return "At UPT, I worked on Uption Card, Metropol POS and courier integrations (PTT / Kuryenet). I modeled card/POS/wallet/courier journeys at API level and managed them with Postman scenarios. I also delivered the Uption Rating work, including in-app rating and deep link integrations.";
       }
 
-      if (n.includes("dias")) {
-        return (
-          "DİAS Teknoloji’de prod sorunları ve talep yönetimi tarafında; ElasticSearch, log analizi ve Jira talep süreci üzerinden root-cause tespiti yaparak, hataların tespit ve çözüm süresini kısaltmaya odaklandım. " +
-          "Ayrıca UTTS ve Lena teknisyen entegrasyonlarında eğitim ve onboarding akışlarını BPMN ile modelledim."
-        );
+      if (e.includes("dias")) {
+        return "At DİAS Teknoloji, I focused on production issues and demand management—root-causing incidents via ElasticSearch/log analysis and Jira flows to reduce investigation and resolution time. I also modeled onboarding/training flows for technician integrations using BPMN.";
       }
 
-      if (n.includes("akbank") || n.includes("tosla") || n.includes("starbucks")) {
-        return (
-          "Akbank’ta Tosla ve Tosla x Starbucks projelerinde; referral kampanyaları, cashback & ödül süreçleri ve App-to-App entegrasyon akışları üzerinde çalıştım. " +
-          "BPMN diyagramları, kampanya kuralları ve OAuth tabanlı entegrasyonlarla hem iş hem de teknik ekiplerle birlikte ilerledim."
-        );
+      if (e.includes("akbank") || e.includes("tosla") || e.includes("starbucks")) {
+        return "At Akbank, I worked on Tosla and Tosla x Starbucks initiatives—referral campaigns, cashback & rewards and App-to-App integration flows. I used BPMN, campaign rules and OAuth-based integrations while collaborating closely with business and engineering teams.";
       }
 
-      if (n.includes("developer") || n.includes("gelistirici") || n.includes("yazilimci")) {
-        return hrAnswers.developer;
-      }
+      if (e.includes("developer") || e.includes("engineer")) return CONTENT.en.qa.answers.developer;
+      if (e.includes("cto") || e.includes("tech leader") || e.includes("engineering manager")) return CONTENT.en.qa.answers.cto;
+      if (e.includes("strength")) return CONTENT.en.qa.answers.strengths;
+      if (e.includes("salary") || e.includes("compensation")) return CONTENT.en.qa.answers.salary;
+      if (e.includes("3 year") || e.includes("future")) return CONTENT.en.qa.answers.future;
+      if (e.includes("education") || e.includes("university")) return CONTENT.en.qa.answers.education;
+      if (e.includes("what do you do") || e.includes("role")) return CONTENT.en.qa.answers.lastrole;
+      if (e.includes("introduce") || e.includes("about yourself") || e.includes("summary")) return CONTENT.en.qa.answers.intro;
 
-      if (n.includes("cto") || n.includes("teknik yonetici") || n.includes("teknik lider")) {
-        return hrAnswers.cto;
-      }
-
-      if (n.includes("guc lu") || n.includes("gucu") || n.includes("guc yon")) {
-        return hrAnswers.strengths;
-      }
-
-      if (n.includes("maas") || n.includes("ucret") || n.includes("salary")) {
-        return hrAnswers.salary;
-      }
-
-      if (n.includes("uc yil") || n.includes("3 yil") || n.includes("gelecek")) {
-        return hrAnswers.future;
-      }
-
-      if (n.includes("okul") || n.includes("universite") || n.includes("egitim")) {
-        return hrAnswers.education;
-      }
-
-      if (n.includes("ne yapiyorsun") || n.includes("gorevin") || n.includes("rolun")) {
-        return hrAnswers.lastrole;
-      }
-
-      if (n.includes("kendini") || n.includes("kimsin") || n.includes("ozet")) {
-        return hrAnswers.intro;
-      }
-
-      // Hiçbir kategori tutmazsa: genel, net, kısa ama dolu cevap
-      return (
-        "Soru için teşekkür ederim. Bu interaktif CV’de, PDF’lere sığmayan kısımları; proje çıktıları, rol tanımı, teknik derinlik ve liderlik bakış açısı olarak öne çıkarmaya çalıştım. " +
-        "Özetle; sermaye piyasaları, ödeme sistemleri, dijital cüzdan ve entegrasyon dünyasında, hem analizi hem de ürünü aynı potada birleştiren; geliştirici, ürün, operasyon, insan kaynakları ve üst yönetimle ortak dil yakalayabilen bir Senior Business Analyst Team Lead / Product Manager olarak çalışıyorum. " +
-        "Detaylara, yukarıdaki zaman çizelgesi ve projeler bölümünden de ulaşabilirsin."
-      );
+      return "Thanks for the question. This interactive CV is built to capture what PDF resumes often miss—project outcomes, role clarity, technical depth and leadership perspective.\n\nIn short, I work at the intersection of capital markets, payments and integrations as a hybrid Senior Business Analyst Team Lead / Product Manager—bridging developers, product, operations, HR and leadership with a shared, clear picture.";
     }
 
     freeAskBtn.addEventListener("click", () => {
       const q = freeQuestionInput.value;
       const ans = answerFreeQuestion(q);
+      LAST_QA_ID = null;
       answerBox.textContent = ans;
       speakText(ans);
     });
@@ -1310,11 +1512,9 @@
       }
     });
 
-    // ---------- SPEECH SYNTHESIS ----------
-    let voiceEnabled = true;
-    const speakerToggle = document.getElementById("speaker-toggle");
-    const avatarEl = document.getElementById("avatar");
-
+    // ===========================
+    // SPEECH SYNTHESIS (TR/EN)
+    // ===========================
     speakerToggle.addEventListener("click", () => {
       voiceEnabled = !voiceEnabled;
       speakerToggle.classList.toggle("active", voiceEnabled);
@@ -1330,8 +1530,8 @@
       else avatarEl.classList.remove("speaking");
     }
 
-    function buildPhonetic(text) {
-      // İngilizce kelimeleri Türkçe TTS için daha okunur hale getir
+    function buildPhoneticTR(text) {
+      // Only used for Turkish voice to read some English words more naturally
       const phraseMap = {
         "Enterprise Design Thinking": "Enterprays Dizayn Thinking",
         "Google Ads Apps Certification": "Gugıl Eds Eps Sertifikeyşın",
@@ -1359,16 +1559,20 @@
       let processed = text;
 
       Object.keys(phraseMap).forEach((key) => {
-        const regex = new RegExp(key, "g");
-        processed = processed.replace(regex, phraseMap[key]);
+        processed = processed.replace(new RegExp(key, "g"), phraseMap[key]);
       });
 
       Object.keys(wordMap).forEach((key) => {
-        const regex = new RegExp("\\b" + key + "\\b", "g");
-        processed = processed.replace(regex, wordMap[key]);
+        processed = processed.replace(new RegExp("\\b" + key + "\\b", "g"), wordMap[key]);
       });
 
       return processed;
+    }
+
+    function pickVoice(langPrefix) {
+      const voices = window.speechSynthesis.getVoices() || [];
+      const preferred = voices.find(v => (v.lang || "").toLowerCase().startsWith(langPrefix));
+      return preferred || null;
     }
 
     function speakText(text) {
@@ -1378,25 +1582,27 @@
       try {
         window.speechSynthesis.cancel();
 
-        const processed = buildPhonetic(text);
-        const utter = new SpeechSynthesisUtterance(processed);
-        utter.lang = "tr-TR";
-        utter.rate = 1;
-        utter.pitch = 1;
+        const utter = new SpeechSynthesisUtterance(
+          CURRENT_LANG === "tr" ? buildPhoneticTR(text) : text
+        );
+
+        if (CURRENT_LANG === "tr") {
+          utter.lang = "tr-TR";
+          utter.rate = 1;
+          utter.pitch = 1;
+          const v = pickVoice("tr");
+          if (v) utter.voice = v;
+        } else {
+          utter.lang = "en-US";
+          utter.rate = 1;
+          utter.pitch = 1;
+          const v = pickVoice("en");
+          if (v) utter.voice = v;
+        }
 
         utter.onstart = () => setAvatarSpeaking(true);
         utter.onend = () => setAvatarSpeaking(false);
         utter.onerror = () => setAvatarSpeaking(false);
-
-        const voices = window.speechSynthesis.getVoices();
-        const trVoices = voices.filter((v) => v.lang && v.lang.startsWith("tr"));
-
-        if (trVoices.length > 0) {
-          const preferred = trVoices.find((v) =>
-            /male|man|yunus|cem|murat/i.test(v.name)
-          );
-          utter.voice = preferred || trVoices[0];
-        }
 
         window.speechSynthesis.speak(utter);
       } catch (e) {
@@ -1404,41 +1610,61 @@
       }
     }
 
+    // ===========================
+    // INIT
+    // ===========================
+    function init() {
+      // speaker tooltip per language
+      speakerToggle.title = (CURRENT_LANG === "tr") ? "Sesli anlatımı aç/kapat" : "Toggle voice narration";
+
+      // apply language
+      applyLang(CURRENT_LANG);
+
+      // default mode text = genel (active)
+      const activeModeBtn = document.querySelector(".mode-tab.active");
+      const activeMode = activeModeBtn ? activeModeBtn.getAttribute("data-mode") : "genel";
+      modeTextEl.textContent = CONTENT[CURRENT_LANG].modeTexts[activeMode] || CONTENT[CURRENT_LANG].modeTexts.genel;
+
+      // default QA
+      answerBox.textContent = CONTENT[CURRENT_LANG].qa.defaultAnswer;
+    }
+
+    // Some browsers load voices async; keep stable
     window.speechSynthesis.onvoiceschanged = () => {};
+
+    init();
+
+    // ===========================
+    // CACHE BUST (commit-based)
+    // ===========================
+    (async function () {
+      const owner = "ekremssen";
+      const repo = "EkremSen_Interactive_CV";
+      const branch = "main";
+      const key = "cv_latest_sha";
+
+      try {
+        const url = `https://api.github.com/repos/${owner}/${repo}/commits/${branch}`;
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) return;
+
+        const data = await res.json();
+        const sha = data.sha;
+        const prev = localStorage.getItem(key);
+
+        if (prev && prev !== sha) {
+          const u = new URL(location.href);
+          u.searchParams.set("v", sha.slice(0, 8));
+          localStorage.setItem(key, sha);
+          location.replace(u.toString());
+          return;
+        }
+
+        if (!prev) localStorage.setItem(key, sha);
+      } catch (e) {
+        // silent
+      }
+    })();
   </script>
 </body>
 </html>
-<script>
-(async function () {
-  const owner = "ekremssen";
-  const repo = "EkremSen_Interactive_CV";
-  const branch = "main";
-  const key = "cv_latest_sha";
-
-  try {
-    const url = `https://api.github.com/repos/${owner}/${repo}/commits/${branch}`;
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) return;
-
-    const data = await res.json();
-    const sha = data.sha;
-    const prev = localStorage.getItem(key);
-
-    // Eğer daha önce farklı SHA gördüyse, sayfayı cache-busting param ile yeniden aç
-    if (prev && prev !== sha) {
-      const u = new URL(location.href);
-      u.searchParams.set("v", sha.slice(0, 8)); // URL değişsin -> cache kırılır
-      localStorage.setItem(key, sha);
-      location.replace(u.toString());
-      return;
-    }
-
-    // İlk kez geliyorsa kaydet
-    if (!prev) localStorage.setItem(key, sha);
-  } catch (e) {
-    // sessiz geç
-  }
-})();
-</script>
-
-
