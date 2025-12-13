@@ -2,9 +2,9 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>Ekrem Şen • Etkileşimli CV</title>
+  <title>Ekrem Şen • Etkileşimli Sesli CV</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -12,197 +12,169 @@
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
+
     body {
-      background: radial-gradient(circle at top, #020617 0, #020010 40%, #000 100%);
-      color: #f9fafb;
+      background: #0b1020;
+      color: #f5f5f5;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
-      transition: background 0.25s ease, color 0.25s ease;
     }
-    body.light-mode {
-      background: #e5e7eb;
-      color: #020617;
-    }
-    body.xr-mode {
-      background:
-        radial-gradient(circle at top, #020617 0, #0b1020 25%, #020617 60%, #000 100%),
-        radial-gradient(circle at bottom left, rgba(59,130,246,0.4), transparent 55%),
-        radial-gradient(circle at top right, rgba(34,197,94,0.35), transparent 60%);
-    }
+
     .app-wrapper {
-      background: radial-gradient(circle at top left, #020617, #020016 60%, #020617 100%);
+      background: radial-gradient(circle at top left, #1f2937, #020617);
       border-radius: 24px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
       max-width: 1180px;
       width: 100%;
       display: grid;
       grid-template-columns: minmax(0, 3.2fr) minmax(0, 2fr);
       overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      position: relative;
+      border: 1px solid rgba(148, 163, 184, 0.35);
     }
-    body.light-mode .app-wrapper {
-      background: radial-gradient(circle at top left, #ffffff, #e5e7eb);
-      border-color: rgba(148, 163, 184, 0.7);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.25);
-    }
+
     @media (max-width: 900px) {
       .app-wrapper {
         grid-template-columns: 1fr;
       }
     }
+
     .left-panel {
-      padding: 24px 28px 20px;
-      border-right: 1px solid rgba(51, 65, 85, 0.9);
+      padding: 24px 28px;
+      border-right: 1px solid rgba(51, 65, 85, 0.85);
       display: flex;
       flex-direction: column;
       gap: 16px;
-      backdrop-filter: blur(18px);
-      position: relative;
     }
-    body.light-mode .left-panel {
-      border-right-color: rgba(209, 213, 219, 0.9);
-    }
+
     @media (max-width: 900px) {
       .left-panel {
         border-right: none;
-        border-bottom: 1px solid rgba(51, 65, 85, 0.9);
+        border-bottom: 1px solid rgba(51, 65, 85, 0.85);
       }
-      body.light-mode .left-panel {
-        border-bottom-color: rgba(209, 213, 219, 0.9);
-      }
-    }
-    .right-panel {
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.24), transparent);
-      backdrop-filter: blur(18px);
-    }
-    body.light-mode .right-panel {
-      background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.18), #e5e7eb);
     }
 
-    /* Avatar */
     .header-row {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
-    .avatar-wrapper {
-      position: relative;
-      width: 90px;
-      height: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      perspective: 800px;
-    }
-    .avatar-orbit {
-      position: absolute;
-      inset: -10px;
-      border-radius: 999px;
-      background:
-        radial-gradient(circle at 20% 0%, rgba(56, 189, 248, 0.7), transparent 60%),
-        radial-gradient(circle at 80% 100%, rgba(34, 197, 94, 0.6), transparent 60%),
-        radial-gradient(circle at 0% 100%, rgba(168, 85, 247, 0.5), transparent 55%);
-      filter: blur(10px);
-      opacity: 0.9;
-      animation: orbitGlow 14s linear infinite;
-      transform-origin: center;
-    }
-    .avatar-orbit::after {
-      content: "";
-      position: absolute;
-      inset: 12px;
-      border-radius: inherit;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      box-shadow:
-        0 0 18px rgba(56, 189, 248, 0.9),
-        0 0 32px rgba(34, 197, 94, 0.7),
-        inset 0 0 20px rgba(15, 23, 42, 0.95);
-    }
-    .avatar-disc {
-      position: absolute;
-      inset: -4px;
-      border-radius: 999px;
-      background: conic-gradient(from 220deg, #38bdf8, #22c55e, #a855f7, #38bdf8);
-      opacity: 0.9;
-      filter: blur(4px);
-      mix-blend-mode: screen;
-      animation: discSpin 16s linear infinite;
-    }
+
+    /* --- Konuşan avatar alanı --- */
     .avatar {
-      width: 74px;
-      height: 74px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid rgba(248, 250, 252, 0.95);
-      box-shadow:
-        0 12px 28px rgba(15, 23, 42, 0.9),
-        0 0 26px rgba(56, 189, 248, 1);
-      flex-shrink: 0;
       position: relative;
-      z-index: 2;
-      background: radial-gradient(circle at 30% 0%, #f9fafb, #111827);
-      transform-style: preserve-3d;
-      transform: translateZ(0);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: radial-gradient(circle at top, #0f172a, #020617 75%);
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.5);
+      flex-shrink: 0;
+      overflow: hidden;
     }
-    .avatar img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .avatar::after {
+
+    .avatar::before {
       content: "";
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.45), transparent 55%);
-      mix-blend-mode: screen;
+      border: 2px solid rgba(56, 189, 248, 0.9);
+      box-shadow: 0 0 28px rgba(56, 189, 248, 0.9);
+      opacity: 0.9;
       pointer-events: none;
     }
-    .avatar-speaking {
-      animation: speakingPulse 0.9s ease-in-out infinite;
+
+    .avatar-photo {
+      width: 88%;
+      height: 88%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: auto;
+      transform-origin: center;
+      transition: transform 0.25s ease, filter 0.25s ease;
+      filter: saturate(1.05) contrast(1.05);
     }
-    @keyframes orbitGlow {
-      0% { transform: rotate3d(0, 1, 0, 0deg); }
-      50% { transform: rotate3d(0.1, 1, 0, 180deg); }
-      100% { transform: rotate3d(0, 1, 0, 360deg); }
+
+    .avatar-pulse {
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      border-radius: 50%;
+      border: 2px solid rgba(56, 189, 248, 0.4);
+      opacity: 0;
+      pointer-events: none;
     }
-    @keyframes discSpin {
-      0% { transform: rotate(0deg) scale(1); }
-      100% { transform: rotate(360deg) scale(1); }
+
+    /* Ağız overlay – fotoğraftaki ağza göre ince ayar yapabilirsin */
+    .avatar-mouth {
+      position: absolute;
+      bottom: 18px; /* burada 2–3 px oynayıp ağza oturtabilirsin */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 46px;
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      pointer-events: none;
     }
-    @keyframes speakingPulse {
-      0% {
-        transform: translateZ(0) scale(1);
-        box-shadow:
-          0 12px 28px rgba(15, 23, 42, 0.9),
-          0 0 26px rgba(56, 189, 248, 1);
+
+    .avatar-mouth::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: rgba(15, 23, 42, 0.9);
+      transform-origin: center;
+      transform: scaleY(0.2);
+      opacity: 0;
+    }
+
+    /* Konuşma aktifken efektler */
+    .avatar-speaking .avatar-photo {
+      transform: translateY(-1px) scale(1.03);
+      filter: saturate(1.1) contrast(1.1);
+      animation: avatarTalk 0.35s infinite alternate;
+    }
+
+    .avatar-speaking .avatar-pulse {
+      animation: avatarPulse 0.9s infinite;
+    }
+
+    .avatar-speaking .avatar-mouth::before {
+      opacity: 1;
+      animation: mouthTalk 0.18s infinite;
+    }
+
+    @keyframes avatarTalk {
+      from {
+        transform: translateY(-1px) scale(1.02);
       }
-      50% {
-        transform: translateZ(20px) scale(1.06);
-        box-shadow:
-          0 18px 36px rgba(15, 23, 42, 0.95),
-          0 0 38px rgba(56, 189, 248, 1),
-          0 0 44px rgba(34, 197, 94, 0.9);
-      }
-      100% {
-        transform: translateZ(0) scale(1);
-        box-shadow:
-          0 12px 28px rgba(15, 23, 42, 0.9),
-          0 0 26px rgba(56, 189, 248, 1);
+      to {
+        transform: translateY(1px) scale(1.04);
       }
     }
 
-    /* Headline */
+    @keyframes avatarPulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.3;
+      }
+      100% {
+        transform: scale(1.18);
+        opacity: 0;
+      }
+    }
+
+    @keyframes mouthTalk {
+      0%   { transform: scaleY(0.2); }
+      40%  { transform: scaleY(1); }
+      70%  { transform: scaleY(0.4); }
+      100% { transform: scaleY(0.8); }
+    }
+    /* --- Konuşan avatar alanı SON --- */
+
     .badge {
       display: inline-flex;
       align-items: center;
@@ -216,11 +188,7 @@
       color: #e5e7eb;
       border: 1px solid rgba(148, 163, 184, 0.7);
     }
-    body.light-mode .badge {
-      background: rgba(243, 244, 246, 0.98);
-      color: #111827;
-      border-color: rgba(148, 163, 184, 1);
-    }
+
     .badge-dot {
       width: 7px;
       height: 7px;
@@ -228,39 +196,38 @@
       background: #22c55e;
       box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
     }
+
     h1 {
-      font-size: 26px;
-      line-height: 1.2;
-      margin-top: 4px;
+      font-size: 24px;
+      line-height: 1.3;
     }
+
     h1 span.highlight {
       background: linear-gradient(135deg, #38bdf8, #22c55e);
       -webkit-background-clip: text;
       color: transparent;
     }
+
     .subtitle {
       font-size: 13px;
       color: #e5e7eb;
-      opacity: 0.9;
+      opacity: 0.88;
       margin-top: 4px;
     }
-    body.light-mode .subtitle {
-      color: #374151;
-    }
+
     .question {
       margin-top: 10px;
       font-size: 14px;
       color: #cbd5f5;
     }
-    body.light-mode .question {
-      color: #111827;
-    }
+
     .pill-row {
       margin-top: 10px;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
+
     .pill {
       font-size: 11px;
       padding: 4px 10px;
@@ -269,12 +236,8 @@
       border: 1px solid rgba(148, 163, 184, 0.6);
       color: #e5e7eb;
       white-space: nowrap;
-      backdrop-filter: blur(12px);
     }
-    body.light-mode .pill {
-      background: rgba(249, 250, 251, 0.96);
-      color: #111827;
-    }
+
     .links-row {
       display: flex;
       flex-wrap: wrap;
@@ -282,113 +245,27 @@
       margin-top: 6px;
       font-size: 11px;
     }
+
     .links-row a {
       color: #93c5fd;
       text-decoration: none;
-      position: relative;
-    }
-    body.light-mode .links-row a {
-      color: #1d4ed8;
-    }
-    .links-row a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -2px;
-      width: 0;
-      height: 1px;
-      background: linear-gradient(90deg, #38bdf8, #22c55e);
-      transition: width 0.18s ease;
-    }
-    .links-row a:hover::after {
-      width: 100%;
     }
 
-    /* Modes & toggles */
-    .mode-row {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      justify-content: space-between;
+    .links-row a:hover {
+      text-decoration: underline;
     }
-    .modes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .mode-chip {
-  font-size: 11px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(75, 85, 99, 0.9);
-  background: rgba(15, 23, 42, 0.9);
-  cursor: pointer;
-  opacity: 1;              /* 0.85 yerine 1 */
-  color: #e5e7eb;          /* yazı rengini aç */
-}
 
-.mode-chip.active {
-  background: linear-gradient(135deg, #22c55e, #38bdf8);
-  color: #020617;
-  border-color: transparent;
-  font-weight: 600;
-}
-
-body.light-mode .mode-chip {
-  background: rgba(243, 244, 246, 0.98);
-  border-color: rgba(148, 163, 184, 1);
-  color: #111827;
-}
-    .toggle-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .toggle-btn {
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.9);
-  padding: 5px 10px;
-  font-size: 11px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  background: #020617;
-  color: #e5e7eb;              /* metni aydınlat */
-}
-.toggle-btn.small {
-  font-size: 11px;
-  padding: 5px 10px;
-}
-.toggle-btn.active {
-  border-color: #22c55e;
-  box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
-  background: #022c22;
-}
-body.light-mode .toggle-btn {
-  background: #f3f4f6;
-  color: #111827;
-  border-color: #d1d5db;
-}
-
-    /* Chat */
     .chat-box {
       margin-top: 14px;
       border-radius: 16px;
-      background: rgba(15, 23, 42, 0.96);
+      background: rgba(15, 23, 42, 0.9);
       border: 1px solid rgba(51, 65, 85, 0.9);
       display: flex;
       flex-direction: column;
-      height: 360px;
+      height: 380px;
       overflow: hidden;
-      position: relative;
     }
-    body.light-mode .chat-box {
-      background: rgba(249, 250, 251, 0.98);
-      border-color: rgba(209, 213, 219, 1);
-    }
+
     .chat-messages {
       padding: 14px 16px;
       flex: 1;
@@ -396,8 +273,8 @@ body.light-mode .toggle-btn {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      scroll-behavior: smooth;
     }
+
     .msg {
       max-width: 100%;
       font-size: 13px;
@@ -405,14 +282,15 @@ body.light-mode .toggle-btn {
       padding: 10px 12px;
       border-radius: 12px;
       white-space: pre-line;
-      position: relative;
     }
+
     .msg-user {
       align-self: flex-end;
       background: linear-gradient(135deg, #1d4ed8, #38bdf8);
       color: white;
       border-bottom-right-radius: 4px;
     }
+
     .msg-ai {
       align-self: flex-start;
       background: #020617;
@@ -420,30 +298,16 @@ body.light-mode .toggle-btn {
       border-bottom-left-radius: 4px;
       color: #e5e7eb;
     }
-    body.light-mode .msg-ai {
-      background: #ffffff;
-      border-color: rgba(209, 213, 219, 1);
-      color: #111827;
-    }
-    .msg-meta {
-      position: absolute;
-      bottom: -14px;
-      right: 6px;
-      font-size: 10px;
-      opacity: 0.6;
-    }
+
     .chat-input {
       border-top: 1px solid rgba(51, 65, 85, 0.9);
       padding: 8px 10px;
       display: flex;
       gap: 8px;
       align-items: center;
-      background: rgba(10, 16, 32, 0.98);
+      background: rgba(10, 16, 32, 0.9);
     }
-    body.light-mode .chat-input {
-      background: rgba(243, 244, 246, 0.98);
-      border-top-color: rgba(209, 213, 219, 1);
-    }
+
     .chat-input input {
       flex: 1;
       background: rgba(15, 23, 42, 0.9);
@@ -454,63 +318,51 @@ body.light-mode .toggle-btn {
       color: #e5e7eb;
       outline: none;
     }
-    body.light-mode .chat-input input {
-      background: #ffffff;
-      color: #111827;
-      border-color: rgba(209, 213, 219, 1);
-    }
+
     .chat-input input::placeholder {
       color: #6b7280;
     }
-    .chat-input button.send-btn {
+
+    .chat-input button {
       border: none;
       border-radius: 999px;
       padding: 8px 14px;
       font-size: 13px;
       cursor: pointer;
-      background: linear-gradient(135deg, #22c55e, #38bdf8);
-      color: #020617;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      white-space: nowrap;
-    }
-    .chat-input .icon-btn {
-      padding: 8px;
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(51, 65, 85, 0.9);
-      color: #e5e7eb;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    body.light-mode .chat-input .icon-btn {
-      background: #ffffff;
-      border-color: rgba(209, 213, 219, 1);
-      color: #111827;
-    }
-    .chat-input .icon-btn.active {
-      border-color: #22c55e;
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
-    }
-    .voice-row {
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-    }
-    .voice-row input[type="range"] {
-      flex: 1;
     }
 
-    /* Right side */
+    #sendBtn {
+      background: linear-gradient(135deg, #22c55e, #38bdf8);
+      color: #020617;
+    }
+
+    #sendBtn:hover {
+      opacity: 0.95;
+    }
+
+    #micBtn {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+    }
+
+    #micBtn.listening {
+      border-color: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+    }
+
+    .right-panel {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.2), transparent);
+    }
+
     .section-title {
       font-size: 12px;
       letter-spacing: 0.08em;
@@ -518,18 +370,11 @@ body.light-mode .toggle-btn {
       color: #9ca3af;
       margin-bottom: 4px;
     }
-    body.light-mode .section-title {
-      color: #6b7280;
-    }
-    .quick-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
+
     .quick-btn {
       border-radius: 12px;
       border: 1px solid rgba(51, 65, 85, 0.9);
-      background: rgba(15, 23, 42, 0.94);
+      background: rgba(15, 23, 42, 0.9);
       padding: 9px 10px;
       font-size: 12px;
       text-align: left;
@@ -539,222 +384,53 @@ body.light-mode .toggle-btn {
       display: flex;
       flex-direction: column;
       gap: 4px;
+      margin-bottom: 4px;
     }
-    body.light-mode .quick-btn {
-      background: #ffffff;
-      border-color: rgba(209, 213, 219, 1);
-      color: #111827;
-    }
+
     .quick-btn span {
       font-weight: 600;
     }
+
     .quick-btn small {
       opacity: 0.8;
       font-size: 11px;
     }
+
     .quick-btn:hover {
       transform: translateY(-1px);
       border-color: #38bdf8;
     }
-    .right-sections {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-    .card {
-      border-radius: 16px;
-      border: 1px solid rgba(51, 65, 85, 0.9);
-      background: rgba(15, 23, 42, 0.95);
-      padding: 10px 12px;
-      font-size: 12px;
-    }
-    body.light-mode .card {
-      background: #ffffff;
-      border-color: rgba(209, 213, 219, 1);
-      color: #111827;
-    }
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 6px;
-    }
-    .timeline-item {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 8px;
-      align-items: flex-start;
-      cursor: pointer;
-    }
-    .timeline-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: #38bdf8;
-      margin-top: 4px;
-      box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
-    }
-    .timeline-content {
-      border-left: 1px dashed rgba(148, 163, 184, 0.7);
-      padding-left: 8px;
-    }
-    .timeline-title {
-      font-weight: 600;
-      font-size: 12px;
-    }
-    .timeline-sub {
-      font-size: 11px;
-      opacity: 0.85;
-    }
-    .skills-wrapper { margin-top: 6px; }
-    #skillsRadar { width: 100%; max-height: 210px; }
-    .project-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-top: 6px;
-    }
-    @media (max-width: 900px) {
-      .project-grid { grid-template-columns: 1fr; }
-    }
-    .project-card {
-      border-radius: 10px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      padding: 8px 9px;
-      font-size: 11px;
-      cursor: pointer;
-      background: rgba(15, 23, 42, 0.96);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    body.light-mode .project-card {
-      background: #f9fafb;
-      border-color: rgba(209, 213, 219, 1);
-    }
-    .project-card span { font-weight: 600; font-size: 11.5px; }
-    .project-card small { opacity: 0.8; }
-    .project-card:hover {
-      border-color: #22c55e;
-      transform: translateY(-1px);
-    }
-    .info-text {
-      font-size: 11px;
-      opacity: 0.85;
-      margin-top: 4px;
-    }
-
-    .hr-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 6px;
-      margin-top: 6px;
-    }
-    .hr-btn {
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.9);
-  padding: 8px 16px;
-  font-size: 12px;
-  text-align: left;
-  cursor: pointer;
-  background: rgba(15, 23, 42, 0.98);
-  color: #e5e7eb;            /* yazı rengi net */
-  display: flex;
-  align-items: center;
-}
-.hr-btn:hover {
-  border-color: #38bdf8;
-  background: rgba(15, 23, 42, 1);
-}
-body.light-mode .hr-btn {
-  background: #f9fafb;
-  border-color: rgba(209, 213, 219, 1);
-  color: #111827;            /* gündüz modunda koyu yazı */
-}
-
-
-    /* Analytics panel */
-    #analyticsPanel {
-      position: absolute;
-      right: 12px;
-      bottom: 12px;
-      width: 240px;
-      max-height: 260px;
-      overflow-y: auto;
-      border-radius: 16px;
-      padding: 10px 12px;
-      font-size: 11px;
-      background: rgba(15, 23, 42, 0.98);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      color: #e5e7eb;
-      display: none;
-      z-index: 30;
-    }
-    body.light-mode #analyticsPanel {
-      background: rgba(255, 255, 255, 0.98);
-      color: #111827;
-      border-color: rgba(156, 163, 175, 1);
-    }
-    #analyticsPanel h3 { font-size: 12px; margin-bottom: 6px; }
-    #analyticsPanel ul { list-style: none; margin-top: 4px; }
-    #analyticsPanel li { margin-bottom: 2px; }
-    #analyticsPanel .hint { margin-top: 6px; opacity: 0.7; }
   </style>
 </head>
 
 <body>
   <div class="app-wrapper">
-    <!-- Analytics -->
-    <div id="analyticsPanel">
-      <h3>Ekrem Analytics</h3>
-      <div><strong>Hızlı Sorular:</strong></div>
-      <ul id="analyticsQuick"></ul>
-      <div style="margin-top:4px;"><strong>Timeline Tıklamaları:</strong></div>
-      <ul id="analyticsTimeline"></ul>
-      <div style="margin-top:4px;"><strong>Toplam Soru:</strong> <span id="analyticsQuestions">0</span></div>
-      <p class="hint">Shift + E ile paneli aç/kapa.</p>
-    </div>
-
-    <!-- LEFT -->
     <div class="left-panel">
       <div class="header-row">
-        <div class="avatar-wrapper">
-          <div class="avatar-orbit"></div>
-          <div class="avatar-disc"></div>
-          <div class="avatar" id="avatar">
-            <img src="ekrem-avatar.png" alt="Ekrem Şen avatar" />
-          </div>
+        <div class="avatar" id="avatar">
+          <!-- Fotoğrafını aynı klasöre ekle ve adını tam olarak böyle ver: ekrem-photo.jpg -->
+          <img src="ekrem-photo.jpg" alt="Ekrem Şen" class="avatar-photo" />
+          <div class="avatar-mouth"></div>
+          <div class="avatar-pulse"></div>
         </div>
         <div>
           <div class="badge">
             <span class="badge-dot"></span>
-            EKREM ŞEN • Senior Business Analyst Team Lead / Project Manager
+            EKREM ŞEN • Senior BA / Team Lead / PM
           </div>
-          <h1>Merhaba, ben <span class="highlight">Ekrem Şen</span></h1>
+          <h1>Merhaba, ben <span class="highlight">Ekrem Şen</span> 👋</h1>
           <p class="subtitle">
-            FinTech, sermaye piyasaları, ödeme sistemleri ve dijital cüzdan alanında çalışan
-            Senior Business Analyst Team Lead / Project Manager & Product Owner hibrit profili.
+            Senior Business Analyst Team Lead / Project Manager.<br />
+            Ödeme sistemleri, dijital kanallar ve sermaye piyasaları projelerinde uçtan uca
+            ürün geliştirme ve iş analizi yapıyorum.
           </p>
         </div>
       </div>
 
-      <div class="mode-row">
-        <div class="modes">
-          <button class="mode-chip active" data-mode="default">Genel Mod</button>
-          <button class="mode-chip" data-mode="interview">Mülakat Modu</button>
-          <button class="mode-chip" data-mode="ceo">CEO Özeti</button>
-          <button class="mode-chip" data-mode="tech">Teknik Mod</button>
-        </div>
-        <div class="toggle-row">
-          <button class="toggle-btn small" id="xrToggle">XR Mod</button>
-          <button class="toggle-btn small" id="themeToggle">Gece/Gündüz</button>
-        </div>
-      </div>
-
-      <p class="question">“Benim hakkımda ne öğrenmek istersin?”</p>
+      <p class="question">“Hakkımda ne öğrenmek istersin? Sor, detaylı anlatayım.”</p>
 
       <div class="pill-row">
-        <div class="pill">FinTech & Ödeme Sistemleri</div>
+        <div class="pill">Ödeme Sistemleri & Kanallar</div>
         <div class="pill">Dijital Cüzdan & Kart</div>
         <div class="pill">API / CRM Entegrasyonları</div>
         <div class="pill">Agile & Scrum Takım Liderliği</div>
@@ -762,768 +438,548 @@ body.light-mode .hr-btn {
       </div>
 
       <div class="links-row">
-        <span><a href="https://www.linkedin.com/in/ekremsen/" target="_blank">LinkedIn profilim</a></span>
-        <span><a href="https://ekremsen.medium.com/" target="_blank">Medium yazılarım</a></span>
+        <span>🔗 <a href="https://www.linkedin.com/in/ekremsen/" target="_blank">LinkedIn profili</a></span>
+        <span>✍️ <a href="https://ekremsen.medium.com/" target="_blank">Medium makaleleri</a></span>
       </div>
 
       <div class="chat-box">
         <div class="chat-messages" id="chatMessages">
           <div class="msg msg-ai">
-            Bu sayfa klasik bir CV’den daha çok, kendimi anlattığım canlı bir profil gibi tasarlandı.
-            Sağ taraftaki butonlara basarak kariyer hikayemi, projelerimi ve HR sorularına verdiğim
-            hazır cevapları hem metin olarak okuyabilir hem de sesli dinleyebilirsin.
+            Selam 👋 Ben Ekrem Şen.<br /><br />
+            Senior Business Analyst Team Lead / Project Manager olarak; ödeme sistemleri,
+            dijital cüzdan, sanal POS, API entegrasyonları ve sermaye piyasaları projelerinde çalışıyorum.
+            Sağ taraftaki kartlardan birine tıklayabilir veya aşağıya soru yazabilir ya da 🎙 ile sesli sorabilirsin.
           </div>
         </div>
 
         <div class="chat-input">
-          <button class="icon-btn" id="voiceToggle" title="Sesle oku / kapat">🔊</button>
-          <button class="icon-btn" id="micBtn" title="Sesli soru (tarayıcı destekliyorsa)">🎤</button>
-          <input id="userInput" type="text" placeholder="Bir soru sor (örn: FinTech deneyimin nedir?)" />
-          <button class="send-btn" id="sendBtn">Gönder</button>
+          <button id="micBtn" type="button" title="Mikrofonla sor">🎙</button>
+          <input id="userInput" type="text" placeholder="Bir soru sor (örn: Gedik’te ne yapıyorsun, projelerini anlatır mısın?)" />
+          <button id="sendBtn" type="button">Gönder ➤</button>
         </div>
       </div>
-
-      <div class="voice-row">
-        <span>Ses hızı:</span>
-        <input id="rateSlider" type="range" min="0.8" max="1.3" step="0.05" value="1.0" />
-        <span id="rateLabel">1.0x</span>
-      </div>
-
-      <p class="info-text">
-        İpucu: “Kendini kısaca tanıt”, “Spot Döviz projesini anlat”, “Vodafone deneyimin?”
-        gibi sorular sorabilir ya da direkt sağdaki HR sorularından birine tıklayabilirsin.
-      </p>
     </div>
 
-    <!-- RIGHT -->
     <div class="right-panel">
-      <div class="right-sections">
-        <div>
-          <div class="section-title">Hızlı Sorular</div>
-          <div class="quick-grid">
-            <button class="quick-btn" data-intent="summary">
-              <span>Özet Profil</span>
-              <small>“Ekrem kimdir, ne yapar?”</small>
-            </button>
-            <button class="quick-btn" data-intent="gedik">
-              <span>Gedik Yatırım Rolüm</span>
-              <small>Senior Business Analyst Team Lead / Project Manager</small>
-            </button>
-            <button class="quick-btn" data-intent="fintech">
-              <span>FinTech & Ödeme Sistemleri</span>
-              <small>Dijital cüzdan, kart, 6493 ve regülasyon</small>
-            </button>
-            <button class="quick-btn" data-intent="api">
-              <span>API & Entegrasyon Deneyimi</span>
-              <small>REST/SOAP, telco, kart ve CRM entegrasyonları</small>
-            </button>
-            <button class="quick-btn" data-intent="experience">
-              <span>Kariyer Zaman Çizelgesi</span>
-              <small>BEDAŞ’tan Gedik’e uzanan yol</small>
-            </button>
-            <button class="quick-btn" data-intent="projects">
-              <span>Öne Çıkan Projeler</span>
-              <small>Spot Döviz, Check-Sim, Dijital Cüzdan, CRM</small>
-            </button>
-            <button class="quick-btn" data-intent="learning">
-              <span>Eğitim & Sertifikalar</span>
-              <small>IIBA, IBM, UX, SQL ve diğerleri</small>
-            </button>
-            <button class="quick-btn" data-intent="hr-intro">
-              <span>HR için Kendimi Tanıt</span>
-              <small>İnsan kaynakları için 1 dakikalık özet</small>
-            </button>
-          </div>
-        </div>
+      <div>
+        <div class="section-title">Hızlı Sorular</div>
 
-        <div class="card">
-          <div class="section-title">Kariyer Timeline</div>
-          <div class="timeline">
-            <div class="timeline-item" data-timeline="gedik">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-title">2025 → Gedik Yatırım</div>
-                <div class="timeline-sub">Senior Business Analyst Team Lead / Project Manager</div>
-              </div>
-            </div>
-            <div class="timeline-item" data-timeline="dias">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-title">2024 → DİAS Teknoloji</div>
-                <div class="timeline-sub">Senior Expert Business Analyst</div>
-              </div>
-            </div>
-            <div class="timeline-item" data-timeline="upt">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-title">2021 → UPT Ödeme Hizmetleri</div>
-                <div class="timeline-sub">Expert Business Analyst</div>
-              </div>
-            </div>
-            <div class="timeline-item" data-timeline="akbank">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-title">2018 → Akbank</div>
-                <div class="timeline-sub">Senior Business Analyst</div>
-              </div>
-            </div>
-            <div class="timeline-item" data-timeline="vodafone">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-title">2009 → Vodafone</div>
-                <div class="timeline-sub">Quality & Process / Business Analyst</div>
-              </div>
-            </div>
-            <div class="timeline-item" data-timeline="bedas">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-title">2005 → BEDAŞ</div>
-                <div class="timeline-sub">Hakediş Kontrol Sorumlusu</div>
-              </div>
-            </div>
-          </div>
-          <button class="hr-btn" id="storyBtn">Kariyer hikayemi story formatında anlat</button>
-        </div>
+        <button class="quick-btn" data-intent="summary">
+          <span>Özet Profil</span>
+          <small>Ekrem kimdir, ne yapar?</small>
+        </button>
 
-        <div class="card">
-          <div class="section-title">Yetenek Haritam</div>
-          <div class="skills-wrapper">
-            <canvas id="skillsRadar"></canvas>
-          </div>
-          <p class="info-text">
-            Grafikte; İş Analizi, FinTech, Entegrasyon, Scrum & Agile, Liderlik ve Veri Analizi
-            alanlarındaki göreli ağırlıklarımı görebilirsin.
-          </p>
-        </div>
+        <button class="quick-btn" data-intent="gedik">
+          <span>Gedik Yatırım Rolü</span>
+          <small>Senior BA Team Lead / PM</small>
+        </button>
 
-        <div class="card">
-          <div class="section-title">Projelerden Seçmeler</div>
-          <div class="project-grid">
-            <div class="project-card" data-project="spot">
-              <span>Spot Döviz & Trading</span>
-              <small>Kur, tatil günleri, OTC, muhasebe ve risk kurguları.</small>
-            </div>
-            <div class="project-card" data-project="checksim">
-              <span>Check-Sim & SIM Bloke</span>
-              <small>Turatel STS, operatör retry, hata kodu standardizasyonu.</small>
-            </div>
-            <div class="project-card" data-project="wallet">
-              <span>Dijital Cüzdan & Kart</span>
-              <small>Uption Kart, Metropol POS, cashback ve KYC süreçleri.</small>
-            </div>
-            <div class="project-card" data-project="crm">
-              <span>CRM & Kampanya Motoru</span>
-              <small>Siebel ürün kataloğu, segmentasyon ve raporlama.</small>
-            </div>
-          </div>
-        </div>
+        <button class="quick-btn" data-intent="fintech">
+          <span>Ödeme Sistemleri</span>
+          <small>Dijital cüzdan, sanal POS vb.</small>
+        </button>
 
-        <div class="card">
-          <div class="section-title">Sertifikalar & Uzmanlıklar</div>
-          <ul style="margin-left:16px; margin-top:6px; line-height:1.5;">
-            <li>IIBA Fundamentals of Business Analysis</li>
-            <li>IIBA CBAP Uluslararası İş Analisti Eğitimleri</li>
-            <li>Uluslararası İş Analizi Metodolojisi ve Teknikleri</li>
-            <li>Proje Yönetimi Uzmanlık Sertifikası</li>
-            <li>Enterprise Design Thinking (IBM)</li>
-            <li>UX Foundation</li>
-            <li>Google Ads Apps Certification</li>
-            <li>Prompt Engineering</li>
-            <li>UFT One 2021.x Essentials</li>
-            <li>SQL Server ile Veri Tabanı Tasarımı</li>
-            <li>Algoritma ve Programlamaya Giriş</li>
-            <li>Etkili Sunum Teknikleri, İknanın Sırları, Zor Kişilerle İletişimde Kişilik Analizi</li>
-          </ul>
-        </div>
+        <button class="quick-btn" data-intent="api">
+          <span>API & Entegrasyon Deneyimi</span>
+          <small>Postman, SoapUI, entegrasyon projeleri</small>
+        </button>
 
-        <div class="card">
-          <div class="section-title">HR Soruları (Hazır Cevaplar)</div>
-          <p class="info-text">
-            Aşağıdaki butonlara tıklayarak klasik mülakat sorularına benim ağzımdan
-            hazırlanmış cevapları okuyabilir ve sesli dinleyebilirsin.
-          </p>
-          <div class="hr-grid" id="hrGrid"></div>
-        </div>
+        <button class="quick-btn" data-intent="experience">
+          <span>Kariyer Zaman Çizelgesi</span>
+          <small>Tüm şirketler ve tarihler</small>
+        </button>
+
+        <button class="quick-btn" data-intent="projects">
+          <span>Öne Çıkan Projeler</span>
+          <small>Spot Döviz, Check-Sim, kampanyalar</small>
+        </button>
+
+        <button class="quick-btn" data-intent="learning">
+          <span>Eğitim & Sertifikalar</span>
+          <small>Üniversite, sertifika ve eğitimler</small>
+        </button>
       </div>
     </div>
   </div>
 
   <script>
-    // ---------- GLOBAL STATE ----------
-    const chatMessagesEl = document.getElementById("chatMessages");
-    const userInputEl = document.getElementById("userInput");
-    const sendBtn = document.getElementById("sendBtn");
-    const voiceToggleBtn = document.getElementById("voiceToggle");
-    const micBtn = document.getElementById("micBtn");
-    const rateSlider = document.getElementById("rateSlider");
-    const rateLabel = document.getElementById("rateLabel");
-    const modeChips = document.querySelectorAll(".mode-chip");
-    const quickButtons = document.querySelectorAll(".quick-btn");
-    const timelineItems = document.querySelectorAll(".timeline-item");
-    const projectCards = document.querySelectorAll(".project-card");
-    const storyBtn = document.getElementById("storyBtn");
-    const themeToggle = document.getElementById("themeToggle");
-    const xrToggle = document.getElementById("xrToggle");
-    const analyticsPanel = document.getElementById("analyticsPanel");
-    const analyticsQuickEl = document.getElementById("analyticsQuick");
-    const analyticsTimelineEl = document.getElementById("analyticsTimeline");
-    const analyticsQuestionsEl = document.getElementById("analyticsQuestions");
-    const avatarEl = document.getElementById("avatar");
-    const hrGrid = document.getElementById("hrGrid");
+    /* ------------------ 0) SES MOTORU AYARLARI ------------------ */
 
-    let currentMode = "default";
     let voiceEnabled = true;
-    let speechRate = 1.0;
-
+    let speechRate = 1;
     let turkishVoice = null;
-    let englishVoice = null;
-    let voicesInitialized = false;
 
-    const analytics = { quick: {}, timeline: {}, questions: 0 };
-
-    // ---------- ENGLISH DICTIONARY ----------
-    const englishDictionary = new Set([
-      "fintech", "api", "crm", "scrum", "agile",
-      "sql", "ibm", "google", "ux", "uft",
-      "fundamentals", "business", "analysis", "enterprise",
-      "design", "thinking", "server", "apps", "certification",
-      "prompt", "engineering", "essentials"
-    ]);
-
-    // ---------- RESPONSES ----------
-    const responses = {
-      summary: {
-        default: `Kısaca Ekrem Şen: FinTech, sermaye piyasaları, dijital cüzdanlar ve ödeme sistemleri tarafında çalışan Senior Business Analyst Team Lead / Project Manager’im.
-
-Kariyerimde BEDAŞ’ta operasyon ve hakediş süreçleriyle başlayıp, Vodafone’da süreç ve kalite analizi, Akbank’ta bankacılık ve dijital kanallar, UPT’de ödeme hizmetleri ve kart ürünleri, DİAS Teknoloji’de ERP ve finans projeleri, bugün ise Gedik Yatırım’da trading ve dijital cüzdan projeleriyle devam eden bir çizgim var.`
-      },
-      gedik: {
-        default: `Gedik Yatırım’da Senior Business Analyst Team Lead / Project Manager olarak çalışıyorum.
-
-Spot Döviz & Trading, Check-Sim, SIM altyapısı, mobil uygulamalar ve CRM projelerinde hem analiz hem de proje koordinasyonu rolündeyim. İş birimleriyle gereksinimi netleştirip; akışlar, iş kuralları, API kontratları, test senaryoları ve canlıya geçiş süreçlerini uçtan uca yönetiyorum.`
-      },
-      fintech: {
-        default: `FinTech tarafında odaklandığım alanlar:
-
-• Dijital cüzdan ve kart ürünleri (prepaid, sanal kart, fiziksel kart, cashback)
-• Sanal POS, ödeme akışları, komisyon ve ücretlendirme yapıları
-• 6493 ve sermaye piyasası regülasyonlarıyla uyumlu süreç tasarımı
-• KYC, müşteri doğrulama ve risk/fraud kontrolleri
-• Sermaye piyasalarında trading ve yatırımcı deneyimini sadeleştiren akışlar.`
-      },
-      api: {
-        default: `API ve entegrasyon tarafında; bankacılık/trading core sistemleri, telco operatörleri (Turk Telekom, Vodafone, Turkcell), Turatel STS, kart ve ödeme altyapıları, CRM ve kampanya sistemleri arasında REST/SOAP tabanlı entegrasyonlar tasarlıyorum.
-
-Postman collection’ları, swagger/OpenAPI dokümanları, JSON/XML şemaları ve test datalarıyla birlikte uçtan uca analiz ve test yaklaşımı benimsiyorum.`
-      },
-      experience: {
-        default: `Kariyer zaman çizelgem özetle:
-
-• BEDAŞ – Hakediş Kontrol Sorumlusu  
-• Vodafone – Quality & Process / Business Analyst  
-• Akbank – Senior Business Analyst  
-• UPT Ödeme Hizmetleri – Expert Business Analyst  
-• DİAS Teknoloji – Senior Expert Business Analyst  
-• Gedik Yatırım – Senior Business Analyst Team Lead / Project Manager
-
-Her adımda; sahaya yakın operasyon, süreç analizi, bankacılık/ödeme sistemleri, ERP ve FinTech deneyimlerini birleştiren hibrit bir profil oluştu.`
-      },
-      projects: {
-        default: `Öne çıkan projelerimden bazıları:
-
-• Spot Döviz & Trading:
-  – Kur ve tatil günleri yönetimi, OTC entegrasyonu, muhasebe kayıtları, risk ve limit kontrolleri.
-
-• Check-Sim & SIM Bloke:
-  – Turatel STS entegrasyonu,
-  – Operatör bazlı retry ve hata kodu standardizasyonu,
-  – CRM ekranlarıyla müşteri temsilcisi iş akışının sadeleştirilmesi.
-
-• Dijital Cüzdan & Kart:
-  – Uption Kart, Metropol POS, cashback kampanyaları,
-  – Kurye, teslimat, kart kullanım kuralları ve KYC süreçleri.
-
-• CRM & Kampanya Motoru:
-  – Siebel ürün kataloğu, kampanya segmentleri, yetki matrisi ve performans raporları.`
-      },
-      learning: {
-        default: `Eğitim ve sertifika tarafında; IIBA Business Analysis eğitimleri, Enterprise Design Thinking (IBM), UX, Google Ads Apps Certification, Prompt Engineering, UFT One, SQL Server ve iletişim odaklı programlarla hem teknik hem soft-skill yönümü dengede tutuyorum.
-
-Bu sayede; geliştiriciyle teknik seviyede, iş birimi ve yönetimle stratejik seviyede aynı masada konuşabilen bir profil ortaya çıkıyor.`
-      },
-      hrIntro: {
-        default: `İnsan kaynakları tarafına kendimi şöyle özetliyorum:
-
-Ben Ekrem Şen. FinTech, sermaye piyasaları ve ödeme sistemleri odaklı çalışan Senior Business Analyst Team Lead / Project Manager’im. Analistlik kasımı; ekip liderliği, proje yönetimi ve ürün odaklı bakış açısıyla birleştiriyorum.
-
-Güçlü yönlerim; karmaşık süreçleri sadeleştirmek, paydaşları ortak hedefte buluşturmak, regülasyon ve risk perspektifini korurken müşteri deneyimini iyileştirmek.  
-Beklentim; karşılıklı güvene dayalı, etki odaklı ve uzun vadeli bir iş birliği kurmak.`
-      }
+    const phraseMap = {
+      "Enterprise Design Thinking": "Enterprays Dizayn Thinking",
+      "Google Ads Apps Certification": "Gugıl Eds Eps Sertifikeyşın",
+      "UFT One 2021.x Essentials": "Yu Ef Ti Van 2021 Esentials",
+      "UX Foundation": "Yu Eks Faundeyşın",
+      "Prompt Engineering": "Prompt Encıniring",
+      "SQL Server": "Es Kiu El Sörvır",
+      "Fundamentals of Business Analysis": "Fandamentıls of Biznıs Enelisis",
+      "Project Management": "Procekt Menıcımınt",
+      "Business Analysis": "Biznıs Enelisis"
     };
 
-    const hrQuestions = [
-      {
-        id: "q1",
-        label: "Kısaca kendini ve kariyerini özetler misin?",
-        text: `Kısaca kendimi ve kariyer yolculuğumu özetleyeyim.
+    const wordMap = {
+      "FinTech": "Fin tek",
+      "API": "Ey Pi Ay",
+      "CRM": "Si Ar Em",
+      "Scrum": "Skram",
+      "Agile": "Ecayıl",
+      "SQL": "Es Kiu El",
+      "IBM": "Ay Bi Em",
+      "Google": "Gugıl",
+      "Server": "Sörvır",
+      "UX": "Yu Eks",
+      "UFT": "Yu Ef Ti"
+    };
 
-Ben Ekrem Şen. Kariyerime BEDAŞ’ta sahaya yakın, hakediş ve operasyon süreçlerinde başlayarak işin mutfağında çalıştım. Orada hem dokümantasyon disiplinini hem de sahadaki gerçek ihtiyaçları görme alışkanlığını kazandım.
-
-Sonrasında Vodafone’da süreç ve kalite analisti olarak görev aldım. Çağrı merkezi ve backoffice süreçlerinde müşteri deneyimini, KPI’ları ve performans takibini yakından tanıdım.
-
-Akbank döneminde bankacılık ve ödeme sistemleriyle tanıştım; dijital kanallar tarafında uçtan uca iş analizi yaparak finansal ürünlerin nasıl tasarlanıp hayata geçtiğini öğrendim.
-
-UPT Ödeme Hizmetleri’nde dijital cüzdan, kart ürünleri ve para transferi projeleriyle FinTech odağım derinleşti. DİAS Teknoloji’de ERP ve finans projeleriyle hem kurumsal sistemleri hem de süreç tasarımını daha bütüncül görmeye başladım.
-
-Bugün Gedik Yatırım’da Senior Business Analyst Team Lead / Project Manager olarak; trading, dijital cüzdan, telco entegrasyonları ve CRM projelerinde hem analiz hem de liderlik rolünü birlikte yürütüyorum.`
-      },
-      {
-        id: "q2",
-        label: "Güçlü yönlerin neler? Bir örnek verir misin?",
-        text: `Güçlü yönlerim; karmaşık süreçleri sadeleştirme, paydaşları ortak bir noktada buluşturma ve teknik detayla iş hedefini aynı anda görebilmem.
-
-Örneğin Gedik Yatırım’daki Spot Döviz projesinde; trading, muhasebe, risk, IT, operasyon ve müşteri tarafının farklı beklentilerini tek bir uçtan uca akışta topladım. Kur hesaplama, tatil günleri, OTC ve muhasebe kurgularını aynı dokümanda netleştirdik.
-
-Bu sayede hem geliştirme ekibinin ne yapacağını net gördüğü, hem de iş birimlerinin regülasyon ve risk açısından içinin rahat olduğu bir tasarımla canlıya çıktık. Sonuçta operasyonel hatalar azaldı, kullanıcı şikayetleri düştü ve ekipler arası “bu kısım kimin sorumluluğu” tartışmaları ortadan kalktı.`
-      },
-      {
-        id: "q3",
-        label: "Geliştirmek istediğin yönler neler?",
-        text: `Geliştirmek istediğim taraf, teknik derinliği ürün stratejisiyle daha da fazla birleştirmek ve liderlik kasımı sürekli güncel tutmak.
-
-Bunun için; FinTech ve sermaye piyasaları tarafında global case’leri ve yeni regülasyonları düzenli takip ediyorum. Medium ve LinkedIn tarafında içerik üreterek hem öğrendiklerimi paylaşıyor hem de kendimi zorlayarak bilgiyi derinleştiriyorum.
-
-Ayrıca ekip yönetimi ve koçluk odaklı kitaplar, eğitimler ve vaka incelemeleriyle liderlik tarafıma yatırım yapıyorum. Hedefim; sadece iyi bir analist olmak değil, ekibi ve işi bir üst seviyeye taşıyan bir lider olmak.`
-      },
-      {
-        id: "q4",
-        label: "Zor paydaş / çatışma durumlarını nasıl yönetirsin?",
-        text: `Zor paydaşlarla çalışırken yaklaşımım; önce anlamak, sonra çerçeveyi netleştirmek ve en sonunda uzlaştırmak.
-
-Örneğin bir projede iş birimi kapsamı sürekli genişletmek istiyor, IT tarafı ise takvim ve kapasite nedeniyle endişeliydi. Önce her iki tarafla ayrı ayrı görüşüp baskı noktalarını, beklentileri ve kaygıları netleştirdim.
-
-Ardından herkesin olduğu bir oturumda; iş hedeflerini, teknik kapasiteyi ve riskleri şeffaf şekilde masaya koyup “MVP + fazlama” yaklaşımıyla ilerleme önerisi sundum. İlk fazda işin gerçekten kritik çekirdeğini çıkardık, kalan fonksiyonları ise risk ve değer önceliğine göre fazladık.
-
-Sonuç olarak canlıya çıkış tarihi bozulmadı, iş birimi de tüm fonksiyonları kaybetmeden kontrollü şekilde devreye alabildi. Bu tip durumlarda sakin kalmak, veriye ve şeffaf iletişime yaslanmak çatışmayı yönetmemi sağlıyor.`
-      },
-      {
-  id: "q5",
-  label: "Maaş beklentin ve iş–yaşam dengesi bakış açın nedir?",
-  text: `Maaş beklentim; üstlendiğim sorumluluk, yarattığım etki ve piyasa koşullarıyla uyumlu, her iki taraf için de adalet duygusunu besleyen bir seviyede olması.
-
-İş–yaşam dengesinde; kritik dönemlerde ekstra efor koymaktan çekinmem ancak bunun sürdürülebilir olması için önceliklerin net olması, emeğin görünür olması ve ekip içinde yük paylaşımının dengeli olması gerektiğine inanırım.
-
-Uzun vadede motive, üretken ve yaratıcı ekiplerin bu dengeyi koruyabilen yapılarda ortaya çıktığını düşünüyorum.
-
-Net maaş beklentimi ise, karşılıklı beklentilerin ve sorumlulukların daha net konuşulabildiği yüz yüze veya online mülakat esnasında paylaşmayı tercih ediyorum.`
-},
-      {
-        id: "q6",
-        label: "Önümüzdeki 3 yılda kendini nerede görmek istiyorsun?",
-        text: `Önümüzdeki 3 yılda; FinTech ve sermaye piyasaları tarafında stratejik ürün ve projelerde daha fazla sorumluluk almış, analistlik deneyimimi liderlik ve ürün sahipliğiyle birleştirmiş bir rolde ilerlemek istiyorum.
-
-Hedefim; sadece analiz üreten değil, iş hedefini, teknolojiyi ve ekibi aynı çatı altında toplayan; şirketin kritik dijital projelerinde güvenilen bir lider olmak.
-
-Bunu yaparken bilgi paylaşan, ekibini yetiştiren ve kuruma kalıcı değer bırakan bir çizgide kalmaya önem veriyorum.`
-      }
-    ];
-
-    // ---------- UTILITIES ----------
-    function addMessage(sender, text, options = {}) {
-      const { speak = true } = options;
-      const msgEl = document.createElement("div");
-      msgEl.classList.add("msg");
-      msgEl.classList.add(sender === "user" ? "msg-user" : "msg-ai");
-
-      const metaEl = document.createElement("div");
-      metaEl.classList.add("msg-meta");
-      const now = new Date();
-      metaEl.textContent = `${sender === "user" ? "Sen" : "Ekrem"} • ${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
-
-      msgEl.appendChild(metaEl);
-      chatMessagesEl.appendChild(msgEl);
-
-      if (sender === "ai") {
-        typeWriter(text, msgEl, () => {
-          if (voiceEnabled && speak) speakText(text);
-        });
-      } else {
-        msgEl.insertBefore(document.createTextNode(text), metaEl);
-      }
-      chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-    }
-
-    function typeWriter(text, container, callback) {
-      let idx = 0;
-      const span = document.createElement("span");
-      container.insertBefore(span, container.querySelector(".msg-meta"));
-
-      const interval = 12;
-      const timer = setInterval(() => {
-        span.textContent += text.charAt(idx);
-        idx++;
-        if (idx >= text.length) {
-          clearInterval(timer);
-          if (callback) callback();
-        }
-      }, interval);
-    }
-
-    function inferIntentFromText(text) {
-      const t = text.toLowerCase();
-      if (t.includes("gedik")) return "gedik";
-      if (t.includes("fintech") || t.includes("ödeme") || t.includes("cüzdan")) return "fintech";
-      if (t.includes("api") || t.includes("entegrasyon")) return "api";
-      if (t.includes("kariyer") || t.includes("tecrübe") || t.includes("deneyim") || t.includes("timeline")) return "experience";
-      if (t.includes("proje")) return "projects";
-      if (t.includes("sertifika") || t.includes("eğitim")) return "learning";
-      if (t.includes("hr") || t.includes("ik") || t.includes("kendini tanıt") || t.includes("tanıt")) return "hrIntro";
-      return null;
-    }
-
-    function getResponseText(intent, mode) {
-      if (!intent) {
-        return `Soru için teşekkürler. Kısaca cevaplayayım; istersen sağ taraftaki kartlardan birine tıklayarak detaylı bilgi de alabilirsin.`;
-      }
-      const data = responses[intent];
-      if (!data) return "Bu konuda kısa süre içinde bir özet hazırlayacağım.";
-      return data[mode] || data.default || Object.values(data)[0];
-    }
-
-    // ---------- TEXT CLEAN & TTS ----------
-
-    function stripEmojisAndSymbols(str) {
-      if (!str) return "";
-      return str
-        .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, "")
-        .replace(/[•◆◼►▪️#*]/g, "")
-        .replace(/\s{2,}/g, " ")
-        .trim();
-    }
-
-    function isMostlyEnglish(text) {
-      if (!text) return false;
-      const words = text
-        .split(/\s+/)
-        .map(w => w.replace(/[.,;:!?()[\]"“”]/g, ""))
-        .filter(Boolean);
-
-      if (!words.length) return false;
-
-      let enCount = 0;
-      words.forEach(w => {
-        const lower = w.toLowerCase();
-        if (englishDictionary.has(lower)) {
-          enCount++;
-          return;
-        }
-        if (/^[A-Z]{2,}$/.test(w)) {
-          enCount++;
-          return;
-        }
-        if (/^[a-z]+$/.test(lower) &&
-            !/[ığüşöçİĞÜŞÖÇ]/.test(lower) &&
-            lower.length > 4) {
-          enCount++;
-        }
+    function preprocessForTTS(text) {
+      let processed = text;
+      Object.keys(phraseMap).forEach(key => {
+        const re = new RegExp(key, "gi");
+        processed = processed.replace(re, phraseMap[key]);
       });
-
-      return enCount > 0 && enCount / words.length > 0.7;
+      Object.keys(wordMap).forEach(key => {
+        const re = new RegExp("\\b" + key + "\\b", "gi");
+        processed = processed.replace(re, wordMap[key]);
+      });
+      return processed;
     }
 
     function initVoices() {
-      if (voicesInitialized || !("speechSynthesis" in window)) return;
-      const vs = window.speechSynthesis.getVoices();
-      if (!vs || !vs.length) return;
+      if (!("speechSynthesis" in window)) return;
+      const voices = window.speechSynthesis.getVoices();
+      if (!voices || !voices.length) return;
 
-      function pickVoice(langPrefix) {
-        const list = vs.filter(v => v.lang && v.lang.toLowerCase().startsWith(langPrefix));
-        if (!list.length) return null;
-        const male = list.find(v => /male|erkek|man/i.test(v.name));
-        return male || list[0];
-      }
-
-      turkishVoice = pickVoice("tr");
-      englishVoice = pickVoice("en");
-      voicesInitialized = true;
+      const trVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith("tr"));
+      turkishVoice =
+        trVoices.find(v => /male|erkek|adam/i.test(v.name)) ||
+        trVoices[0] ||
+        voices[0];
     }
 
     if ("speechSynthesis" in window) {
-      window.speechSynthesis.onvoiceschanged = initVoices;
       initVoices();
+      window.speechSynthesis.onvoiceschanged = initVoices;
     }
+
+    const avatarEl = document.getElementById("avatar");
 
     function setAvatarSpeaking(state) {
       if (!avatarEl) return;
-      if (state) avatarEl.classList.add("avatar-speaking");
-      else avatarEl.classList.remove("avatar-speaking");
+      if (state) {
+        avatarEl.classList.add("avatar-speaking");
+      } else {
+        avatarEl.classList.remove("avatar-speaking");
+      }
     }
 
     function speakText(text) {
-      if (!voiceEnabled || !("speechSynthesis" in window)) return;
+      if (!voiceEnabled || !("speechSynthesis" in window)) {
+        // Ses yoksa sadece avatar animasyonu çalışsın
+        animateAvatarForText(text);
+        return;
+      }
       if (!text || !text.trim()) return;
 
-      const clean = stripEmojisAndSymbols(text);
-      if (!clean) return;
-
-      window.speechSynthesis.cancel();
-      initVoices();
-
-      const utter = new SpeechSynthesisUtterance(clean);
-      utter.rate = speechRate;
-      utter.pitch = 1;
-
-      const english = isMostlyEnglish(clean);
-
-      if (english && englishVoice) {
-        utter.voice = englishVoice;
-        utter.lang = "en-US";
-      } else if (turkishVoice) {
-        utter.voice = turkishVoice;
-        utter.lang = "tr-TR";
-      } else {
-        utter.lang = english ? "en-US" : "tr-TR";
-      }
-
-      utter.onstart = () => setAvatarSpeaking(true);
-      utter.onend = () => setAvatarSpeaking(false);
-
       try {
-        window.speechSynthesis.speak(utter);
-      } catch {
-        setAvatarSpeaking(false);
-      }
-    }
-
-    // ---------- ANALYTICS ----------
-    function incQuickAnalytics(key) {
-      analytics.quick[key] = (analytics.quick[key] || 0) + 1;
-      renderAnalytics();
-    }
-    function incTimelineAnalytics(key) {
-      analytics.timeline[key] = (analytics.timeline[key] || 0) + 1;
-      renderAnalytics();
-    }
-    function incQuestionCount() {
-      analytics.questions += 1;
-      renderAnalytics();
-    }
-    function renderAnalytics() {
-      analyticsQuickEl.innerHTML = "";
-      Object.entries(analytics.quick).forEach(([k, v]) => {
-        const li = document.createElement("li");
-        li.textContent = `${k}: ${v} kez`;
-        analyticsQuickEl.appendChild(li);
-      });
-
-      analyticsTimelineEl.innerHTML = "";
-      Object.entries(analytics.timeline).forEach(([k, v]) => {
-        const li = document.createElement("li");
-        li.textContent = `${k}: ${v} tıklama`;
-        analyticsTimelineEl.appendChild(li);
-      });
-
-      analyticsQuestionsEl.textContent = analytics.questions.toString();
-    }
-
-    // ---------- EVENTS ----------
-    sendBtn.addEventListener("click", () => {
-      const text = userInputEl.value.trim();
-      if (!text) return;
-      userInputEl.value = "";
-      addMessage("user", text, { speak: false });
-      incQuestionCount();
-
-      const intent = inferIntentFromText(text);
-      const reply = getResponseText(intent, currentMode);
-      addMessage("ai", reply);
-    });
-
-    userInputEl.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") sendBtn.click();
-    });
-
-    modeChips.forEach(chip => {
-      chip.addEventListener("click", () => {
-        modeChips.forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        currentMode = chip.dataset.mode || "default";
-
-        let text = "";
-        if (currentMode === "default") {
-          text = "Genel modda, dengeli ve açıklayıcı bir tonda cevap veriyorum.";
-        } else if (currentMode === "interview") {
-          text = "Mülakat modunda, cevaplarımı daha çok HR ve mülakat bakış açısıyla kurguluyorum.";
-        } else if (currentMode === "ceo") {
-          text = "CEO özeti modunda, cevapları daha kısa, net ve etki odaklı tutacağım.";
-        } else if (currentMode === "tech") {
-          text = "Teknik modda, entegrasyon ve teknik detaylara daha fazla odaklanıyorum.";
-        }
-        addMessage("ai", text);
-      });
-    });
-
-    quickButtons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        const intentKey = btn.dataset.intent === "hr-intro" ? "hrIntro" : btn.dataset.intent;
-        const label = btn.querySelector("span")?.textContent || intentKey;
-        incQuickAnalytics(label);
-        const reply = getResponseText(intentKey, currentMode);
-        addMessage("ai", reply);
-      });
-    });
-
-    timelineItems.forEach(item => {
-      item.addEventListener("click", () => {
-        const key = item.dataset.timeline;
-        let text = "";
-        switch (key) {
-          case "gedik":
-            text = `Gedik Yatırım dönemimde; Spot Döviz & Trading, Check-Sim, SMS altyapısı, mobil uygulama ve CRM projelerinde hem analistlik hem proje yönetimi rolünü birlikte yürütüyorum.`;
-            break;
-          case "dias":
-            text = `DİAS Teknoloji tarafında; ERP entegrasyonları, finansal sistemler ve süreç tasarımı odaklı yazılım projelerinde Senior Expert Business Analyst olarak görev aldım.`;
-            break;
-          case "upt":
-            text = `UPT Ödeme Hizmetleri’nde; dijital cüzdan, kart ürünleri, Metropol POS ve uluslararası para transferi projeleriyle ödeme hizmetleri tarafında derinlik kazandım.`;
-            break;
-          case "akbank":
-            text = `Akbank’ta, dijital kanallar ve ödeme sistemleri tarafında Senior Business Analyst olarak çalıştım; özellikle süreç iyileştirme ve entegrasyon projelerine odaklandım.`;
-            break;
-          case "vodafone":
-            text = `Vodafone döneminde; çağrı merkezi ve backoffice süreçlerinde kalite, performans ve raporlama odaklı Quality & Process / Business Analyst rolünü üstlendim.`;
-            break;
-          case "bedas":
-            text = `Kariyerimin başlangıcında BEDAŞ’ta; hakediş kontrol süreçlerinde çalışarak saha operasyonu, sözleşme ve hakediş yönetimi tarafında güçlü bir operasyonel bakış açısı edindim.`;
-            break;
-        }
-        const label = item.querySelector(".timeline-title").textContent;
-        incTimelineAnalytics(label);
-        addMessage("ai", text);
-      });
-    });
-
-    projectCards.forEach(card => {
-      card.addEventListener("click", () => {
-        const key = card.dataset.project;
-        let text = "";
-        if (key === "spot") {
-          text = `Spot Döviz & Trading projesinde; kur ve tatil günleri yönetimi, OTC entegrasyonu, muhasebe kayıtları ve risk/limit kontrollerini uçtan uca modelledim. Hem mobil uygulama hem de arka ofis tarafında kullanıcı deneyimini sadeleştiren bir yapı kurguladık.`;
-        } else if (key === "checksim") {
-          text = `Check-Sim projesinde; Turatel STS entegrasyonu, operatör bazlı retry mekanizması, hata kodu standardizasyonu ve CRM ekranlarıyla müşteri temsilcisi deneyimini sadeleştiren uçtan uca bir akış tasarladım.`;
-        } else if (key === "wallet") {
-          text = `Dijital cüzdan & kart tarafında; Uption Kart, Metropol POS, cashback kampanyaları, kurye ve teslimat akışları ile KYC süreçlerini bir arada ele alan uçtan uca müşteri yolculuğu tasarladım.`;
-        } else if (key === "crm") {
-          text = `CRM & kampanya motoru projelerinde; Siebel ürün kataloğu, segmentasyon, yetki matrisi ve kampanyaların performans raporlaması üzerinde çalıştım.`;
-        }
-        addMessage("ai", text);
-      });
-    });
-
-    storyBtn.addEventListener("click", () => {
-      const text = `Kariyer hikayemi kısa bir story formatında anlatayım:
-
-• BEDAŞ’ta hakediş ve saha operasyonuyla başlayarak işin mutfağını öğrendim.  
-• Vodafone’da süreç ve kalite analiziyle müşteri temas noktalarını ve KPI dünyasını tanıdım.  
-• Akbank döneminde bankacılık ve ödeme sistemleriyle tanışıp dijital kanallar tarafında çalıştım.  
-• UPT Ödeme Hizmetleri’nde dijital cüzdan, kart ürünleri ve para transferi projeleriyle FinTech odağım güçlendi.  
-• DİAS Teknoloji’de ERP ve finans projeleriyle uçtan uca süreç tasarımı deneyimi kazandım.  
-• Bugün Gedik Yatırım’da; trading, dijital cüzdan, telco entegrasyonları ve CRM projelerini yöneten Senior Business Analyst Team Lead / Project Manager olarak tüm bu deneyimi tek çatı altında birleştiriyorum.`;
-      addMessage("ai", text);
-    });
-
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("light-mode");
-    });
-
-    xrToggle.addEventListener("click", () => {
-      document.body.classList.toggle("xr-mode");
-      xrToggle.classList.toggle("active");
-    });
-
-    voiceToggleBtn.addEventListener("click", () => {
-      voiceEnabled = !voiceEnabled;
-      voiceToggleBtn.classList.toggle("active", voiceEnabled);
-      if (!voiceEnabled && "speechSynthesis" in window) {
         window.speechSynthesis.cancel();
+        const processed = preprocessForTTS(text);
+        const utter = new SpeechSynthesisUtterance(processed);
+        utter.lang = "tr-TR";
+        utter.rate = speechRate;
+        utter.pitch = 1;
+        if (turkishVoice) utter.voice = turkishVoice;
+
+        utter.onstart = () => setAvatarSpeaking(true);
+        utter.onend = () => setAvatarSpeaking(false);
+        utter.onerror = () => setAvatarSpeaking(false);
+
+        window.speechSynthesis.speak(utter);
+      } catch (e) {
         setAvatarSpeaking(false);
+      }
+    }
+
+    // TTS yoksa fallback animasyon süresi
+    function animateAvatarForText(text) {
+      const length = (text || "").length;
+      const duration = Math.min(7000, 800 + length * 25);
+      setAvatarSpeaking(true);
+      setTimeout(() => setAvatarSpeaking(false), duration);
+    }
+
+    /* ------------------ 1) CEVAP HAVUZU ------------------ */
+
+    const responses = {
+      summary: `KİMİM?
+
+Ödeme sistemleri, dijital kanallar, telekom ve sermaye piyasaları alanlarında 10+ yıllık deneyime sahip bir Senior Business Analyst Team Lead / Project Manager’ım.
+
+Kariyerim boyunca:
+• Dijital cüzdanlar, sanal POS ve kart altyapıları,
+• Mobil bankacılık & yatırım uygulamaları,
+• API & CRM entegrasyonları,
+• KYC/NFC doğrulama, fraud önleme,
+• Sermaye piyasaları ve trading ürünleri
+
+gibi alanlarda uçtan uca ürün geliştirme ve iş analizi süreçlerini yönettim.
+
+Agile/Scrum metodolojileriyle çalışan ekiplerde:
+• Ürün vizyonunu netleştirme,
+• Gereksinimleri iş–kullanıcı–teknik eksende toplama,
+• BPMN/UML ile süreç modelleme,
+• Kullanıcı hikayeleri ve kabul kriterleri yazma,
+• Ekipler arası iletişimi sadeleştirme
+
+konularında uzmanlaştım.
+
+LinkedIn’de 10K+ takipçim, Medium’da ise iş analizi, ödeme sistemleri, API ve prompt mühendisliği üzerine birçok makalem var. Üretmeyi, öğrendiklerimi paylaşmayı ve ekiplerle birlikte değer üretmeyi seviyorum.`,
+
+      gedik: `GEDİK YATIRIM ROLÜM
+Senior Business Analyst Team Lead / Project Manager
+Gedik Yatırım Menkul Değerler A.Ş. | İstanbul | Eki 2024 – Devam
+
+Gedik’te odaklandığım ana başlıklar:
+
+• Sermaye Piyasaları & Dijital Kanallar
+  - Trading platformları (Gedik Trader, mobil yatırım uygulamaları),
+  - Spot döviz ve sermaye piyasası ürünleri için iş analizi,
+  - Kullanıcı deneyimi, emir iletim akışları, risk ve onay süreçlerinin netleştirilmesi.
+
+• Ürün & Proje Yönetimi
+  - Roadmap ve backlog yönetimi,
+  - Sprint planlama, önceliklendirme ve release takvimi oluşturma,
+  - Üst yönetim, iş birimleri, vendor’lar ve teknik ekipler arasında köprü görevi.
+
+• Entegrasyon & Altyapı
+  - Geneks ve diğer iş ortakları ile OTC, SMS ve kontrol sistemleri entegrasyonları,
+  - Check-Sim / SIM blokaj kaldırma, 2FA/Soft OTP, YDB gibi kritik güvenlik ve regülasyon projeleri,
+  - CRM ve iç sistem entegrasyonları, loglama, denetim izi, uyumlu kayıt yapıları.
+
+• Ekip Liderliği
+  - Analist ekibine koçluk, gereksinim toplama ve dokümantasyon kalitesini artırma,
+  - Takım içi sorumluluk dağılımı, karar alma mekanizmalarının netleştirilmesi,
+  - Üst yönetime düzenli ve anlaşılır durum raporları sunma.
+
+Kısaca: Gedik’te hem iş analizi hem ürün hem de proje yönetimi şapkalarını takarak,
+sermaye piyasası ürünlerini daha güvenli, hızlı ve kullanıcı dostu hale getirmek için çalışıyorum.`,
+
+      fintech: `ÖDEME SİSTEMLERİ & DİJİTAL CÜZDAN DENEYİMİ
+
+Çalıştığım ve içerik ürettiğim başlıca alanlar:
+
+1) Dijital Cüzdan & Kart Sistemleri
+• Dijital cüzdan (wallet), sanal kart, cashback ve sadakat modelleri
+• Kart saklama, tokenization, 3D Secure ve fraud önleme yaklaşımları
+• Seyahat ekosistemi ile entegre cüzdan: iptal/iade → cüzdana iade, voucher, ek hizmet ödemeleri
+
+2) Sanal POS ve Ödeme Altyapıları
+• Sanal POS mimarisi ve işlem akışları
+• Ödeme geçidi, 3D doğrulama, chargeback ve settlement süreçleri
+• “Sanal POS nedir?” gibi rehber içeriklerle mimariyi sade şekilde anlatma
+
+3) Regülasyon Bakışı
+• Ödeme sistemlerinde regülasyon ve denetim beklentilerini iş analizine yansıtma
+• Kurum içi ekiplerle birlikte uyumlu tasarım kararları alınmasına katkı sağlama
+
+Benim bakış açım:
+Kullanıcı deneyimi + iş modeli + teknik mimari + regülasyon dengesini kurmadan ödeme projesinin gerçekten başarılı sayılmayacağını düşünüyorum.`,
+
+      api: `API & ENTEGRASYON DENEYİMİ
+
+Teknik tarafı güçlü bir iş analisti / PM olarak; API ve entegrasyon projelerinde hem iş hem teknik ekiplerle rahatça konuşabilen bir yapım var.
+
+• Postman & SoapUI
+  - Test suite, test case, environment, assertion yönetimi
+  - Büyük entegrasyon projelerinde tekrar eden testleri otomatikleştirerek ciddi zaman kazandırma
+
+• API Tasarımı ve Dokümantasyonu
+  - REST/SOAP servislerin input/output şemaları, hata kodları, response body yapıları
+  - Confluence / Markdown tabanlı API dokümanları
+  - Webhook kurguları ve event-driven entegrasyon senaryoları
+
+• Entegrasyon Senaryoları
+  - Payment gateway, wallet, CRM, kampanya motoru, dış servisler, SMS/şebeke entegrasyonları
+  - 3rd party servislerle (ödeme şirketleri, telco, kart programları, loyalty sistemleri) entegrasyon
+
+Özetle: API projelerinde sadece gereksinimi yazmakla kalmıyor,
+o API’nin gerçekten “çalışan, izlenebilen ve sürdürülebilir” bir yapıda olmasına odaklanıyorum.`,
+
+      experience: `KARİYER ZAMAN ÇİZELGESİ
+
+• Senior Business Analyst Team Lead / Project Manager
+  Gedik Yatırım Menkul Değerler A.Ş. | İstanbul | Eki 2024 – Devam
+
+• Expert Business Analyst
+  UPT Ödeme Hizmetleri ve Elektronik Para A.Ş. | İstanbul | Kas 2021 – Oca 2024
+
+• Senior Business Analyst
+  Akbank | İstanbul | Nis 2018 – Kas 2021
+
+• Business Analyst & Test Engineer
+  Vodafone | İstanbul | Haz 2013 – Nis 2018
+
+• Quality and Process Management Specialist
+  Vodafone | İstanbul | Ağu 2009 – Haz 2013
+
+• Hakediş Kontrol Sorumlusu
+  Boğaziçi Elektrik Dağıtım A.Ş. | İstanbul | Ağu 2005 – Ağu 2007
+
+EĞİTİM
+• İşletme — Anadolu Üniversitesi İktisat Fakültesi
+• Otomotiv — Çanakkale Onsekiz Mart Üniversitesi
+
+Bu çizelge; CV’ndeki bilgiler ve güncel Gedik Yatırım rolüne göre hazırlanmıştır.`,
+
+      projects: `ÖNE ÇIKAN PROJELERDEN ÖRNEKLER
+
+• Spot Döviz & Trading Projesi (Gedik Yatırım)
+  - Project Manager + Senior BA hibrit rolü
+  - Kur ve tatil günü kurguları, OTC entegrasyonu
+  - Muhasebe ve risk akışlarının tasarımı, vendor koordinasyonu
+
+• Check-Sim & SIM Bloke Kaldırma
+  - Turatel, Geneks ve Gedik Yatırım entegrasyonu
+  - STS yapısı, retry mekanizması ve hata kodu standardizasyonu
+  - Mobil uygulama (Gedik Mobil & Trader) akışlarının tasarımı
+
+• SMS OTP & Telco Maliyet Analizi
+  - Türk Telekom, Vodafone, Turkcell ve Turatel üzerinden giden SMS trafiğinin analizi
+  - 2025–2026 maliyet projeksiyonları ve optimizasyon roadmap’i
+
+• Yurtdışı Borsa Geliştirmeleri (Gedik Yatırım Mobil)
+  - GTN, BIST ve TipRanks paydaşlarından gelen fundamental verilerin API dokümanları üzerinden incelenmesi
+  - Hangi alanların uygulamada kullanılacağı ve veri modeline nasıl oturacağına dair analizler
+
+Ortak payda:
+Her projede hem iş değeri hem teknik uygulanabilirlik hem de regülasyon/danetim uyumunu birlikte ele alıyorum.`,
+
+      learning: `EĞİTİM, SERTİFİKA VE SÜREKLİ ÖĞRENME
+
+FORMAL EĞİTİM
+• İşletme — Anadolu Üniversitesi İktisat Fakültesi
+• Otomotiv — Çanakkale Onsekiz Mart Üniversitesi
+
+SERTİFİKA & EĞİTİMLERDEN ÖRNEKLER
+• IIBA Fundamentals of Business Analysis
+• IIBA CBAP International Business Analysis Trainings
+• Uluslararası İş Analizi Metodolojisi ve Teknikleri
+• Proje Yönetimi Uzmanlık Sertifikası
+• Enterprise Design Thinking (IBM)
+• UX Foundation
+• Google Ads Apps Certification
+• Prompt Engineering
+• API, SQL, test otomasyonu, veri analizi vb. teknik eğitimler
+• İletişim, sunum teknikleri, ikna ve zor kişilerle iletişim eğitimleri
+
+İÇERİK ÜRETİMİ
+Medium ve LinkedIn üzerinde;
+• Sanal POS,
+• Elektronik para ve 6493 sayılı kanun,
+• Bankacılık süreçleri ve BOA,
+• Web servis testleri (SoapUI),
+• Direct Sales / API / webhook rehberleri,
+• Veri Analizi 101,
+• İş analistleri için SQL ve mülakat kartları
+
+gibi içerikleri düzenli olarak paylaşıyorum.
+
+Benim için öğrenme, sadece eğitim almak değil;
+öğrendiklerimi sade bir dille paylaşarak başkalarının da gelişimine katkı sağlamak demek.`
+    };
+
+    /* ------------------ 2) NLP BENZERİ KONU ALGILAMA ------------------ */
+
+    const keywordMap = {
+      summary: ["ekrem", "kimdir", "özgeçmiş", "profil", "hakkında", "özet"],
+      fintech: ["ödeme", "dijital cüzdan", "cüzdan", "token", "sanal pos", "6493", "elektronik para"],
+      api: ["api", "entegrasyon", "postman", "soapui", "json", "xml", "servis", "webhook"],
+      gedik: ["gedik", "yatırım", "trader", "check-sim", "check sim", "ydb", "crm", "sermaye piyasası"],
+      experience: ["kariyer", "deneyim", "iş tecrübesi", "timeline", "tarih", "cv", "özgeçmiş"],
+      projects: ["proje", "projeler", "spot döviz", "kampanya", "wallet", "cüzdan", "kart", "akış", "model"],
+      learning: ["eğitim", "sertifika", "kurs", "öğrenme", "udemy", "btk", "iiba", "cbap", "medium", "makale"]
+    };
+
+    function detectTopic(input) {
+      const lower = input.toLowerCase();
+      const detected = [];
+
+      for (const topic in keywordMap) {
+        if (keywordMap[topic].some(k => lower.includes(k))) {
+          detected.push(topic);
+        }
+      }
+
+      if (!detected.length) return ["summary"];
+      return detected;
+    }
+
+    function generateResponse(userQuestion) {
+      const topics = detectTopic(userQuestion);
+      let finalAnswer = "";
+
+      topics.forEach(topic => {
+        const data = responses[topic];
+        finalAnswer += `📌 ${topic.toUpperCase()}:\n\n${data}\n\n`;
+      });
+
+      if (topics.length > 1) {
+        finalAnswer =
+          "Sorduğun soru birden fazla konuya değiniyor. Her birini ayrı ayrı cevapladım:\n\n" +
+          finalAnswer;
+      }
+
+      return finalAnswer;
+    }
+
+    /* ------------------ 3) MÜLAKAT MODU NOTLARI (isteğe bağlı) ------------------ */
+
+    const interviewQA = {
+      leadership: {
+        q: ["liderlik", "team lead", "ekip", "koordine", "manage", "lider"],
+        a: `🧭 Liderlik yaklaşımım
+
+Kendimi sadece “task dağıtan” değil, belirsizliği azaltan ve ekibin önünü açan bir lider olarak konumlandırıyorum.
+
+• Net vizyon: Ekibin “neden bu işi yapıyoruz?” sorusuna net cevap almasını sağlarım.
+• Şeffaf iletişim: Riskleri ve engelleri saklamadan, çözüm odaklı masaya getiririm.
+• Sorumluluk paylaşımı: Kritik kararları tek başıma almak yerine, ilgili kişileri sürece dahil ederim.
+• Koçluk: Özellikle analist ekibine dokümantasyon kalitesi, gereksinim toplama, paydaş yönetimi gibi konularda mentörlük yaparım.
+
+Ekiplerde genelde şu geri bildirimi alırım:
+“Ekrem belirsizliği azaltıyor, işi netleştiriyor ve karar almayı kolaylaştırıyor.”`
+      },
+
+      conflict: {
+        q: ["çatışma", "problem", "zor insan", "uyumsuz", "gerilim", "anlaşmazlık"],
+        a: `🤝 Zor paydaşlarla çalışma & çatışma yönetimi
+
+Çatışma durumlarında önce “kişiyi” değil “konuyu” konuşmayı tercih ederim.
+
+1) Dinleme: Tarafların asıl kaygısını anlamaya çalışırım (süre, risk, iş yükü, kalite vb.).
+2) Veri: Tartışmayı kişisel algılardan çıkarıp, kabul kriterleri, ölçümler ve timeline gibi somut veriye çekerim.
+3) Ortak zemin: İş hedefini merkeze koyarım: “Bu ürün/özellik kime ne değer katacak?”
+4) Net aksiyon: Toplantı sonunda mutlaka eylem maddeleri ve sorumlular netleşmiş olur.
+5) Yazılı özet: Sonrasında kısa bir toplantı özeti göndererek uzlaşılan noktaları kayıt altına alırım.
+
+Bu yaklaşım; gerilimi düşürüp, aynı hedefe bakan bir ekip hissi yaratıyor.`
+      },
+
+      default: `Bu soruyu mülakat bakış açısıyla cevaplamak için daha net bir odak seçebilirsin.
+
+Örneğin şunları sorabilirsin:
+• “Liderlik stilin nasıl?”
+• “Zor paydaşlarla nasıl çalışırsın?”
+• “Roadmap’i nasıl yönetiyorsun?”
+• “Ödeme sistemleri tarafında nasıl değer katıyorsun?”`
+    };
+
+    function interviewModeAnswer(q) {
+      const lower = q.toLowerCase();
+      for (const key in interviewQA) {
+        if (key === "default") continue;
+        if (interviewQA[key].q.some(k => lower.includes(k))) {
+          return interviewQA[key].a;
+        }
+      }
+      return interviewQA.default;
+    }
+
+    /* ------------------ 4) CHAT MANTIIĞI ------------------ */
+
+    function addMessage(text, isUser) {
+      const msg = document.createElement("div");
+      msg.className = "msg " + (isUser ? "msg-user" : "msg-ai");
+      msg.textContent = text;
+
+      const box = document.getElementById("chatMessages");
+      box.appendChild(msg);
+      box.scrollTop = box.scrollHeight;
+
+      if (!isUser) {
+        speakText(text); // her asistan cevabını seslendir
+      }
+    }
+
+    const sendBtn = document.getElementById("sendBtn");
+    const userInput = document.getElementById("userInput");
+
+    sendBtn.onclick = () => {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      addMessage(text, true);
+
+      const lower = text.toLowerCase();
+
+      if (lower.includes("mülakat") || lower.includes("interview") || lower.includes("yönetici")) {
+        const r = interviewModeAnswer(text);
+        addMessage(r, false);
+      } else {
+        const r = generateResponse(text);
+        addMessage(r, false);
+      }
+
+      userInput.value = "";
+    };
+
+    userInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        sendBtn.click();
       }
     });
 
-    rateSlider.addEventListener("input", () => {
-      speechRate = parseFloat(rateSlider.value);
-      rateLabel.textContent = speechRate.toFixed(2) + "x";
+    document.querySelectorAll(".quick-btn").forEach(btn => {
+      btn.onclick = () => {
+        const intent = btn.dataset.intent;
+        addMessage(btn.querySelector("span").innerText, true);
+        addMessage(responses[intent], false);
+      };
     });
+
+    /* ------------------ 5) MİKROFON (SPEECH RECOGNITION) ------------------ */
+
+    const micBtn = document.getElementById("micBtn");
+    let recognition = null;
 
     if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-      const recognizer = new SR();
-      recognizer.lang = "tr-TR";
-      recognizer.continuous = false;
-      recognizer.interimResults = false;
-
-      micBtn.addEventListener("click", () => {
-        recognizer.start();
-        micBtn.classList.add("active");
-      });
-
-      recognizer.onresult = (e) => {
-        const text = e.results[0][0].transcript;
-        userInputEl.value = text;
-        micBtn.classList.remove("active");
-      };
-      recognizer.onend = () => micBtn.classList.remove("active");
+      recognition = new SR();
+      recognition.lang = "tr-TR";
+      recognition.continuous = false;
+      recognition.interimResults = false;
     } else {
-      micBtn.style.display = "none";
+      if (micBtn) micBtn.style.display = "none";
     }
 
-    document.addEventListener("keydown", (e) => {
-      if (e.shiftKey && e.key.toLowerCase() === "e") {
-        analyticsPanel.style.display =
-          analyticsPanel.style.display === "block" ? "none" : "block";
-      }
-    });
-
-    // ---------- HR BUTTONS ----------
-    hrQuestions.forEach(q => {
-      const btn = document.createElement("button");
-      btn.className = "hr-btn";
-      btn.textContent = q.label;
-      btn.dataset.id = q.id;
-      btn.addEventListener("click", () => {
-        addMessage("ai", q.text);
-      });
-      hrGrid.appendChild(btn);
-    });
-
-    // ---------- RADAR CHART ----------
-    const ctx = document.getElementById("skillsRadar").getContext("2d");
-    new Chart(ctx, {
-      type: "radar",
-      data: {
-        labels: ["İş Analizi", "FinTech", "Entegrasyon", "Scrum & Agile", "Liderlik", "Veri Analizi"],
-        datasets: [{
-          label: "Ekrem Şen",
-          data: [95, 90, 92, 88, 87, 80],
-          fill: true,
-          borderWidth: 2
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: {
-          r: {
-            beginAtZero: true,
-            suggestedMax: 100,
-            angleLines: { color: "rgba(148, 163, 184, 0.4)" },
-            grid: { color: "rgba(55, 65, 81, 0.6)" },
-            pointLabels: { color: "#e5e7eb", font: { size: 11 } },
-            ticks: { display: false }
-          }
+    if (micBtn && recognition) {
+      micBtn.addEventListener("click", () => {
+        try {
+          recognition.start();
+          micBtn.classList.add("listening");
+        } catch (e) {
+          // bazen "already started" hatası verebilir, görmezden gel
         }
-      }
-    });
+      });
+
+      recognition.onresult = event => {
+        const transcript = event.results[0][0].transcript;
+        userInput.value = transcript;
+        sendBtn.click();
+      };
+
+      recognition.onerror = () => {
+        micBtn.classList.remove("listening");
+      };
+
+      recognition.onend = () => {
+        micBtn.classList.remove("listening");
+      };
+    }
   </script>
 </body>
 </html>
-
