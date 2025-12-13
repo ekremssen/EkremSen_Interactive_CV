@@ -62,7 +62,7 @@
       gap: 14px;
     }
 
-    /* --- Konuşan avatar alanı --- */
+    /* --- Konuşan avatar --- */
     .avatar {
       position: relative;
       width: 84px;
@@ -107,10 +107,9 @@
       pointer-events: none;
     }
 
-    /* Ağız overlay – fotoğraftaki ağza göre ince ayar yapabilirsin */
     .avatar-mouth {
       position: absolute;
-      bottom: 18px; /* burada 2–3 px oynayıp ağza oturtabilirsin */
+      bottom: 18px;
       left: 50%;
       transform: translateX(-50%);
       width: 46px;
@@ -131,7 +130,6 @@
       opacity: 0;
     }
 
-    /* Konuşma aktifken efektler */
     .avatar-speaking .avatar-photo {
       transform: translateY(-1px) scale(1.03);
       filter: saturate(1.1) contrast(1.1);
@@ -148,32 +146,22 @@
     }
 
     @keyframes avatarTalk {
-      from {
-        transform: translateY(-1px) scale(1.02);
-      }
-      to {
-        transform: translateY(1px) scale(1.04);
-      }
+      from { transform: translateY(-1px) scale(1.02); }
+      to   { transform: translateY(1px) scale(1.04); }
     }
 
     @keyframes avatarPulse {
-      0% {
-        transform: scale(1);
-        opacity: 0.3;
-      }
-      100% {
-        transform: scale(1.18);
-        opacity: 0;
-      }
+      0%   { transform: scale(1);    opacity: 0.3; }
+      100% { transform: scale(1.18); opacity: 0;   }
     }
 
     @keyframes mouthTalk {
       0%   { transform: scaleY(0.2); }
-      40%  { transform: scaleY(1); }
+      40%  { transform: scaleY(1);   }
       70%  { transform: scaleY(0.4); }
       100% { transform: scaleY(0.8); }
     }
-    /* --- Konuşan avatar alanı SON --- */
+    /* --- Konuşan avatar SON --- */
 
     .badge {
       display: inline-flex;
@@ -326,22 +314,24 @@
     .chat-input button {
       border: none;
       border-radius: 999px;
-      padding: 8px 14px;
+      padding: 8px 12px;
       font-size: 13px;
       cursor: pointer;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+      min-width: 40px;
     }
 
-    #sendBtn {
-      background: linear-gradient(135deg, #22c55e, #38bdf8);
-      color: #020617;
+    #speakerBtn {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
     }
 
-    #sendBtn:hover {
-      opacity: 0.95;
+    #speakerBtn.off {
+      opacity: 0.6;
     }
 
     #micBtn {
@@ -353,6 +343,16 @@
     #micBtn.listening {
       border-color: #22c55e;
       box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+    }
+
+    #sendBtn {
+      background: linear-gradient(135deg, #22c55e, #38bdf8);
+      color: #020617;
+      padding-inline: 16px;
+    }
+
+    #sendBtn:hover {
+      opacity: 0.95;
     }
 
     .right-panel {
@@ -408,7 +408,7 @@
     <div class="left-panel">
       <div class="header-row">
         <div class="avatar" id="avatar">
-          <!-- Fotoğrafını aynı klasöre ekle ve adını tam olarak böyle ver: ekrem-photo.jpg -->
+          <!-- Fotoğrafını ekle: ekrem-photo.jpg -->
           <img src="ekrem-photo.jpg" alt="Ekrem Şen" class="avatar-photo" />
           <div class="avatar-mouth"></div>
           <div class="avatar-pulse"></div>
@@ -421,8 +421,8 @@
           <h1>Merhaba, ben <span class="highlight">Ekrem Şen</span> 👋</h1>
           <p class="subtitle">
             Senior Business Analyst Team Lead / Project Manager.<br />
-            Ödeme sistemleri, dijital kanallar ve sermaye piyasaları projelerinde uçtan uca
-            ürün geliştirme ve iş analizi yapıyorum.
+            Ödeme sistemleri, dijital cüzdan, sanal POS ve sermaye piyasaları projelerinde
+            uçtan uca ürün ve iş analizi süreçlerini yönetiyorum.
           </p>
         </div>
       </div>
@@ -439,7 +439,7 @@
 
       <div class="links-row">
         <span>🔗 <a href="https://www.linkedin.com/in/ekremsen/" target="_blank">LinkedIn profili</a></span>
-        <span>✍️ <a href="https://ekremsen.medium.com/" target="_blank">Medium makaleleri</a></span>
+        <span>✍️ <a href="https://ekremsen.medium.com/" target="_blank">Medium yazılarım</a></span>
       </div>
 
       <div class="chat-box">
@@ -453,8 +453,10 @@
         </div>
 
         <div class="chat-input">
-          <button id="micBtn" type="button" title="Mikrofonla sor">🎙</button>
-          <input id="userInput" type="text" placeholder="Bir soru sor (örn: Gedik’te ne yapıyorsun, projelerini anlatır mısın?)" />
+          <button id="speakerBtn" title="Sesi aç / kapa">🔊</button>
+          <button id="micBtn" title="Mikrofonla sor">🎙</button>
+          <input id="userInput" type="text"
+                 placeholder="Bir soru sor (örn: Gedik’te ne yapıyorsun, projelerini anlatır mısın?)" />
           <button id="sendBtn" type="button">Gönder ➤</button>
         </div>
       </div>
@@ -486,7 +488,7 @@
 
         <button class="quick-btn" data-intent="experience">
           <span>Kariyer Zaman Çizelgesi</span>
-          <small>Tüm şirketler ve tarihler</small>
+          <small>Tüm şirketler ve pozisyonlar</small>
         </button>
 
         <button class="quick-btn" data-intent="projects">
@@ -496,53 +498,48 @@
 
         <button class="quick-btn" data-intent="learning">
           <span>Eğitim & Sertifikalar</span>
-          <small>Üniversite, sertifika ve eğitimler</small>
+          <small>Üniversite, sertifika ve öğrenme</small>
         </button>
       </div>
     </div>
   </div>
 
   <script>
-    /* ------------------ 0) SES MOTORU AYARLARI ------------------ */
+    /* ------------ 0) SES MOTORU & İKONLAR ------------ */
 
     let voiceEnabled = true;
     let speechRate = 1;
     let turkishVoice = null;
 
+    // İngilizce sertifika isimlerini biraz yumuşatmak için çok hafif fonetik düzeltme
     const phraseMap = {
-      "Enterprise Design Thinking": "Enterprays Dizayn Thinking",
-      "Google Ads Apps Certification": "Gugıl Eds Eps Sertifikeyşın",
-      "UFT One 2021.x Essentials": "Yu Ef Ti Van 2021 Esentials",
+      "Enterprise Design Thinking": "Enterprıs Dizayn Tinking",
+      "Google Ads Apps Certification": "Gugıl Ads Eps Sertifikeyşın",
+      "UFT One 2021.x Essentials": "Yuf Ti Van 2021 Esenşıls",
       "UX Foundation": "Yu Eks Faundeyşın",
-      "Prompt Engineering": "Prompt Encıniring",
+      "Prompt Engineering": "Prompt Encınirin",
       "SQL Server": "Es Kiu El Sörvır",
-      "Fundamentals of Business Analysis": "Fandamentıls of Biznıs Enelisis",
-      "Project Management": "Procekt Menıcımınt",
-      "Business Analysis": "Biznıs Enelisis"
+      "Fundamentals of Business Analysis": "Fandamentıls of Biznıs Enelısis",
+      "Business Analysis": "Biznıs Enelısis"
     };
 
     const wordMap = {
-      "FinTech": "Fin tek",
       "API": "Ey Pi Ay",
       "CRM": "Si Ar Em",
-      "Scrum": "Skram",
-      "Agile": "Ecayıl",
       "SQL": "Es Kiu El",
       "IBM": "Ay Bi Em",
-      "Google": "Gugıl",
-      "Server": "Sörvır",
       "UX": "Yu Eks",
-      "UFT": "Yu Ef Ti"
+      "UFT": "Yuf Ti"
     };
 
     function preprocessForTTS(text) {
       let processed = text;
       Object.keys(phraseMap).forEach(key => {
-        const re = new RegExp(key, "gi");
+        const re = new RegExp(key, "g");
         processed = processed.replace(re, phraseMap[key]);
       });
       Object.keys(wordMap).forEach(key => {
-        const re = new RegExp("\\b" + key + "\\b", "gi");
+        const re = new RegExp("\\b" + key + "\\b", "g");
         processed = processed.replace(re, wordMap[key]);
       });
       return processed;
@@ -552,7 +549,6 @@
       if (!("speechSynthesis" in window)) return;
       const voices = window.speechSynthesis.getVoices();
       if (!voices || !voices.length) return;
-
       const trVoices = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith("tr"));
       turkishVoice =
         trVoices.find(v => /male|erkek|adam/i.test(v.name)) ||
@@ -569,20 +565,24 @@
 
     function setAvatarSpeaking(state) {
       if (!avatarEl) return;
-      if (state) {
-        avatarEl.classList.add("avatar-speaking");
-      } else {
-        avatarEl.classList.remove("avatar-speaking");
-      }
+      if (state) avatarEl.classList.add("avatar-speaking");
+      else avatarEl.classList.remove("avatar-speaking");
+    }
+
+    function animateAvatarForText(text) {
+      const len = (text || "").length;
+      const duration = Math.min(7000, 800 + len * 25);
+      setAvatarSpeaking(true);
+      setTimeout(() => setAvatarSpeaking(false), duration);
     }
 
     function speakText(text) {
-      if (!voiceEnabled || !("speechSynthesis" in window)) {
-        // Ses yoksa sadece avatar animasyonu çalışsın
+      if (!text || !text.trim()) return;
+
+      if (!("speechSynthesis" in window) || !voiceEnabled) {
         animateAvatarForText(text);
         return;
       }
-      if (!text || !text.trim()) return;
 
       try {
         window.speechSynthesis.cancel();
@@ -603,15 +603,7 @@
       }
     }
 
-    // TTS yoksa fallback animasyon süresi
-    function animateAvatarForText(text) {
-      const length = (text || "").length;
-      const duration = Math.min(7000, 800 + length * 25);
-      setAvatarSpeaking(true);
-      setTimeout(() => setAvatarSpeaking(false), duration);
-    }
-
-    /* ------------------ 1) CEVAP HAVUZU ------------------ */
+    /* ------------ 1) CEVAP METİNLERİ ------------ */
 
     const responses = {
       summary: `KİMİM?
@@ -619,151 +611,82 @@
 Ödeme sistemleri, dijital kanallar, telekom ve sermaye piyasaları alanlarında 10+ yıllık deneyime sahip bir Senior Business Analyst Team Lead / Project Manager’ım.
 
 Kariyerim boyunca:
-• Dijital cüzdanlar, sanal POS ve kart altyapıları,
+• Dijital cüzdanlar, sanal kart ve ödeme altyapıları,
 • Mobil bankacılık & yatırım uygulamaları,
 • API & CRM entegrasyonları,
-• KYC/NFC doğrulama, fraud önleme,
+• KYC / NFC kimlik doğrulama ve fraud önleme,
 • Sermaye piyasaları ve trading ürünleri
 
 gibi alanlarda uçtan uca ürün geliştirme ve iş analizi süreçlerini yönettim.
 
-Agile/Scrum metodolojileriyle çalışan ekiplerde:
-• Ürün vizyonunu netleştirme,
-• Gereksinimleri iş–kullanıcı–teknik eksende toplama,
-• BPMN/UML ile süreç modelleme,
-• Kullanıcı hikayeleri ve kabul kriterleri yazma,
-• Ekipler arası iletişimi sadeleştirme
-
-konularında uzmanlaştım.
-
-LinkedIn’de 10K+ takipçim, Medium’da ise iş analizi, ödeme sistemleri, API ve prompt mühendisliği üzerine birçok makalem var. Üretmeyi, öğrendiklerimi paylaşmayı ve ekiplerle birlikte değer üretmeyi seviyorum.`,
+Agile/Scrum ekiplerinde; gereksinim yönetimi, süreç modelleme, kullanıcı hikayeleri, kabul kriterleri ve paydaş yönetimi tarafında hem analist hem de PM şapkasıyla rol alıyorum.`,
 
       gedik: `GEDİK YATIRIM ROLÜM
 Senior Business Analyst Team Lead / Project Manager
 Gedik Yatırım Menkul Değerler A.Ş. | İstanbul | Eki 2024 – Devam
 
-Gedik’te odaklandığım ana başlıklar:
+Başlıca sorumluluklarım:
+• Sermaye piyasası ve trading projelerinde iş analizi ve proje yönetimi
+• Spot Döviz, Check-Sim, YDB ve diğer güvenlik / regülasyon odaklı geliştirmeler
+• Ürün roadmap’inin oluşturulması, backlog yönetimi ve önceliklendirme
+• Geneks, Turatel, GTN ve diğer iş ortaklarıyla entegrasyon projelerinin yönetimi
+• Analist ekibinin koordinasyonu ve dokümantasyon kalitesinin artırılması
+• Üst yönetim için sade ve net durum raporları hazırlanması.`,
 
-• Sermaye Piyasaları & Dijital Kanallar
-  - Trading platformları (Gedik Trader, mobil yatırım uygulamaları),
-  - Spot döviz ve sermaye piyasası ürünleri için iş analizi,
-  - Kullanıcı deneyimi, emir iletim akışları, risk ve onay süreçlerinin netleştirilmesi.
+      fintech: `ÖDEME SİSTEMLERİ & DİJİTAL CÜZDAN
 
-• Ürün & Proje Yönetimi
-  - Roadmap ve backlog yönetimi,
-  - Sprint planlama, önceliklendirme ve release takvimi oluşturma,
-  - Üst yönetim, iş birimleri, vendor’lar ve teknik ekipler arasında köprü görevi.
-
-• Entegrasyon & Altyapı
-  - Geneks ve diğer iş ortakları ile OTC, SMS ve kontrol sistemleri entegrasyonları,
-  - Check-Sim / SIM blokaj kaldırma, 2FA/Soft OTP, YDB gibi kritik güvenlik ve regülasyon projeleri,
-  - CRM ve iç sistem entegrasyonları, loglama, denetim izi, uyumlu kayıt yapıları.
-
-• Ekip Liderliği
-  - Analist ekibine koçluk, gereksinim toplama ve dokümantasyon kalitesini artırma,
-  - Takım içi sorumluluk dağılımı, karar alma mekanizmalarının netleştirilmesi,
-  - Üst yönetime düzenli ve anlaşılır durum raporları sunma.
-
-Kısaca: Gedik’te hem iş analizi hem ürün hem de proje yönetimi şapkalarını takarak,
-sermaye piyasası ürünlerini daha güvenli, hızlı ve kullanıcı dostu hale getirmek için çalışıyorum.`,
-
-      fintech: `ÖDEME SİSTEMLERİ & DİJİTAL CÜZDAN DENEYİMİ
-
-Çalıştığım ve içerik ürettiğim başlıca alanlar:
-
-1) Dijital Cüzdan & Kart Sistemleri
-• Dijital cüzdan (wallet), sanal kart, cashback ve sadakat modelleri
-• Kart saklama, tokenization, 3D Secure ve fraud önleme yaklaşımları
-• Seyahat ekosistemi ile entegre cüzdan: iptal/iade → cüzdana iade, voucher, ek hizmet ödemeleri
-
-2) Sanal POS ve Ödeme Altyapıları
-• Sanal POS mimarisi ve işlem akışları
-• Ödeme geçidi, 3D doğrulama, chargeback ve settlement süreçleri
-• “Sanal POS nedir?” gibi rehber içeriklerle mimariyi sade şekilde anlatma
-
-3) Regülasyon Bakışı
-• Ödeme sistemlerinde regülasyon ve denetim beklentilerini iş analizine yansıtma
-• Kurum içi ekiplerle birlikte uyumlu tasarım kararları alınmasına katkı sağlama
-
-Benim bakış açım:
-Kullanıcı deneyimi + iş modeli + teknik mimari + regülasyon dengesini kurmadan ödeme projesinin gerçekten başarılı sayılmayacağını düşünüyorum.`,
+• Dijital cüzdan (wallet), sanal kart, cashback ve sadakat kurguları
+• Sanal POS mimarisi, 3D Secure, chargeback ve mutabakat süreçleri
+• Elektronik para, 6493 sayılı kanun ve regülasyon gereksinimlerini iş analizine yansıtma
+• Kullanıcı deneyimi, güvenlik ve gelir modelini aynı çerçevede ele alma alışkanlığı.`,
 
       api: `API & ENTEGRASYON DENEYİMİ
 
-Teknik tarafı güçlü bir iş analisti / PM olarak; API ve entegrasyon projelerinde hem iş hem teknik ekiplerle rahatça konuşabilen bir yapım var.
-
-• Postman & SoapUI
-  - Test suite, test case, environment, assertion yönetimi
-  - Büyük entegrasyon projelerinde tekrar eden testleri otomatikleştirerek ciddi zaman kazandırma
-
-• API Tasarımı ve Dokümantasyonu
-  - REST/SOAP servislerin input/output şemaları, hata kodları, response body yapıları
-  - Confluence / Markdown tabanlı API dokümanları
-  - Webhook kurguları ve event-driven entegrasyon senaryoları
-
-• Entegrasyon Senaryoları
-  - Payment gateway, wallet, CRM, kampanya motoru, dış servisler, SMS/şebeke entegrasyonları
-  - 3rd party servislerle (ödeme şirketleri, telco, kart programları, loyalty sistemleri) entegrasyon
-
-Özetle: API projelerinde sadece gereksinimi yazmakla kalmıyor,
-o API’nin gerçekten “çalışan, izlenebilen ve sürdürülebilir” bir yapıda olmasına odaklanıyorum.`,
+• Postman ve SoapUI ile uçtan uca entegrasyon testleri
+• REST/SOAP servis tasarımı, request/response şemaları, hata kodu standardı
+• Payment gateway, wallet, CRM, kampanya motoru, telco servisleri ve üçüncü parti sistemlerle entegrasyon
+• Webhook ve event-driven entegrasyon senaryolarının kurgulanması.`,
 
       experience: `KARİYER ZAMAN ÇİZELGESİ
 
-• Senior Business Analyst Team Lead / Project Manager
-  Gedik Yatırım Menkul Değerler A.Ş. | İstanbul | Eki 2024 – Devam
+• Senior Business Analyst Team Lead / Project Manager – Gedik Yatırım (İstanbul)
+• Expert Business Analyst – UPT Ödeme Hizmetleri ve Elektronik Para A.Ş.
+• Senior Business Analyst – Akbank
+• Business Analyst & Test Engineer – Vodafone
+• Quality and Process Management Specialist – Vodafone
+• Hakediş Kontrol Sorumlusu – Boğaziçi Elektrik Dağıtım A.Ş.
 
-• Expert Business Analyst
-  UPT Ödeme Hizmetleri ve Elektronik Para A.Ş. | İstanbul | Kas 2021 – Oca 2024
-
-• Senior Business Analyst
-  Akbank | İstanbul | Nis 2018 – Kas 2021
-
-• Business Analyst & Test Engineer
-  Vodafone | İstanbul | Haz 2013 – Nis 2018
-
-• Quality and Process Management Specialist
-  Vodafone | İstanbul | Ağu 2009 – Haz 2013
-
-• Hakediş Kontrol Sorumlusu
-  Boğaziçi Elektrik Dağıtım A.Ş. | İstanbul | Ağu 2005 – Ağu 2007
-
-EĞİTİM
+FORMAL EĞİTİM
 • İşletme — Anadolu Üniversitesi İktisat Fakültesi
-• Otomotiv — Çanakkale Onsekiz Mart Üniversitesi
+• Otomotiv — Çanakkale Onsekiz Mart Üniversitesi`,
 
-Bu çizelge; CV’ndeki bilgiler ve güncel Gedik Yatırım rolüne göre hazırlanmıştır.`,
-
-      projects: `ÖNE ÇIKAN PROJELERDEN ÖRNEKLER
+      projects: `ÖNE ÇIKAN PROJELER
 
 • Spot Döviz & Trading Projesi (Gedik Yatırım)
   - Project Manager + Senior BA hibrit rolü
   - Kur ve tatil günü kurguları, OTC entegrasyonu
-  - Muhasebe ve risk akışlarının tasarımı, vendor koordinasyonu
+  - Muhasebe ve risk akışlarının tasarımı
 
 • Check-Sim & SIM Bloke Kaldırma
   - Turatel, Geneks ve Gedik Yatırım entegrasyonu
-  - STS yapısı, retry mekanizması ve hata kodu standardizasyonu
-  - Mobil uygulama (Gedik Mobil & Trader) akışlarının tasarımı
+  - STS altyapısı, retry mekanizması, hata kodu standardizasyonu
+  - Mobil uygulama akışları (Gedik Mobil & Gedik Trader)
 
 • SMS OTP & Telco Maliyet Analizi
-  - Türk Telekom, Vodafone, Turkcell ve Turatel üzerinden giden SMS trafiğinin analizi
+  - Üç operatör + Turatel üzerindeki tüm SMS trafiğinin analizi
   - 2025–2026 maliyet projeksiyonları ve optimizasyon roadmap’i
 
 • Yurtdışı Borsa Geliştirmeleri (Gedik Yatırım Mobil)
   - GTN, BIST ve TipRanks paydaşlarından gelen fundamental verilerin API dokümanları üzerinden incelenmesi
-  - Hangi alanların uygulamada kullanılacağı ve veri modeline nasıl oturacağına dair analizler
+  - Hangi verilerin uygulamada gösterileceği, nasıl filtreleneceği ve veri modeline nasıl oturacağına dair analizler.`,
 
-Ortak payda:
-Her projede hem iş değeri hem teknik uygulanabilirlik hem de regülasyon/danetim uyumunu birlikte ele alıyorum.`,
-
-      learning: `EĞİTİM, SERTİFİKA VE SÜREKLİ ÖĞRENME
+      learning: `EĞİTİM, SERTİFİKA VE ÖĞRENME
 
 FORMAL EĞİTİM
 • İşletme — Anadolu Üniversitesi İktisat Fakültesi
 • Otomotiv — Çanakkale Onsekiz Mart Üniversitesi
 
-SERTİFİKA & EĞİTİMLERDEN ÖRNEKLER
+SEÇİLİ EĞİTİM & SERTİFİKALAR
 • IIBA Fundamentals of Business Analysis
 • IIBA CBAP International Business Analysis Trainings
 • Uluslararası İş Analizi Metodolojisi ve Teknikleri
@@ -772,26 +695,15 @@ SERTİFİKA & EĞİTİMLERDEN ÖRNEKLER
 • UX Foundation
 • Google Ads Apps Certification
 • Prompt Engineering
-• API, SQL, test otomasyonu, veri analizi vb. teknik eğitimler
-• İletişim, sunum teknikleri, ikna ve zor kişilerle iletişim eğitimleri
+• SQL ve veri analizi, test otomasyonu, API ve entegrasyon eğitimleri
+• Etkili sunum, ikna ve zor kişilerle iletişim eğitimleri
 
 İÇERİK ÜRETİMİ
-Medium ve LinkedIn üzerinde;
-• Sanal POS,
-• Elektronik para ve 6493 sayılı kanun,
-• Bankacılık süreçleri ve BOA,
-• Web servis testleri (SoapUI),
-• Direct Sales / API / webhook rehberleri,
-• Veri Analizi 101,
-• İş analistleri için SQL ve mülakat kartları
-
-gibi içerikleri düzenli olarak paylaşıyorum.
-
-Benim için öğrenme, sadece eğitim almak değil;
-öğrendiklerimi sade bir dille paylaşarak başkalarının da gelişimine katkı sağlamak demek.`
+Medium ve LinkedIn’de; iş analizi, ödeme sistemleri, elektronik para, sanal POS,
+API/entegrasyon ve veri analizi üzerine düzenli içerikler üretiyorum.`
     };
 
-    /* ------------------ 2) NLP BENZERİ KONU ALGILAMA ------------------ */
+    /* ------------ 2) NLP BENZERİ KONU ALGILAMA ------------ */
 
     const keywordMap = {
       summary: ["ekrem", "kimdir", "özgeçmiş", "profil", "hakkında", "özet"],
@@ -800,7 +712,7 @@ Benim için öğrenme, sadece eğitim almak değil;
       gedik: ["gedik", "yatırım", "trader", "check-sim", "check sim", "ydb", "crm", "sermaye piyasası"],
       experience: ["kariyer", "deneyim", "iş tecrübesi", "timeline", "tarih", "cv", "özgeçmiş"],
       projects: ["proje", "projeler", "spot döviz", "kampanya", "wallet", "cüzdan", "kart", "akış", "model"],
-      learning: ["eğitim", "sertifika", "kurs", "öğrenme", "udemy", "btk", "iiba", "cbap", "medium", "makale"]
+      learning: ["eğitim", "sertifika", "kurs", "öğrenme", "iiba", "cbap", "medium", "makale", "üniversite"]
     };
 
     function detectTopic(input) {
@@ -835,46 +747,45 @@ Benim için öğrenme, sadece eğitim almak değil;
       return finalAnswer;
     }
 
-    /* ------------------ 3) MÜLAKAT MODU NOTLARI (isteğe bağlı) ------------------ */
+    /* ------------ 3) MÜLAKAT BAKIŞ AÇILI CEVAPLAR ------------ */
 
     const interviewQA = {
       leadership: {
         q: ["liderlik", "team lead", "ekip", "koordine", "manage", "lider"],
         a: `🧭 Liderlik yaklaşımım
 
-Kendimi sadece “task dağıtan” değil, belirsizliği azaltan ve ekibin önünü açan bir lider olarak konumlandırıyorum.
+Kendimi sadece “task dağıtan” biri değil, belirsizliği azaltan ve ekibin önünü açan bir lider olarak görüyorum.
 
-• Net vizyon: Ekibin “neden bu işi yapıyoruz?” sorusuna net cevap almasını sağlarım.
-• Şeffaf iletişim: Riskleri ve engelleri saklamadan, çözüm odaklı masaya getiririm.
-• Sorumluluk paylaşımı: Kritik kararları tek başıma almak yerine, ilgili kişileri sürece dahil ederim.
-• Koçluk: Özellikle analist ekibine dokümantasyon kalitesi, gereksinim toplama, paydaş yönetimi gibi konularda mentörlük yaparım.
+• Net vizyon ve bağlam iletişimi
+• Risk ve engelleri şeffaf şekilde paylaşma
+• Sorumluluğu adil dağıtma, ekip içi dengeyi gözetme
+• Özellikle analist ekibi için koçluk ve mentörlük rolü
 
-Ekiplerde genelde şu geri bildirimi alırım:
-“Ekrem belirsizliği azaltıyor, işi netleştiriyor ve karar almayı kolaylaştırıyor.”`
+Amaç: Ekibin kendini güvende hissettiği, ne yaptığını ve neden yaptığını bildiği bir ortam oluşturmak.`
       },
 
       conflict: {
         q: ["çatışma", "problem", "zor insan", "uyumsuz", "gerilim", "anlaşmazlık"],
         a: `🤝 Zor paydaşlarla çalışma & çatışma yönetimi
 
-Çatışma durumlarında önce “kişiyi” değil “konuyu” konuşmayı tercih ederim.
+Çatışma anlarında önce konuyu kişiden ayırırım.
 
-1) Dinleme: Tarafların asıl kaygısını anlamaya çalışırım (süre, risk, iş yükü, kalite vb.).
-2) Veri: Tartışmayı kişisel algılardan çıkarıp, kabul kriterleri, ölçümler ve timeline gibi somut veriye çekerim.
-3) Ortak zemin: İş hedefini merkeze koyarım: “Bu ürün/özellik kime ne değer katacak?”
-4) Net aksiyon: Toplantı sonunda mutlaka eylem maddeleri ve sorumlular netleşmiş olur.
-5) Yazılı özet: Sonrasında kısa bir toplantı özeti göndererek uzlaşılan noktaları kayıt altına alırım.
+1) Tarafların gerçek kaygısını anlamak (süre, risk, iş yükü, öncelik vb.)
+2) Tartışmayı veri ve kabul kriterlerine çekmek
+3) Ortak hedefi netleştirmek: “Bu iş kime ne değer katacak?”
+4) Toplantı sonunda net aksiyon ve sorumlular belirlemek
+5) Kısa bir özet mailiyle kararı kayıt altına almak
 
-Bu yaklaşım; gerilimi düşürüp, aynı hedefe bakan bir ekip hissi yaratıyor.`
+Bu yaklaşım; hem gerilimi düşürüyor hem de tekrar eden tartışmaların önüne geçiyor.`
       },
 
-      default: `Bu soruyu mülakat bakış açısıyla cevaplamak için daha net bir odak seçebilirsin.
+      default: `Bu soruyu mülakat bakış açısıyla cevaplamak için biraz daha odaklı sorabilirsin.
 
-Örneğin şunları sorabilirsin:
+Örneğin:
 • “Liderlik stilin nasıl?”
 • “Zor paydaşlarla nasıl çalışırsın?”
 • “Roadmap’i nasıl yönetiyorsun?”
-• “Ödeme sistemleri tarafında nasıl değer katıyorsun?”`
+• “Ödeme sistemlerinde nasıl değer katıyorsun?”`
     };
 
     function interviewModeAnswer(q) {
@@ -888,7 +799,7 @@ Bu yaklaşım; gerilimi düşürüp, aynı hedefe bakan bir ekip hissi yaratıyo
       return interviewQA.default;
     }
 
-    /* ------------------ 4) CHAT MANTIIĞI ------------------ */
+    /* ------------ 4) CHAT MANTIĞI ------------ */
 
     function addMessage(text, isUser) {
       const msg = document.createElement("div");
@@ -900,7 +811,7 @@ Bu yaklaşım; gerilimi düşürüp, aynı hedefe bakan bir ekip hissi yaratıyo
       box.scrollTop = box.scrollHeight;
 
       if (!isUser) {
-        speakText(text); // her asistan cevabını seslendir
+        speakText(text);
       }
     }
 
@@ -914,7 +825,6 @@ Bu yaklaşım; gerilimi düşürüp, aynı hedefe bakan bir ekip hissi yaratıyo
       addMessage(text, true);
 
       const lower = text.toLowerCase();
-
       if (lower.includes("mülakat") || lower.includes("interview") || lower.includes("yönetici")) {
         const r = interviewModeAnswer(text);
         addMessage(r, false);
@@ -941,11 +851,30 @@ Bu yaklaşım; gerilimi düşürüp, aynı hedefe bakan bir ekip hissi yaratıyo
       };
     });
 
-    /* ------------------ 5) MİKROFON (SPEECH RECOGNITION) ------------------ */
+    /* ------------ 5) MİKROFON & HOPARLÖR BUTONLARI ------------ */
 
     const micBtn = document.getElementById("micBtn");
+    const speakerBtn = document.getElementById("speakerBtn");
     let recognition = null;
 
+    // Ses aç/kapa
+    if (speakerBtn) {
+      const updateSpeakerIcon = () => {
+        speakerBtn.textContent = voiceEnabled ? "🔊" : "🔈";
+        speakerBtn.classList.toggle("off", !voiceEnabled);
+      };
+      updateSpeakerIcon();
+
+      speakerBtn.addEventListener("click", () => {
+        voiceEnabled = !voiceEnabled;
+        if (!voiceEnabled && window.speechSynthesis) {
+          window.speechSynthesis.cancel();
+        }
+        updateSpeakerIcon();
+      });
+    }
+
+    // Mikrofon (Web Speech API – iPhone Safari şu an desteklemiyor, bu normal)
     if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognition = new SR();
@@ -953,7 +882,7 @@ Bu yaklaşım; gerilimi düşürüp, aynı hedefe bakan bir ekip hissi yaratıyo
       recognition.continuous = false;
       recognition.interimResults = false;
     } else {
-      if (micBtn) micBtn.style.display = "none";
+      if (micBtn) micBtn.style.display = "none"; // destek yoksa ikonu gizle
     }
 
     if (micBtn && recognition) {
@@ -961,9 +890,7 @@ Bu yaklaşım; gerilimi düşürüp, aynı hedefe bakan bir ekip hissi yaratıyo
         try {
           recognition.start();
           micBtn.classList.add("listening");
-        } catch (e) {
-          // bazen "already started" hatası verebilir, görmezden gel
-        }
+        } catch (e) {}
       });
 
       recognition.onresult = event => {
